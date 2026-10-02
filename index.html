@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.2.1</title>
+<title>Club Manager MVP 0.3.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -172,19 +172,47 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
   .stadiumMini { grid-template-columns:96px 1fr; }
   .stadiumMini img { width:96px; height:78px; }
 }
+
+
+/* MVP 0.3 — squad alerts, matchday commerce, saves */
+.lineupStatusButton { width:100%; min-height:48px; margin-top:10px; border-radius:15px; border:1px solid rgba(255,255,255,.13); background:rgba(255,255,255,.06); color:#d8ddd3; display:flex; align-items:center; justify-content:space-between; padding:0 14px; font-size:12px; font-weight:800; }
+.lineupStatusButton.ok { color:#c9ef8a; }.lineupStatusButton.warn { color:#ffd88b; }.lineupStatusButton.danger { background:rgba(200,77,61,.16); color:#ffb0a5; border-color:rgba(255,139,125,.26); }
+.lineupStatusButton b { font-size:18px; }
+.matchdaySales { margin-top:12px; padding:14px; border-radius:18px; background:#1b2118; border:1px solid rgba(255,255,255,.08); }
+.matchdaySalesTop { display:flex; justify-content:space-between; gap:12px; align-items:center; }.matchdaySalesTop>div { display:flex; flex-direction:column; gap:4px; }.matchdaySalesTop span { color:#8f9889; font-size:9px; font-weight:850; letter-spacing:1px; }.matchdaySalesTop strong { font-size:14px; }.ticketStepper { display:flex; align-items:center; gap:8px; }.ticketStepper button { width:32px; height:32px; border:0; border-radius:10px; background:#30372d; color:white; font-size:18px; }.ticketStepper b { min-width:50px; text-align:center; }
+.matchdayProjection { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:10px; }.matchdayProjection div { background:rgba(255,255,255,.055); border-radius:11px; padding:8px; display:flex; flex-direction:column; gap:3px; }.matchdayProjection span { color:#90998a; font-size:8px; text-transform:uppercase; letter-spacing:.7px; }.matchdayProjection strong { font-size:11px; }
+.lineupAlertPanel { margin-bottom:10px; padding:13px; border-radius:17px; background:#fff7e7; border:1px solid #ead9b2; }.lineupAlertPanel.danger { background:#f8e7e4; border-color:#e7c0b9; }.lineupAlertPanel.ok { background:#edf6df; border-color:#d5e3bd; }.lineupAlertTitle { display:flex; justify-content:space-between; align-items:center; gap:10px; }.lineupAlertTitle strong { font-size:13px; }.lineupAlertTitle span { font-size:10px; color:var(--muted); }.lineupIssueList { display:flex; flex-direction:column; gap:6px; margin-top:9px; }.lineupIssue { font-size:10px; display:flex; justify-content:space-between; gap:10px; }.lineupIssue b { color:var(--danger); }.lineupIssue.warn b { color:#a16b12; }
+.fieldPlayer.unavailable .shirt { background:#f4c9c2; color:#741e16; }.fieldPlayer.tired .shirt { background:#f3dda5; color:#6e4c09; }.playerStateBadge { position:absolute; right:4px; top:-6px; min-width:20px; height:18px; padding:0 5px; border-radius:9px; display:grid; place-items:center; font-size:8px; font-weight:900; background:#c84d3d; color:white; }.playerStateBadge.warn { background:#d79b25; }
+.benchPlayer.unavailable { background:#fff0ee; }.benchPlayer.tired { background:#fff8e8; }.statusInline { font-weight:850; }.statusInline.bad { color:#b74235; }.statusInline.warn { color:#a46b0c; }
+.resultEconomics { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:12px; padding-top:12px; border-top:1px solid var(--line); }.resultEconomics div { background:#f6f7f3; padding:10px; border-radius:12px; display:flex; justify-content:space-between; gap:6px; }.resultEconomics span { font-size:9px; color:var(--muted); }.resultEconomics strong { font-size:10px; }.resultEconomics .total { grid-column:1/-1; background:#e8f0db; }
+.commercialHero { margin-top:12px; padding:16px; border-radius:22px; background:var(--dark); color:white; }.commercialHeroHead { display:flex; justify-content:space-between; align-items:flex-start; }.commercialHeroHead span { font-size:9px; letter-spacing:1px; color:#90988c; font-weight:850; }.commercialHeroHead h3 { margin-top:5px; }.fanbaseValue { text-align:right; }.fanbaseValue strong { display:block; font-size:20px; }.fanbaseValue small { color:#90988c; }
+.commercialGrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:13px; }.commercialMetric { padding:11px; border-radius:13px; background:rgba(255,255,255,.06); }.commercialMetric span { display:block; color:#90988c; font-size:8px; text-transform:uppercase; }.commercialMetric strong { display:block; margin-top:4px; font-size:12px; }
+.adOffers { display:flex; flex-direction:column; gap:8px; }.adOffer { border:1px solid var(--line); border-radius:16px; padding:12px; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; }.adOffer strong { display:block; font-size:12px; }.adOffer span { display:block; margin-top:3px; font-size:9px; color:var(--muted); }.adOffer button,.marketingAction button { border:0; border-radius:11px; background:var(--accent); padding:9px 11px; font-size:9px; font-weight:850; }.activeContract { padding:13px; border-radius:16px; background:#eef5e2; border:1px solid #d7e1c7; }.activeContract strong { display:block; }.activeContract span { display:block; font-size:10px; color:var(--muted); margin-top:4px; }
+.marketingList { display:flex; flex-direction:column; gap:8px; }.marketingAction { display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; border-top:1px solid var(--line); padding:10px 0; }.marketingAction:first-child { border-top:0; }.marketingAction strong { font-size:11px; }.marketingAction span { display:block; color:var(--muted); font-size:9px; margin-top:3px; }.marketingAction button:disabled { background:#e9ece5; color:#9ea49a; }
+.saveSlots { display:flex; flex-direction:column; gap:8px; }.saveSlot { border:1px solid var(--line); border-radius:16px; padding:12px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:10px; }.saveSlot strong { display:block; font-size:12px; }.saveSlot span { display:block; color:var(--muted); font-size:9px; margin-top:3px; }.slotActions { display:flex; gap:5px; }.slotActions button { border:0; border-radius:10px; padding:8px 9px; font-size:8px; font-weight:850; background:#edf0e9; }.slotActions button.primary { background:var(--dark); color:white; }.saveNotice { margin-top:8px; padding:9px 11px; border-radius:12px; background:#e9f3dd; font-size:10px; }
+.newGameButton,.seasonButton { width:100%; min-height:48px; margin-top:10px; border:0; border-radius:15px; background:var(--dark); color:white; font-weight:850; }.seasonButton { background:var(--accent); color:var(--accent-ink); }
+.newGameOverlay { position:fixed; inset:0; z-index:90; background:#f2f3ef; overflow:auto; }.newGameInner { width:min(520px,100%); margin:auto; padding:calc(20px + env(safe-area-inset-top)) 16px 32px; }.newGameTop { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }.newGameTop button { width:38px; height:38px; border:0; border-radius:13px; background:white; font-size:20px; }.clubChoiceGrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }.clubChoice { min-height:130px; border:1px solid var(--line); border-radius:20px; background:white; padding:13px; text-align:left; }.clubChoice .teamMark { margin-bottom:9px; }.clubChoice strong { display:block; font-size:12px; }.clubChoice span { display:block; color:var(--muted); font-size:9px; margin-top:4px; }.clubChoiceMetrics { display:flex; justify-content:space-between; margin-top:10px; font-size:9px; font-weight:800; }
+.seasonCompleteCard { margin-top:12px; border-radius:20px; background:#e7f0d8; border:1px solid #d2dfbe; padding:16px; }.seasonCompleteCard h3 { margin-top:5px; }.seasonCompleteCard p { margin-top:6px; color:#64705d; font-size:11px; line-height:1.4; }
+@media (max-width:380px){.clubChoiceGrid{grid-template-columns:1fr}.resultEconomics{grid-template-columns:1fr}.resultEconomics .total{grid-column:auto}}
+
 </style>
 </head>
 <body>
 <main id="app" class="appShell"></main>
 <script>(() => {
   const $app = document.getElementById('app');
-  const SAVE_KEY = 'club-manager-mvp-static-v2';
+  const SAVE_KEY = 'club-manager-mvp-static-v3';
+  const PREVIOUS_SAVE_KEY = 'club-manager-mvp-static-v2';
   const OLD_SAVE_KEY = 'club-manager-mvp-static-v1';
   let tab = 'home';
   let selectedPlayer = null;
   let detailPlayer = null;
   let marketFilter = 'ALL';
   let stadiumUpgradeFlash = false;
+  let newGameOpen = false;
+  let saveNotice = '';
+  let commercialMessage = '';
+  const SLOT_KEYS = ['club-manager-slot-1','club-manager-slot-2','club-manager-slot-3'];
 
   const TEAM_DEFS = [
     { name: 'Barcelona City', short: 'BCN', palette: ['#0d2c5b', '#a50044', '#f0c560'], symbol: 'tower', crest: 'data:image/webp;base64,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' },
@@ -332,7 +360,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     return [...list, ...secondRound].map((f, i) => ({ id: `fx-${i + 1}`, ...f, played: false }));
   }
 
-  function createGame() {
+  function createGame(teamIndex = 0) {
     const seed = 804221;
     const random = rng(seed);
     const teams = TEAM_DEFS.map((def, i) => ({
@@ -367,11 +395,15 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
         morale: 72 + Math.round(random() * 22),
         fitness: 88 + Math.round(random() * 12),
         form: 65 + Math.round(random() * 30),
+        injuryGames: 0,
+        suspensionGames: 0,
+        yellowCards: 0,
         clubId: team.id,
       });
     }));
 
-    const userTeamId = teams[0].id;
+    const chosen = Math.max(0, Math.min(teams.length - 1, Number(teamIndex || 0)));
+    const userTeamId = teams[chosen].id;
     const squad = players.filter((p) => p.clubId === userTeamId);
     const used = new Set();
     const lineup = desired.map((pos) => {
@@ -381,45 +413,63 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
       return fit.id;
     });
     const bench = squad.filter((p) => !used.has(p.id)).slice(0, 9).map((p) => p.id);
+    const clubRating = teams[chosen].rating;
+    const initialBudget = Math.round((15 + Math.max(0, clubRating - 70) * 1.7) * 10) / 10;
+    const fanbase = Math.round(85000 + Math.max(0, clubRating - 70) * 4500);
 
     return {
-      version: 2,
+      version: 3,
       seed,
       userTeamId,
+      seasonStartYear: 2026,
       currentMatchday: 1,
-      budget: 34.2,
+      budget: initialBudget,
       teams,
       players,
       fixtures: schedule(teams.map((t) => t.id)),
       lineup,
       bench,
       stadium: { level: 0 },
-      finance: [{ id: 'fin-start', label: 'Presupuesto inicial', amount: 34.2, matchday: 0 }],
+      commercial: {
+        fanbase,
+        ticketPrice: 32,
+        marketingLevel: 0,
+        adContract: null,
+        adOffers: [
+          { id: 'local', name: 'Urban Motors', matches: 5, perHome: 0.08 },
+          { id: 'regional', name: 'Nova Energy', matches: 10, perHome: 0.13 },
+          { id: 'national', name: 'Atlas Finance', matches: 19, perHome: 0.19 },
+        ],
+      },
+      finance: [{ id: 'fin-start', label: 'Presupuesto inicial', amount: initialBudget, matchday: 0 }],
       inbox: [
-        { id: 'in-1', type: 'urgent', title: 'Primer partido', body: 'Revisa el once antes de simular la jornada 1.' },
-        { id: 'in-2', type: 'info', title: 'Mercado abierto', body: 'La dirección autoriza operaciones dentro del presupuesto disponible.' },
+        { id: 'in-1', type: 'info', title: 'Temporada preparada', body: 'El once está disponible. Revisa alertas de físico, lesión o sanción antes de cada jornada.' },
+        { id: 'in-2', type: 'info', title: 'Área comercial abierta', body: 'Ya puedes fijar el precio de entradas, contratar vallas y lanzar campañas de marketing.' },
       ],
     };
   }
 
   function normalizeState(raw) {
     if (!raw || !raw.teams || !raw.players) return createGame();
-    const fresh = createGame();
+    const chosenIndex = Math.max(0, Number(String(raw.userTeamId || 'team-1').replace('team-', '')) - 1 || 0);
+    const fresh = createGame(chosenIndex);
     const merged = {
       ...fresh,
       ...raw,
       teams: raw.teams || fresh.teams,
-      players: raw.players || fresh.players,
+      players: (raw.players || fresh.players).map((p) => ({ injuryGames: 0, suspensionGames: 0, yellowCards: 0, ...p })),
       fixtures: raw.fixtures || fresh.fixtures,
       lineup: Array.isArray(raw.lineup) && raw.lineup.length ? raw.lineup : fresh.lineup,
       bench: Array.isArray(raw.bench) ? raw.bench : fresh.bench,
       finance: Array.isArray(raw.finance) ? raw.finance : fresh.finance,
       inbox: Array.isArray(raw.inbox) ? raw.inbox : fresh.inbox,
+      commercial: { ...fresh.commercial, ...(raw.commercial || {}) },
     };
     const oldLevel = raw?.stadium?.northStand >= 12000 ? 1 : 0;
     merged.stadium = { level: Number.isFinite(raw?.stadium?.level) ? raw.stadium.level : oldLevel };
     merged.stadium.level = Math.max(0, Math.min(STADIUM_STAGES.length - 1, merged.stadium.level));
-    merged.version = 2;
+    merged.seasonStartYear = Number.isFinite(raw.seasonStartYear) ? raw.seasonStartYear : 2026;
+    merged.version = 3;
     return merged;
   }
 
@@ -427,6 +477,8 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     try {
       const current = localStorage.getItem(SAVE_KEY);
       if (current) return normalizeState(JSON.parse(current));
+      const previous = localStorage.getItem(PREVIOUS_SAVE_KEY);
+      if (previous) return normalizeState(JSON.parse(previous));
       const legacy = localStorage.getItem(OLD_SAVE_KEY);
       if (legacy) return normalizeState(JSON.parse(legacy));
     } catch (error) {
@@ -450,11 +502,156 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
   function table() { return [...state.teams].sort((a, b) => b.points - a.points || ((b.gf - b.ga) - (a.gf - a.ga)) || b.gf - a.gf); }
   function nextFixture() { return state.fixtures.find((f) => f.matchday === state.currentMatchday && (f.homeId === state.userTeamId || f.awayId === state.userTeamId)); }
 
+
+  function seasonLabel() { return `${String(state.seasonStartYear).slice(-2)}/${String(state.seasonStartYear + 1).slice(-2)}`; }
+  function seasonComplete() {
+    return state.fixtures.filter((f) => f.homeId === state.userTeamId || f.awayId === state.userTeamId).every((f) => f.played);
+  }
+  function playerAvailability(p) {
+    if (p.injuryGames > 0) return { type: 'injury', hard: true, label: `Lesión · ${p.injuryGames} partido${p.injuryGames === 1 ? '' : 's'}` };
+    if (p.suspensionGames > 0) return { type: 'suspension', hard: true, label: `Sancionado · ${p.suspensionGames} partido${p.suspensionGames === 1 ? '' : 's'}` };
+    if (p.fitness < 62) return { type: 'fitness', hard: false, label: `Físico crítico · ${p.fitness}%` };
+    if (p.fitness < 72) return { type: 'fitness', hard: false, label: `Físico bajo · ${p.fitness}%` };
+    return null;
+  }
+  function lineupIssues() {
+    return state.lineup.map((id) => {
+      const p = player(id);
+      const status = playerAvailability(p);
+      return status ? { player: p, ...status } : null;
+    }).filter(Boolean);
+  }
+  function lineupStatus() {
+    const issues = lineupIssues();
+    const hard = issues.filter((x) => x.hard);
+    if (hard.length) return { cls: 'danger', icon: '!', text: `${hard.length} problema${hard.length > 1 ? 's' : ''} en el once`, issues };
+    if (issues.length) return { cls: 'warn', icon: '!', text: `${issues.length} alerta${issues.length > 1 ? 's' : ''} de físico`, issues };
+    return { cls: 'ok', icon: '✓', text: 'Once preparado', issues: [] };
+  }
+  function nextHomeProjection() {
+    const fixture = nextFixture();
+    if (!fixture || fixture.homeId !== state.userTeamId) return null;
+    const opponent = team(fixture.awayId);
+    const stage = stadiumStage();
+    const price = state.commercial.ticketPrice;
+    const standing = table().findIndex((t) => t.id === state.userTeamId) + 1;
+    const rivalFactor = 0.90 + opponent.rating / 450;
+    const formFactor = Math.max(0.88, 1.08 - Math.max(0, standing - 1) * 0.008);
+    const priceFactor = Math.max(0.48, Math.min(1.20, 1.12 - (price - 30) * 0.014));
+    const demand = Math.round(state.commercial.fanbase * 0.16 * rivalFactor * formFactor * priceFactor);
+    const attendance = Math.max(2500, Math.min(stage.capacity, demand));
+    const occupancy = Math.round(attendance / stage.capacity * 100);
+    const ticketIncome = Math.round(attendance * price) / 1e6;
+    const merch = Math.round(attendance * (3.5 + state.commercial.marketingLevel * 0.45)) / 1e6;
+    const hospitality = Math.round((0.025 + stage.hospitality * 0.018) * 100) / 100;
+    const ads = state.commercial.adContract ? state.commercial.adContract.perHome : 0;
+    return { attendance, occupancy, ticketIncome, merch, hospitality, ads, total: ticketIncome + merch + hospitality + ads };
+  }
+  function adjustTicketPrice(delta) {
+    state.commercial.ticketPrice = Math.max(15, Math.min(90, state.commercial.ticketPrice + delta));
+    save(); render();
+  }
+  function signAdContract(id) {
+    if (state.commercial.adContract) return;
+    const offer = state.commercial.adOffers.find((x) => x.id === id);
+    if (!offer) return;
+    state.commercial.adContract = { ...offer, remaining: offer.matches };
+    commercialMessage = `${offer.name} contratado para ${offer.matches} partidos en casa.`;
+    state.inbox = [{ id:`ad-${Date.now()}`, type:'success', title:'Contrato de publicidad firmado', body: commercialMessage }, ...state.inbox].slice(0,8);
+    save(); render();
+  }
+  function runMarketing(kind) {
+    const actions = {
+      local: { cost: 0.15, fans: 3500, name: 'Campaña local' },
+      digital: { cost: 0.32, fans: 7200, name: 'Campaña digital' },
+      national: { cost: 0.75, fans: 14500, name: 'Campaña nacional' },
+    };
+    const action = actions[kind];
+    if (!action || state.budget < action.cost) return;
+    state.budget = Math.round((state.budget - action.cost) * 100) / 100;
+    state.commercial.fanbase += action.fans;
+    state.commercial.marketingLevel = Math.min(5, state.commercial.marketingLevel + 1);
+    state.finance.push({ id:`marketing-${Date.now()}`, label:action.name, amount:-action.cost, matchday:state.currentMatchday });
+    commercialMessage = `${action.name}: +${action.fans.toLocaleString('es-ES')} aficionados potenciales.`;
+    save(); render();
+  }
+  function progressAvailability(random) {
+    const userSquad = state.players.filter((p) => p.clubId === state.userTeamId);
+    userSquad.forEach((p) => {
+      if (p.injuryGames > 0) p.injuryGames -= 1;
+      if (p.suspensionGames > 0) p.suspensionGames -= 1;
+      if (!state.lineup.includes(p.id)) p.fitness = Math.min(100, p.fitness + 4);
+    });
+    const events = [];
+    const active = state.lineup.map(player).filter(Boolean);
+    active.forEach((p) => {
+      if (random() < 0.17) {
+        p.yellowCards += 1;
+        if (p.yellowCards >= 5) {
+          p.yellowCards = 0;
+          p.suspensionGames = Math.max(p.suspensionGames, 1);
+          events.push({ type:'urgent', title:`${p.name}, sancionado`, body:'Acumulación de tarjetas. Se perderá el próximo partido.' });
+        }
+      }
+    });
+    if (active.length && random() < 0.19) {
+      const injured = active[Math.floor(random() * active.length)];
+      const games = 1 + Math.floor(random() * 3);
+      injured.injuryGames = Math.max(injured.injuryGames, games);
+      events.push({ type:'urgent', title:`Lesión de ${injured.name}`, body:`Baja estimada: ${games} partido${games > 1 ? 's' : ''}. Sustitúyelo en el once.` });
+    }
+    if (active.length && random() < 0.055) {
+      const suspended = active[Math.floor(random() * active.length)];
+      suspended.suspensionGames = Math.max(suspended.suspensionGames, 1);
+      events.push({ type:'urgent', title:`Expulsión de ${suspended.name}`, body:'Sancionado para la próxima jornada.' });
+    }
+    return events;
+  }
+  function saveSlot(slot) {
+    const index = Number(slot) - 1;
+    if (index < 0 || index >= SLOT_KEYS.length) return;
+    localStorage.setItem(SLOT_KEYS[index], JSON.stringify(state));
+    saveNotice = `Partida guardada en Slot ${slot}.`;
+    render();
+  }
+  function loadSlot(slot) {
+    const index = Number(slot) - 1;
+    const raw = index >= 0 ? localStorage.getItem(SLOT_KEYS[index]) : null;
+    if (!raw) return;
+    state = normalizeState(JSON.parse(raw));
+    save();
+    saveNotice = `Slot ${slot} cargado.`;
+    tab = 'home'; selectedPlayer = null; detailPlayer = null; render();
+  }
+  function slotInfo(slot) {
+    try {
+      const raw = localStorage.getItem(SLOT_KEYS[slot - 1]);
+      if (!raw) return null;
+      const x = JSON.parse(raw);
+      const t = x.teams?.find((q) => q.id === x.userTeamId);
+      return { club:t?.name || 'Club', day:x.currentMatchday || 1, season:x.seasonStartYear || 2026 };
+    } catch { return null; }
+  }
+  function startNewSeason() {
+    if (!seasonComplete()) return;
+    state.seasonStartYear += 1;
+    state.currentMatchday = 1;
+    state.teams = state.teams.map((t) => ({ ...t, played:0, won:0, drawn:0, lost:0, gf:0, ga:0, points:0 }));
+    state.fixtures = schedule(state.teams.map((t) => t.id));
+    state.players.forEach((p) => { p.age += 1; p.fitness = Math.max(88, p.fitness); p.form = 72; p.injuryGames = Math.max(0, p.injuryGames - 1); p.suspensionGames = 0; p.yellowCards = 0; });
+    state.lastResult = null; state.lastEconomics = null;
+    state.inbox = [{ id:`season-${Date.now()}`, type:'success', title:`Nueva temporada ${seasonLabel()}`, body:'Calendario renovado. Plantilla y estructura del club se mantienen.' }, ...state.inbox].slice(0,8);
+    save(); tab='home'; render();
+  }
+
   function strength(teamId, user = false) {
     const t = team(teamId);
     const squad = state.players.filter((p) => p.clubId === teamId);
-    const pool = user ? state.lineup.map(player) : squad.sort((a, b) => b.rating - a.rating).slice(0, 11);
-    const avg = pool.reduce((sum, p) => sum + p.rating * (0.82 + p.form / 500) * (0.85 + p.fitness / 650), 0) / pool.length;
+    const pool = user ? state.lineup.map(player).filter(Boolean) : squad.sort((a, b) => b.rating - a.rating).slice(0, 11);
+    const avg = pool.reduce((sum, p) => {
+      const availabilityPenalty = p.injuryGames > 0 || p.suspensionGames > 0 ? 0.55 : 1;
+      return sum + p.rating * (0.82 + p.form / 500) * (0.85 + p.fitness / 650) * availabilityPenalty;
+    }, 0) / Math.max(1, pool.length);
     return avg * 0.82 + t.rating * 0.18;
   }
 
@@ -505,13 +702,15 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
   }
 
   function simulateMatchday() {
+    const hardIssues = lineupIssues().filter((x) => x.hard);
+    if (hardIssues.length) { tab = 'team'; render(); return; }
     const todays = state.fixtures.filter((f) => f.matchday === state.currentMatchday && !f.played);
     if (!todays.length) return;
+    const dayRandom = rng(state.seed + state.currentMatchday * 9191 + 77);
     const sims = todays.map(simFixture);
     sims.forEach((f) => {
       state.teams = state.teams.map((t) => (t.id === f.homeId ? applyResult(t, f.homeGoals, f.awayGoals)
-        : t.id === f.awayId ? applyResult(t, f.awayGoals, f.homeGoals)
-          : t));
+        : t.id === f.awayId ? applyResult(t, f.awayGoals, f.homeGoals) : t));
     });
     const map = new Map(sims.map((f) => [f.id, f]));
     state.fixtures = state.fixtures.map((f) => map.get(f.id) || f);
@@ -520,22 +719,49 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     const isHome = ur.homeId === state.userTeamId;
     const ug = isHome ? ur.homeGoals : ur.awayGoals;
     const og = isHome ? ur.awayGoals : ur.homeGoals;
-    const income = Math.round((stadiumStage().capacity * (0.72 + Math.min(0.23, state.currentMatchday / 150)) * 31) / 10000) / 100;
-    state.players = state.players.map((p) => (state.lineup.includes(p.id)
-      ? { ...p, fitness: Math.min(100, Math.max(65, p.fitness - 6 - (p.age > 30 ? 2 : 0)) + 3), form: Math.max(50, Math.min(99, p.form + (ug > og ? 3 : ug === og ? 0 : -2))) }
-      : p));
+
+    let economics;
+    if (isHome) {
+      const projected = nextHomeProjection() || { attendance:Math.round(stadiumStage().capacity*.72), occupancy:72, ticketIncome:.55, merch:.1, hospitality:.06, ads:0 };
+      const attendanceNoise = 0.94 + dayRandom() * 0.1;
+      const attendance = Math.min(stadiumStage().capacity, Math.round(projected.attendance * attendanceNoise));
+      const ticketIncome = Math.round(attendance * state.commercial.ticketPrice) / 1e6;
+      const merch = Math.round(attendance * (3.5 + state.commercial.marketingLevel * .45)) / 1e6;
+      const hospitality = projected.hospitality;
+      const ads = state.commercial.adContract ? state.commercial.adContract.perHome : 0;
+      const total = Math.round((ticketIncome + merch + hospitality + ads) * 100) / 100;
+      economics = { home:true, attendance, occupancy:Math.round(attendance / stadiumStage().capacity * 100), ticketIncome, merch, hospitality, ads, total };
+      if (state.commercial.adContract) {
+        state.commercial.adContract.remaining -= 1;
+        if (state.commercial.adContract.remaining <= 0) {
+          state.inbox.unshift({ id:`ad-end-${Date.now()}`, type:'info', title:'Contrato de vallas finalizado', body:`${state.commercial.adContract.name} ha completado su acuerdo. Puedes contratar un nuevo anunciante.` });
+          state.commercial.adContract = null;
+        }
+      }
+    } else {
+      economics = { home:false, attendance:null, occupancy:null, ticketIncome:0, merch:0.06, hospitality:0, ads:0, total:0.28 };
+    }
+    state.lastEconomics = economics;
+
+    state.players.forEach((p) => {
+      if (state.lineup.includes(p.id)) {
+        p.fitness = Math.max(48, p.fitness - 7 - (p.age > 30 ? 2 : 0));
+        p.form = Math.max(50, Math.min(99, p.form + (ug > og ? 3 : ug === og ? 0 : -2)));
+      }
+    });
+    const availabilityEvents = progressAvailability(dayRandom);
+    const income = economics.total;
     state.budget = Math.round((state.budget + income) * 100) / 100;
-    state.finance.push({ id: `fin-${Date.now()}`, label: 'Ingresos jornada', amount: income, matchday: state.currentMatchday });
+    state.finance.push({ id:`fin-${Date.now()}`, label:isHome ? 'Ingresos partido en casa' : 'Ingresos partido fuera', amount:income, matchday:state.currentMatchday });
     const title = ug > og ? 'Victoria' : ug === og ? 'Empate' : 'Derrota';
-    state.inbox = [{
-      id: `res-${state.currentMatchday}`,
-      type: ug > og ? 'success' : 'info',
-      title: `${title}: ${team(ur.homeId).short} ${ur.homeGoals}–${ur.awayGoals} ${team(ur.awayId).short}`,
-      body: `Jornada ${state.currentMatchday} completada. Ingresos de partido: ${fmtM(income)}.`,
-    }, ...state.inbox].slice(0, 8);
-    state.currentMatchday = Math.min(38, state.currentMatchday + 1);
-    save();
-    render();
+    const economicText = isHome ? `${economics.attendance.toLocaleString('es-ES')} asistentes · ingresos ${fmtM(economics.total)}.` : `Ingresos TV/merch ${fmtM(economics.total)}.`;
+    state.inbox = [
+      ...availabilityEvents.map((x, i) => ({ id:`availability-${state.currentMatchday}-${i}-${Date.now()}`, ...x })),
+      { id:`res-${state.currentMatchday}`, type:ug > og ? 'success' : 'info', title:`${title}: ${team(ur.homeId).short} ${ur.homeGoals}–${ur.awayGoals} ${team(ur.awayId).short}`, body:`Jornada ${state.currentMatchday} completada. ${economicText}` },
+      ...state.inbox,
+    ].slice(0,10);
+    if (!seasonComplete()) state.currentMatchday = Math.min(38, state.currentMatchday + 1);
+    save(); render();
   }
 
   function buy(id) {
@@ -723,7 +949,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
             </div>
             ${rating(p.rating)}
           </div>
-          <div class="sheetClubRow">${mark(club.short, 'sm')}<span>${club.short}</span></div>
+          <div class="sheetClubRow">${mark(club.short, 'sm')}<span>${club.short}</span>${playerAvailability(p) ? `<b class="statusInline ${playerAvailability(p).hard?'bad':'warn'}">${playerAvailability(p).label}</b>` : ''}</div>
           <div class="sheetStats">
             ${stat('Forma', p.form)}
             ${stat('Moral', p.morale)}
@@ -756,237 +982,19 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     const oppGoals = last ? (userWasHome ? last.awayGoals : last.homeGoals) : 0;
     const resultClass = !last ? '' : userGoals > oppGoals ? 'win' : userGoals < oppGoals ? 'loss' : 'draw';
     const resultLabel = !last ? '' : userGoals > oppGoals ? 'VICTORIA' : userGoals < oppGoals ? 'DERROTA' : 'EMPATE';
+    const lineup = lineupStatus();
+    const projection = nextHomeProjection();
+    const finished = seasonComplete();
+    const econ = state.lastEconomics;
     return `
       <div class="screen">
         <header class="topbar">
-          <div class="topbarBrand">${mark(club.short, 'md')}<div><div class="eyebrow">CLUB MANAGER</div><h1>${club.name}</h1></div></div>
+          <div class="topbarBrand">${mark(club.short, 'md')}<div><div class="eyebrow">CLUB MANAGER · ${seasonLabel()}</div><h1>${club.name}</h1></div></div>
           <div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div>
         </header>
-        <section class="heroCard">
+        ${!finished ? `<section class="heroCard">
           <div class="heroMeta"><span>PRÓXIMO PARTIDO</span><span>${isHome ? 'EN CASA' : 'FUERA'}</span></div>
           <div class="versus">
             <div class="side">${mark(club.short, 'lg')}<strong>${club.short}</strong><span>${club.rating}</span></div>
             <div class="versusCenter"><span>J${state.currentMatchday}</span><b>VS</b><small>SÁB · 18:30</small></div>
             <div class="side">${opp ? mark(opp.short, 'lg') : mark(club.short, 'lg')}<strong>${opp?.short || '--'}</strong><span>${opp?.rating || '--'}</span></div>
-          </div>
-          <button class="primaryButton" data-action="simulate">Simular jornada</button>
-          <button class="textButton" data-nav="team">Revisar alineación</button>
-        </section>
-        ${last ? `<section class="resultStrip ${resultClass}">
-          <div class="resultStripHeader"><span>ÚLTIMO RESULTADO</span><b class="resultOutcome">${resultLabel}</b></div>
-          <div class="resultScoreBoard">
-            <div class="resultTeam">${mark(lastHome.short, 'lg')}<strong>${lastHome.short}</strong></div>
-            <div class="resultScore"><strong>${last.homeGoals}–${last.awayGoals}</strong><small>FINAL</small></div>
-            <div class="resultTeam">${mark(lastAway.short, 'lg')}<strong>${lastAway.short}</strong></div>
-          </div>
-          <div class="resultStripFooter">Jornada ${Math.max(1, state.currentMatchday - 1)} · ${lastHome.name} vs ${lastAway.name}</div>
-        </section>` : ''}
-        <section class="twoCol">
-          <div class="metricCard"><span>CLASIFICACIÓN</span><strong>${pos}<sup>º</sup></strong><small>${club.points} puntos</small></div>
-          <div class="metricCard"><span>FORMA</span><div class="formDots">${[0, 1, 2, 3, 4].map((i) => `<i class="${forms[i] ? `form ${forms[i]}` : 'form empty'}">${forms[i] || '·'}</i>`).join('')}</div><small>${club.won}V · ${club.drawn}E · ${club.lost}D</small></div>
-        </section>
-        <section class="sectionBlock stadiumPreviewBlock">
-          <div class="sectionHeader"><div><span>ESTADIO</span><h3>${stage.label}</h3></div><small>${stage.capacity.toLocaleString('es-ES')} plazas</small></div>
-          <div class="stadiumMini"><img src="${stage.image}" alt="${stage.title}"/><div><strong>${stage.title}</strong><span>${stage.subtitle}</span><button class="textLink" data-nav="club">Ver proyecto</button></div></div>
-        </section>
-        <section class="sectionBlock">
-          <div class="sectionHeader"><div><span>INBOX</span><h3>Asuntos pendientes</h3></div><b>${state.inbox.length}</b></div>
-          <div class="inboxList">${state.inbox.slice(0, 3).map((x) => `<div class="inboxItem"><i class="${x.type}"></i><div><strong>${x.title}</strong><span>${x.body}</span></div></div>`).join('')}</div>
-        </section>
-      </div>`;
-  }
-
-  const fieldSlots = [{ i: 10, x: 50, y: 12 }, { i: 8, x: 20, y: 30 }, { i: 7, x: 50, y: 32 }, { i: 9, x: 80, y: 30 }, { i: 5, x: 34, y: 51 }, { i: 6, x: 66, y: 51 }, { i: 4, x: 16, y: 69 }, { i: 2, x: 38, y: 73 }, { i: 3, x: 62, y: 73 }, { i: 1, x: 84, y: 69 }, { i: 0, x: 50, y: 89 }];
-
-  function teamScreen() {
-    const avg = Math.round(state.lineup.reduce((sum, id) => sum + player(id).rating, 0) / 11);
-    const club = team(state.userTeamId);
-    return `
-      <div class="screen">
-        <header class="topbar compact">
-          <div class="topbarBrand">${mark(club.short, 'md')}<div><div class="eyebrow">EQUIPO</div><h1>Once inicial</h1></div></div>
-          <div class="squadAvg"><span>XI</span><strong>${avg}</strong></div>
-        </header>
-        <div class="formationBar"><span>4–2–3–1</span><small>${selectedPlayer ? 'Selecciona otro jugador para intercambiar' : 'Toca dos jugadores para intercambiar'}</small></div>
-        <div class="pitch">
-          <div class="pitchLine center"></div><div class="pitchCircle"></div><div class="box top"></div><div class="box bottom"></div>
-          ${fieldSlots.map((s) => {
-            const p = player(state.lineup[s.i]);
-            return `<button class="fieldPlayer ${selectedPlayer === p.id ? 'selected' : ''}" style="left:${s.x}%;top:${s.y}%" data-player="${p.id}"><span class="shirt">${p.position}</span><strong>${p.name.split(' ').pop()}</strong><small>${p.rating}</small></button>`;
-          }).join('')}
-        </div>
-        <section class="sectionBlock benchBlock">
-          <div class="sectionHeader"><div><span>PLANTILLA</span><h3>Banquillo</h3></div><small>${state.bench.length} jugadores</small></div>
-          <div class="benchList">${state.bench.map((id) => {
-            const p = player(id);
-            return `<button class="benchPlayer ${selectedPlayer === id ? 'selected' : ''}" data-player="${id}"><span class="positionTag">${p.position}</span><div><strong>${p.name}</strong><small>${p.age} años · Físico ${p.fitness}%</small></div>${rating(p.rating)}</button>`;
-          }).join('')}</div>
-        </section>
-      </div>`;
-  }
-
-  function market() {
-    const need = getSquadNeed();
-    const candidates = state.players
-      .filter((p) => p.clubId !== state.userTeamId && (marketFilter === 'ALL' || p.position === marketFilter))
-      .sort((a, b) => (b.potential + b.rating) - (a.potential + a.rating))
-      .slice(0, 14);
-    const filters = ['ALL', 'GK', 'CB', 'CM', 'AM', 'RW', 'LW', 'ST'];
-    return `
-      <div class="screen">
-        <header class="topbar compact">
-          <div><div class="eyebrow">MERCADO</div><h1>Scouting</h1></div>
-          <div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div>
-        </header>
-        <div class="needCard"><div><span>PRIORIDAD</span><strong>${POSITION_LABELS[need] || need}</strong></div><div class="needSignal"><i></i><i></i><i></i></div></div>
-        <div class="filterRow">${filters.map((f) => `<button data-filter="${f}" class="${marketFilter === f ? 'active' : ''}">${f}</button>`).join('')}</div>
-        <div class="marketList">${candidates.map((p) => {
-          const c = team(p.clubId);
-          const can = p.value <= state.budget;
-          return `<div class="marketCard">
-            <button class="marketInfo" data-detail="${p.id}">
-              ${mark(c.short, 'md')}
-              <div class="marketText"><div><span class="positionTag">${p.position}</span><small>${p.age} años · ${c.short}</small></div><strong>${p.name}</strong><span>Potencial estimado ${Math.max(p.rating, p.potential - 3)}–${p.potential}</span></div>
-              ${rating(p.rating)}
-            </button>
-            <div class="marketAction"><div><span>Valor</span><strong>${fmtM(p.value)}</strong></div><button data-buy="${p.id}" ${can ? '' : 'disabled'}>${can ? 'Fichar' : 'Sin presupuesto'}</button></div>
-          </div>`;
-        }).join('')}</div>
-      </div>`;
-  }
-
-  function club() {
-    const current = stadiumStage();
-    const next = state.stadium.level < STADIUM_STAGES.length - 1 ? STADIUM_STAGES[state.stadium.level + 1] : null;
-    const levels = [['Hospitality', current.hospitality], ['Césped', current.pitch], ['Iluminación', current.lighting], ['Academia', current.academy], ['Entrenamiento', current.training]];
-    return `
-      <div class="screen">
-        <header class="topbar compact">
-          <div><div class="eyebrow">CLUB</div><h1>Infraestructura</h1></div>
-          <div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div>
-        </header>
-        <section class="stadiumHero">
-          <div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title} ${current.label}"/>${stadiumUpgradeFlash ? '<div class="stadiumUpgradeFlash">Mejora completada</div>' : ''}</div>
-          <div class="stadiumUpgradeAction">
-            <div><span>${next ? 'PRÓXIMA REFORMA' : 'ESTADIO'}</span><strong>${next ? next.label : 'Máximo nivel alcanzado'}</strong><small>${next ? `${current.nextProject} · ${fmtM(current.nextCost)}` : 'Proyecto completado'}</small></div>
-            <button class="stadiumUpgradeButton" data-action="upgrade" ${!next || state.budget < current.nextCost ? 'disabled' : ''}>${!next ? 'COMPLETO' : state.budget < current.nextCost ? 'SIN FONDOS' : 'MEJORAR'}</button>
-          </div>
-          <div class="stadiumMeta"><div><span>${current.label}</span><h2>${current.title}</h2></div><div><strong>${current.capacity.toLocaleString('es-ES')}</strong><span>espectadores</span></div></div>
-        </section>
-        <section class="sectionBlock">
-          <div class="sectionHeader"><div><span>EVOLUCIÓN</span><h3>Plan del estadio</h3></div><small>5 fases</small></div>
-          <div class="stadiumStageRail">${STADIUM_STAGES.map((stage, index) => `<div class="stageChip ${index === state.stadium.level ? 'current' : index < state.stadium.level ? 'done' : 'locked'}"><img src="${stage.image}" alt="${stage.label}"/><strong>${index + 1}</strong><span>${stage.capacity.toLocaleString('es-ES')}</span></div>`).join('')}</div>
-        </section>
-        <section class="sectionBlock">
-          <div class="sectionHeader"><div><span>NIVELES</span><h3>Instalaciones</h3></div><small>Máx. 5</small></div>
-          <div class="facilityList">${levels.map(([label, value]) => `<div class="facility"><span>${label}</span><div class="levelDots">${[1, 2, 3, 4, 5].map((n) => `<i class="${n <= value ? 'on' : ''}"></i>`).join('')}</div><strong>${value}</strong></div>`).join('')}</div>
-        </section>
-        <section class="upgradeCard">
-          <div class="upgradeTop"><div><span>PROYECTO</span><h3>${next ? next.label : 'Proyecto completado'}</h3></div><b>${next ? `+${next.capacity - current.capacity}` : 'FULL'}</b></div>
-          <div class="upgradeMetrics">
-            <div><span>Actual</span><strong>${current.capacity.toLocaleString('es-ES')}</strong></div>
-            <div><span>Objetivo</span><strong>${next ? next.capacity.toLocaleString('es-ES') : current.capacity.toLocaleString('es-ES')}</strong></div>
-            <div><span>Coste</span><strong>${next ? fmtM(current.nextCost) : '—'}</strong></div>
-          </div>
-          <p class="upgradeSummary">${next ? current.nextProject : 'El estadio ha alcanzado el máximo del MVP.'}</p>
-          <small class="note">El botón de reforma está situado bajo la imagen para que el cambio visual sea inmediato al aprobarla.</small>
-        </section>
-      </div>`;
-  }
-
-  function more() {
-    const standings = table();
-    return `
-      <div class="screen">
-        <header class="topbar compact"><div><div class="eyebrow">TEMPORADA</div><h1>Competición</h1></div><div class="seasonTag">26/27</div></header>
-        <section class="sectionBlock tableBlock">
-          <div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0, state.currentMatchday - 1)}</small></div>
-          <div class="leagueTable">
-            <div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>
-            ${standings.map((t, i) => `<div class="leagueRow ${t.id === state.userTeamId ? 'mine' : ''}"><span>${i + 1}</span><span>${mark(t.short, 'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf - t.ga > 0 ? '+' : ''}${t.gf - t.ga}</span><strong>${t.points}</strong></div>`).join('')}
-          </div>
-        </section>
-        <section class="sectionBlock">
-          <div class="sectionHeader"><div><span>FINANZAS</span><h3>Últimos movimientos</h3></div><strong>${fmtM(state.budget)}</strong></div>
-          <div class="financeList">${[...state.finance].reverse().slice(0, 6).map((f) => `<div><span>${f.label}</span><strong class="${f.amount >= 0 ? 'positive' : 'negative'}">${f.amount >= 0 ? '+' : ''}${fmtM(f.amount)}</strong></div>`).join('')}</div>
-        </section>
-        <button class="dangerButton" data-action="reset">Reiniciar partida MVP</button>
-        <p class="buildTag">Club Manager MVP · build 0.2.1</p>
-      </div>`;
-  }
-
-  function render() {
-    const body = tab === 'home' ? home() : tab === 'team' ? teamScreen() : tab === 'market' ? market() : tab === 'club' ? club() : more();
-    $app.innerHTML = `<div class="appContent">${body}</div>${nav()}${sheet(detailPlayer)}`;
-  }
-
-  function handleClick(event) {
-    const navBtn = event.target.closest('[data-nav]');
-    if (navBtn) {
-      tab = navBtn.dataset.nav;
-      selectedPlayer = null;
-      detailPlayer = null;
-      render();
-      return;
-    }
-    const actionBtn = event.target.closest('[data-action]');
-    if (actionBtn) {
-      const action = actionBtn.dataset.action;
-      if (action === 'simulate') simulateMatchday();
-      if (action === 'upgrade') upgrade();
-      if (action === 'reset') {
-        localStorage.removeItem(SAVE_KEY);
-        localStorage.removeItem(OLD_SAVE_KEY);
-        state = createGame();
-        tab = 'home';
-        selectedPlayer = null;
-        detailPlayer = null;
-        save();
-        render();
-      }
-      return;
-    }
-    const playerBtn = event.target.closest('[data-player]');
-    if (playerBtn) {
-      tapPlayer(playerBtn.dataset.player);
-      return;
-    }
-    const filterBtn = event.target.closest('[data-filter]');
-    if (filterBtn) {
-      marketFilter = filterBtn.dataset.filter;
-      render();
-      return;
-    }
-    const buyBtn = event.target.closest('[data-buy]');
-    if (buyBtn) {
-      buy(buyBtn.dataset.buy);
-      return;
-    }
-    const detailBtn = event.target.closest('[data-detail]');
-    if (detailBtn) {
-      detailPlayer = player(detailBtn.dataset.detail);
-      render();
-      return;
-    }
-    const closeSheet = event.target.closest('[data-close-sheet]');
-    if (closeSheet) {
-      detailPlayer = null;
-      render();
-    }
-  }
-
-  $app.addEventListener('click', handleClick);
-  render();
-
-})();
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
-}
-if ('caches' in window) {
-  caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
-}
-</script>
-</body>
-</html>
