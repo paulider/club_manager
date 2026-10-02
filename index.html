@@ -998,3 +998,209 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
             <div class="side">${mark(club.short, 'lg')}<strong>${club.short}</strong><span>${club.rating}</span></div>
             <div class="versusCenter"><span>J${state.currentMatchday}</span><b>VS</b><small>SÁB · 18:30</small></div>
             <div class="side">${opp ? mark(opp.short, 'lg') : mark(club.short, 'lg')}<strong>${opp?.short || '--'}</strong><span>${opp?.rating || '--'}</span></div>
+          </div>
+          <button class="primaryButton" data-action="simulate" ${lineup.issues.some((x)=>x.hard) ? 'disabled' : ''}>${lineup.issues.some((x)=>x.hard) ? 'Corrige el once antes de jugar' : 'Simular jornada'}</button>
+          <button class="lineupStatusButton ${lineup.cls}" data-nav="team"><span>${lineup.icon} ${lineup.text}</span><b>›</b></button>
+          ${projection ? `<div class="matchdaySales"><div class="matchdaySalesTop"><div><span>VENTA DE ENTRADAS</span><strong>Precio medio</strong></div><div class="ticketStepper"><button data-ticket="-2">−</button><b>${state.commercial.ticketPrice} €</b><button data-ticket="2">+</button></div></div><div class="matchdayProjection"><div><span>Demanda</span><strong>${projection.attendance.toLocaleString('es-ES')}</strong></div><div><span>Ocupación</span><strong>${projection.occupancy}%</strong></div><div><span>Taquilla</span><strong>${fmtM(projection.ticketIncome)}</strong></div></div></div>` : ''}
+        </section>` : `<section class="seasonCompleteCard"><span class="eyebrow">TEMPORADA COMPLETADA</span><h3>${seasonLabel()} terminada</h3><p>Tu estructura, estadio, contratos y plantilla se mantienen. Puedes guardar esta partida o iniciar la siguiente temporada.</p><button class="seasonButton" data-action="new-season">Comenzar temporada ${String(state.seasonStartYear+1).slice(-2)}/${String(state.seasonStartYear+2).slice(-2)}</button></section>`}
+        ${last ? `<section class="resultStrip ${resultClass}">
+          <div class="resultStripHeader"><span>ÚLTIMO RESULTADO</span><b class="resultOutcome">${resultLabel}</b></div>
+          <div class="resultScoreBoard"><div class="resultTeam">${mark(lastHome.short, 'lg')}<strong>${lastHome.short}</strong></div><div class="resultScore"><strong>${last.homeGoals}–${last.awayGoals}</strong><small>FINAL</small></div><div class="resultTeam">${mark(lastAway.short, 'lg')}<strong>${lastAway.short}</strong></div></div>
+          <div class="resultStripFooter">${lastHome.name} vs ${lastAway.name}</div>
+          ${econ ? `<div class="resultEconomics">${econ.home ? `<div><span>Asistencia</span><strong>${econ.attendance.toLocaleString('es-ES')} · ${econ.occupancy}%</strong></div><div><span>Taquilla</span><strong>+${fmtM(econ.ticketIncome)}</strong></div><div><span>Merchandising</span><strong>+${fmtM(econ.merch)}</strong></div><div><span>Publicidad + VIP</span><strong>+${fmtM(econ.ads + econ.hospitality)}</strong></div>` : `<div><span>Partido fuera</span><strong>TV + merchandising</strong></div>`}<div class="total"><span>Ingreso total del partido</span><strong>+${fmtM(econ.total)}</strong></div></div>` : ''}
+        </section>` : ''}
+        <section class="twoCol"><div class="metricCard"><span>CLASIFICACIÓN</span><strong>${pos}<sup>º</sup></strong><small>${club.points} puntos</small></div><div class="metricCard"><span>FORMA</span><div class="formDots">${[0,1,2,3,4].map((i)=>`<i class="${forms[i]?`form ${forms[i]}`:'form empty'}">${forms[i]||'·'}</i>`).join('')}</div><small>${club.won}V · ${club.drawn}E · ${club.lost}D</small></div></section>
+        <section class="sectionBlock stadiumPreviewBlock"><div class="sectionHeader"><div><span>ESTADIO</span><h3>${stage.label}</h3></div><small>${stage.capacity.toLocaleString('es-ES')} plazas</small></div><div class="stadiumMini"><img src="${stage.image}" alt="${stage.title}"/><div><strong>${stage.title}</strong><span>${stage.subtitle}</span><button class="textLink" data-nav="club">Club y negocio</button></div></div></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>INBOX</span><h3>Asuntos pendientes</h3></div><b>${state.inbox.length}</b></div><div class="inboxList">${state.inbox.slice(0,4).map((x)=>`<div class="inboxItem"><i class="${x.type}"></i><div><strong>${x.title}</strong><span>${x.body}</span></div></div>`).join('')}</div></section>
+      </div>`;
+  }
+
+
+  const fieldSlots = [{ i: 10, x: 50, y: 12 }, { i: 8, x: 20, y: 30 }, { i: 7, x: 50, y: 32 }, { i: 9, x: 80, y: 30 }, { i: 5, x: 34, y: 51 }, { i: 6, x: 66, y: 51 }, { i: 4, x: 16, y: 69 }, { i: 2, x: 38, y: 73 }, { i: 3, x: 62, y: 73 }, { i: 1, x: 84, y: 69 }, { i: 0, x: 50, y: 89 }];
+
+  function teamScreen() {
+    const avg = Math.round(state.lineup.reduce((sum, id) => sum + player(id).rating, 0) / 11);
+    const club = team(state.userTeamId);
+    const status = lineupStatus();
+    return `
+      <div class="screen">
+        <header class="topbar compact"><div class="topbarBrand">${mark(club.short, 'md')}<div><div class="eyebrow">EQUIPO</div><h1>Once inicial</h1></div></div><div class="squadAvg"><span>XI</span><strong>${avg}</strong></div></header>
+        <div class="lineupAlertPanel ${status.cls === 'danger' ? 'danger' : status.cls === 'ok' ? 'ok' : ''}"><div class="lineupAlertTitle"><strong>${status.icon} ${status.text}</strong><span>${status.issues.length ? 'Requiere atención' : 'Sin incidencias'}</span></div>${status.issues.length ? `<div class="lineupIssueList">${status.issues.map((x)=>`<div class="lineupIssue ${x.hard?'':'warn'}"><span>${x.player.name}</span><b>${x.label}</b></div>`).join('')}</div>` : ''}</div>
+        <div class="formationBar"><span>4–2–3–1</span><small>${selectedPlayer ? 'Selecciona otro jugador para intercambiar' : 'Toca dos jugadores para intercambiar'}</small></div>
+        <div class="pitch"><div class="pitchLine center"></div><div class="pitchCircle"></div><div class="box top"></div><div class="box bottom"></div>${fieldSlots.map((slot)=>{const p=player(state.lineup[slot.i]);const st=playerAvailability(p);return `<button class="fieldPlayer ${selectedPlayer===p.id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" style="left:${slot.x}%;top:${slot.y}%" data-player="${p.id}"><span class="shirt">${p.position}</span>${st?`<em class="playerStateBadge ${st.hard?'':'warn'}">${st.type==='injury'?'✚':st.type==='suspension'?'S':'!'}</em>`:''}<strong>${p.name.split(' ').pop()}</strong><small>${p.rating}</small></button>`}).join('')}</div>
+        <section class="sectionBlock benchBlock"><div class="sectionHeader"><div><span>PLANTILLA</span><h3>Banquillo</h3></div><small>${state.bench.length} jugadores</small></div><div class="benchList">${state.bench.map((id)=>{const p=player(id);const st=playerAvailability(p);return `<button class="benchPlayer ${selectedPlayer===id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" data-player="${id}"><span class="positionTag">${p.position}</span><div><strong>${p.name}</strong><small>${st?st.label:`${p.age} años · Físico ${p.fitness}%`}</small></div>${rating(p.rating)}</button>`}).join('')}</div></section>
+      </div>`;
+  }
+
+
+  function market() {
+    const need = getSquadNeed();
+    const candidates = state.players
+      .filter((p) => p.clubId !== state.userTeamId && (marketFilter === 'ALL' || p.position === marketFilter))
+      .sort((a, b) => (b.potential + b.rating) - (a.potential + a.rating))
+      .slice(0, 14);
+    const filters = ['ALL', 'GK', 'CB', 'CM', 'AM', 'RW', 'LW', 'ST'];
+    return `
+      <div class="screen">
+        <header class="topbar compact">
+          <div><div class="eyebrow">MERCADO</div><h1>Scouting</h1></div>
+          <div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div>
+        </header>
+        <div class="needCard"><div><span>PRIORIDAD</span><strong>${POSITION_LABELS[need] || need}</strong></div><div class="needSignal"><i></i><i></i><i></i></div></div>
+        <div class="filterRow">${filters.map((f) => `<button data-filter="${f}" class="${marketFilter === f ? 'active' : ''}">${f}</button>`).join('')}</div>
+        <div class="marketList">${candidates.map((p) => {
+          const c = team(p.clubId);
+          const can = p.value <= state.budget;
+          return `<div class="marketCard">
+            <button class="marketInfo" data-detail="${p.id}">
+              ${mark(c.short, 'md')}
+              <div class="marketText"><div><span class="positionTag">${p.position}</span><small>${p.age} años · ${c.short}</small></div><strong>${p.name}</strong><span>Potencial estimado ${Math.max(p.rating, p.potential - 3)}–${p.potential}</span></div>
+              ${rating(p.rating)}
+            </button>
+            <div class="marketAction"><div><span>Valor</span><strong>${fmtM(p.value)}</strong></div><button data-buy="${p.id}" ${can ? '' : 'disabled'}>${can ? 'Fichar' : 'Sin presupuesto'}</button></div>
+          </div>`;
+        }).join('')}</div>
+      </div>`;
+  }
+
+  function club() {
+    const current = stadiumStage();
+    const next = state.stadium.level < STADIUM_STAGES.length - 1 ? STADIUM_STAGES[state.stadium.level + 1] : null;
+    const levels = [['Hospitality', current.hospitality], ['Césped', current.pitch], ['Iluminación', current.lighting], ['Academia', current.academy], ['Entrenamiento', current.training]];
+    const fixture = nextFixture();
+    const projection = nextHomeProjection();
+    const contract = state.commercial.adContract;
+    const marketing = [
+      { id:'local', name:'Campaña local', cost:.15, fans:3500 },
+      { id:'digital', name:'Campaña digital', cost:.32, fans:7200 },
+      { id:'national', name:'Campaña nacional', cost:.75, fans:14500 },
+    ];
+    return `
+      <div class="screen">
+        <header class="topbar compact"><div><div class="eyebrow">CLUB</div><h1>Club y negocio</h1></div><div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div></header>
+        <section class="stadiumHero"><div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title} ${current.label}"/>${stadiumUpgradeFlash?'<div class="stadiumUpgradeFlash">Mejora completada</div>':''}</div><div class="stadiumUpgradeAction"><div><span>${next?'PRÓXIMA REFORMA':'ESTADIO'}</span><strong>${next?next.label:'Máximo nivel alcanzado'}</strong><small>${next?`${current.nextProject} · ${fmtM(current.nextCost)}`:'Proyecto completado'}</small></div><button class="stadiumUpgradeButton" data-action="upgrade" ${!next||state.budget<current.nextCost?'disabled':''}>${!next?'COMPLETO':state.budget<current.nextCost?'SIN FONDOS':'MEJORAR'}</button></div><div class="stadiumMeta"><div><span>${current.label}</span><h2>${current.title}</h2></div><div><strong>${current.capacity.toLocaleString('es-ES')}</strong><span>espectadores</span></div></div></section>
+        <section class="commercialHero"><div class="commercialHeroHead"><div><span>ÁREA COMERCIAL</span><h3>Ingresos de matchday</h3></div><div class="fanbaseValue"><strong>${state.commercial.fanbase.toLocaleString('es-ES')}</strong><small>aficionados</small></div></div><div class="commercialGrid"><div class="commercialMetric"><span>Entrada media</span><strong>${state.commercial.ticketPrice} €</strong></div><div class="commercialMetric"><span>Marketing</span><strong>Nivel ${state.commercial.marketingLevel}</strong></div>${projection?`<div class="commercialMetric"><span>Próx. ocupación</span><strong>${projection.occupancy}%</strong></div><div class="commercialMetric"><span>Ingreso previsto</span><strong>${fmtM(projection.total)}</strong></div>`:`<div class="commercialMetric"><span>Próximo partido</span><strong>${fixture?'Fuera':'—'}</strong></div><div class="commercialMetric"><span>Publicidad</span><strong>${contract?contract.name:'Libre'}</strong></div>`}</div></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>ENTRADAS</span><h3>Precio de partido</h3></div><small>${fixture?.homeId===state.userTeamId?'Próximo partido en casa':'Se aplicará al próximo partido en casa'}</small></div><div class="matchdaySalesTop"><div><span>PRECIO MEDIO</span><strong>Equilibra ocupación e ingreso</strong></div><div class="ticketStepper"><button data-ticket="-2">−</button><b>${state.commercial.ticketPrice} €</b><button data-ticket="2">+</button></div></div>${projection?`<div class="matchdayProjection"><div><span>Asistencia</span><strong>${projection.attendance.toLocaleString('es-ES')}</strong></div><div><span>Ocupación</span><strong>${projection.occupancy}%</strong></div><div><span>Taquilla</span><strong>${fmtM(projection.ticketIncome)}</strong></div></div>`:''}</section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>VALLAS</span><h3>Publicidad del estadio</h3></div><small>${contract?`${contract.remaining} partidos restantes`:'1 contrato activo'}</small></div>${contract?`<div class="activeContract"><strong>${contract.name}</strong><span>${fmtM(contract.perHome)} por partido en casa · ${contract.remaining} restantes</span></div>`:`<div class="adOffers">${state.commercial.adOffers.map((o)=>`<div class="adOffer"><div><strong>${o.name}</strong><span>${o.matches} partidos · ${fmtM(o.perHome)} / partido</span></div><button data-ad="${o.id}">ACEPTAR</button></div>`).join('')}</div>`}</section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>MARKETING</span><h3>Crecer la fanbase</h3></div><small>Más demanda y merchandising</small></div><div class="marketingList">${marketing.map((m)=>`<div class="marketingAction"><div><strong>${m.name}</strong><span>+${m.fans.toLocaleString('es-ES')} aficionados potenciales</span></div><button data-marketing="${m.id}" ${state.budget<m.cost?'disabled':''}>${fmtM(m.cost)}</button></div>`).join('')}</div>${commercialMessage?`<div class="saveNotice">${commercialMessage}</div>`:''}</section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>EVOLUCIÓN</span><h3>Plan del estadio</h3></div><small>5 fases</small></div><div class="stadiumStageRail">${STADIUM_STAGES.map((stage,index)=>`<div class="stageChip ${index===state.stadium.level?'current':index<state.stadium.level?'done':'locked'}"><img src="${stage.image}" alt="${stage.label}"/><strong>${index+1}</strong><span>${stage.capacity.toLocaleString('es-ES')}</span></div>`).join('')}</div></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>NIVELES</span><h3>Instalaciones</h3></div><small>Máx. 5</small></div><div class="facilityList">${levels.map(([label,value])=>`<div class="facility"><span>${label}</span><div class="levelDots">${[1,2,3,4,5].map((n)=>`<i class="${n<=value?'on':''}"></i>`).join('')}</div><strong>${value}</strong></div>`).join('')}</div></section>
+      </div>`;
+  }
+
+
+  function more() {
+    const standings = table();
+    const slots = [1,2,3].map((n)=>({ n, info:slotInfo(n) }));
+    return `
+      <div class="screen">
+        <header class="topbar compact"><div><div class="eyebrow">TEMPORADA</div><h1>Competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>
+        ${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}
+        <section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y cargar</h3></div><small>Autosave activo</small></div><div class="saveSlots">${slots.map(({n,info})=>`<div class="saveSlot"><div><strong>Slot ${n}</strong><span>${info?`${info.club} · J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Vacío'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">GUARDAR</button>${info?`<button data-load-slot="${n}">CARGAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}<button class="newGameButton" data-action="new-game">Nueva partida</button></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>FINANZAS</span><h3>Últimos movimientos</h3></div><strong>${fmtM(state.budget)}</strong></div><div class="financeList">${[...state.finance].reverse().slice(0,8).map((f)=>`<div><span>${f.label}</span><strong class="${f.amount>=0?'positive':'negative'}">${f.amount>=0?'+':''}${fmtM(f.amount)}</strong></div>`).join('')}</div></section>
+        <p class="buildTag">Club Manager MVP · build 0.3.0</p>
+      </div>`;
+  }
+
+  function newGameModal() {
+    if (!newGameOpen) return '';
+    return `<div class="newGameOverlay"><div class="newGameInner"><div class="newGameTop"><div><span class="eyebrow">NUEVA PARTIDA</span><h1>Elige club</h1></div><button data-action="close-new-game">×</button></div><div class="clubChoiceGrid">${TEAM_DEFS.map((def,i)=>{const t=state.teams[i]||{rating:75};const budget=Math.round((15+Math.max(0,t.rating-70)*1.7)*10)/10;return `<button class="clubChoice" data-new-club="${i}">${mark(def.short,'md')}<strong>${def.name}</strong><span>${def.short} · Plantilla ${t.rating}</span><div class="clubChoiceMetrics"><b>${fmtM(budget)}</b><b>${85000+Math.max(0,t.rating-70)*4500} fans</b></div></button>`}).join('')}</div></div></div>`;
+  }
+
+
+  function render() {
+    const body = tab === 'home' ? home() : tab === 'team' ? teamScreen() : tab === 'market' ? market() : tab === 'club' ? club() : more();
+    $app.innerHTML = `<div class="appContent">${body}</div>${nav()}${sheet(detailPlayer)}${newGameModal()}`;
+  }
+
+  function handleClick(event) {
+    const navBtn = event.target.closest('[data-nav]');
+    if (navBtn) {
+      tab = navBtn.dataset.nav;
+      selectedPlayer = null;
+      detailPlayer = null;
+      render();
+      return;
+    }
+    const actionBtn = event.target.closest('[data-action]');
+    if (actionBtn) {
+      const action = actionBtn.dataset.action;
+      if (action === 'simulate') simulateMatchday();
+      if (action === 'upgrade') upgrade();
+      if (action === 'new-season') startNewSeason();
+      if (action === 'new-game') { newGameOpen = true; render(); }
+      if (action === 'close-new-game') { newGameOpen = false; render(); }
+      if (action === 'reset') {
+        localStorage.removeItem(SAVE_KEY);
+        localStorage.removeItem(PREVIOUS_SAVE_KEY);
+        localStorage.removeItem(OLD_SAVE_KEY);
+        state = createGame();
+        tab = 'home';
+        selectedPlayer = null;
+        detailPlayer = null;
+        save();
+        render();
+      }
+      return;
+    }
+    const ticketBtn = event.target.closest('[data-ticket]');
+    if (ticketBtn) { adjustTicketPrice(Number(ticketBtn.dataset.ticket)); return; }
+    const adBtn = event.target.closest('[data-ad]');
+    if (adBtn) { signAdContract(adBtn.dataset.ad); return; }
+    const marketingBtn = event.target.closest('[data-marketing]');
+    if (marketingBtn) { runMarketing(marketingBtn.dataset.marketing); return; }
+    const saveBtn = event.target.closest('[data-save-slot]');
+    if (saveBtn) { saveSlot(saveBtn.dataset.saveSlot); return; }
+    const loadBtn = event.target.closest('[data-load-slot]');
+    if (loadBtn) { loadSlot(loadBtn.dataset.loadSlot); return; }
+    const newClubBtn = event.target.closest('[data-new-club]');
+    if (newClubBtn) {
+      state = createGame(Number(newClubBtn.dataset.newClub));
+      save(); newGameOpen = false; tab = 'home'; selectedPlayer = null; detailPlayer = null; saveNotice = ''; commercialMessage = ''; render(); return;
+    }
+
+    const playerBtn = event.target.closest('[data-player]');
+    if (playerBtn) {
+      tapPlayer(playerBtn.dataset.player);
+      return;
+    }
+    const filterBtn = event.target.closest('[data-filter]');
+    if (filterBtn) {
+      marketFilter = filterBtn.dataset.filter;
+      render();
+      return;
+    }
+    const buyBtn = event.target.closest('[data-buy]');
+    if (buyBtn) {
+      buy(buyBtn.dataset.buy);
+      return;
+    }
+    const detailBtn = event.target.closest('[data-detail]');
+    if (detailBtn) {
+      detailPlayer = player(detailBtn.dataset.detail);
+      render();
+      return;
+    }
+    const closeSheet = event.target.closest('[data-close-sheet]');
+    if (closeSheet) {
+      detailPlayer = null;
+      render();
+    }
+  }
+
+  $app.addEventListener('click', handleClick);
+  render();
+
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+}
+if ('caches' in window) {
+  caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+}
+</script>
+</body>
+</html>
