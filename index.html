@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.2.0</title>
+<title>Club Manager MVP 0.2.1</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -61,11 +61,22 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
 .primaryButton { width:100%; min-height:50px; border:0; border-radius:16px; background:var(--accent); color:var(--accent-ink); font-weight:850; cursor:pointer; }
 .primaryButton:disabled { background:#d9ddd3; color:#858a80; }
 .textButton { width:100%; border:0; background:transparent; color:#bdc3b6; padding:13px 4px 1px; font-size:12px; font-weight:700; }
-.resultStrip { margin-top:12px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; background:#e8f0db; border-radius:16px; }
-.resultStrip>div:first-child { display:flex; flex-direction:column; gap:3px; }
-.resultStrip span { font-size:9px; font-weight:850; letter-spacing:1px; color:#637052; }
-.resultStrip strong { font-size:14px; }
-.resultDot { width:9px; height:9px; border-radius:50%; background:var(--good); }
+.resultStrip { margin-top:12px; padding:16px; border-radius:24px; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow); }
+.resultStrip.win { background:linear-gradient(180deg,#f4f9eb,#ffffff); border-color:#d9e8c1; }
+.resultStrip.loss { background:linear-gradient(180deg,#fbefed,#ffffff); border-color:#efd1cb; }
+.resultStrip.draw { background:linear-gradient(180deg,#f5f6f3,#ffffff); }
+.resultStripHeader { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.resultStripHeader span { font-size:9px; font-weight:850; letter-spacing:1px; color:var(--muted); }
+.resultOutcome { padding:6px 9px; border-radius:999px; font-size:9px; font-weight:900; letter-spacing:.6px; background:#e8ece4; color:#545c50; }
+.resultStrip.win .resultOutcome { background:#dff0c6; color:#38621d; }
+.resultStrip.loss .resultOutcome { background:#f5d8d3; color:#8e4138; }
+.resultScoreBoard { display:grid; grid-template-columns:1fr 88px 1fr; align-items:center; gap:10px; }
+.resultTeam { display:flex; flex-direction:column; align-items:center; gap:7px; min-width:0; }
+.resultTeam strong { font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%; }
+.resultScore { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.resultScore strong { font-size:44px; line-height:.95; letter-spacing:-3px; }
+.resultScore small { color:var(--muted); font-size:9px; font-weight:750; }
+.resultStripFooter { margin-top:14px; padding-top:12px; border-top:1px solid var(--line); display:flex; justify-content:center; color:var(--muted); font-size:10px; }
 .twoCol { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
 .metricCard { min-height:128px; padding:16px; border-radius:20px; background:var(--surface); border:1px solid var(--line); display:flex; flex-direction:column; }
 .metricCard>strong { font-size:40px; line-height:1; margin-top:12px; letter-spacing:-2px; }
@@ -135,6 +146,16 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
 .marketInfo .teamMark { width:42px; height:42px; border-radius:14px; }
 .stadiumVisual--image { height:230px; background:#182018; }
 .stadiumStageImage { width:100%; height:100%; object-fit:cover; display:block; }
+.stadiumVisual--image { position:relative; }
+.stadiumUpgradeFlash { position:absolute; inset:0; display:grid; place-items:center; background:rgba(17,20,15,.44); color:white; font-size:13px; font-weight:900; letter-spacing:1.2px; text-transform:uppercase; animation:stadiumFlash 1.15s ease forwards; pointer-events:none; }
+@keyframes stadiumFlash { 0%{opacity:0} 15%{opacity:1} 72%{opacity:1} 100%{opacity:0} }
+.stadiumUpgradeAction { display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:13px 14px; background:#20251d; border-top:1px solid rgba(255,255,255,.08); }
+.stadiumUpgradeAction>div { min-width:0; display:flex; flex-direction:column; gap:4px; }
+.stadiumUpgradeAction span { color:#8f988a; font-size:8px; font-weight:850; letter-spacing:1px; text-transform:uppercase; }
+.stadiumUpgradeAction strong { color:white; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stadiumUpgradeAction small { color:#aab1a3; font-size:9px; }
+.stadiumUpgradeButton { min-width:124px; min-height:44px; padding:0 13px; border:0; border-radius:14px; background:var(--accent); color:var(--accent-ink); font-size:10px; font-weight:900; }
+.stadiumUpgradeButton:disabled { background:#3b4138; color:#80887a; }
 .stadiumStageRail { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:8px; }
 .stageChip { padding:8px; border-radius:16px; border:1px solid var(--line); background:#f6f7f3; display:flex; flex-direction:column; gap:6px; }
 .stageChip img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px; }
@@ -163,6 +184,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
   let selectedPlayer = null;
   let detailPlayer = null;
   let marketFilter = 'ALL';
+  let stadiumUpgradeFlash = false;
 
   const TEAM_DEFS = [
     { name: 'Barcelona City', short: 'BCN', palette: ['#0d2c5b', '#a50044', '#f0c560'], symbol: 'tower', crest: 'data:image/webp;base64,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' },
@@ -547,6 +569,8 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     if (state.budget < current.nextCost) return;
     state.budget = Math.round((state.budget - current.nextCost) * 100) / 100;
     state.stadium.level += 1;
+    stadiumUpgradeFlash = true;
+    setTimeout(() => { stadiumUpgradeFlash = false; }, 1200);
     const next = stadiumStage();
     state.finance.push({ id: `stadium-${next.key}-${Date.now()}`, label: next.label, amount: -current.nextCost, matchday: state.currentMatchday });
     state.inbox = [{
@@ -724,6 +748,14 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
     const pos = table().findIndex((t) => t.id === state.userTeamId) + 1;
     const forms = userRecentForm();
     const stage = stadiumStage();
+    const last = state.lastResult;
+    const lastHome = last ? team(last.homeId) : null;
+    const lastAway = last ? team(last.awayId) : null;
+    const userWasHome = last ? last.homeId === state.userTeamId : false;
+    const userGoals = last ? (userWasHome ? last.homeGoals : last.awayGoals) : 0;
+    const oppGoals = last ? (userWasHome ? last.awayGoals : last.homeGoals) : 0;
+    const resultClass = !last ? '' : userGoals > oppGoals ? 'win' : userGoals < oppGoals ? 'loss' : 'draw';
+    const resultLabel = !last ? '' : userGoals > oppGoals ? 'VICTORIA' : userGoals < oppGoals ? 'DERROTA' : 'EMPATE';
     return `
       <div class="screen">
         <header class="topbar">
@@ -740,7 +772,15 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
           <button class="primaryButton" data-action="simulate">Simular jornada</button>
           <button class="textButton" data-nav="team">Revisar alineación</button>
         </section>
-        ${state.lastResult ? `<section class="resultStrip"><div><span>ÚLTIMO RESULTADO</span><strong>${team(state.lastResult.homeId).short} ${state.lastResult.homeGoals}–${state.lastResult.awayGoals} ${team(state.lastResult.awayId).short}</strong></div><div class="resultDot"></div></section>` : ''}
+        ${last ? `<section class="resultStrip ${resultClass}">
+          <div class="resultStripHeader"><span>ÚLTIMO RESULTADO</span><b class="resultOutcome">${resultLabel}</b></div>
+          <div class="resultScoreBoard">
+            <div class="resultTeam">${mark(lastHome.short, 'lg')}<strong>${lastHome.short}</strong></div>
+            <div class="resultScore"><strong>${last.homeGoals}–${last.awayGoals}</strong><small>FINAL</small></div>
+            <div class="resultTeam">${mark(lastAway.short, 'lg')}<strong>${lastAway.short}</strong></div>
+          </div>
+          <div class="resultStripFooter">Jornada ${Math.max(1, state.currentMatchday - 1)} · ${lastHome.name} vs ${lastAway.name}</div>
+        </section>` : ''}
         <section class="twoCol">
           <div class="metricCard"><span>CLASIFICACIÓN</span><strong>${pos}<sup>º</sup></strong><small>${club.points} puntos</small></div>
           <div class="metricCard"><span>FORMA</span><div class="formDots">${[0, 1, 2, 3, 4].map((i) => `<i class="${forms[i] ? `form ${forms[i]}` : 'form empty'}">${forms[i] || '·'}</i>`).join('')}</div><small>${club.won}V · ${club.drawn}E · ${club.lost}D</small></div>
@@ -826,7 +866,11 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
           <div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div>
         </header>
         <section class="stadiumHero">
-          <div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title} ${current.label}"/></div>
+          <div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title} ${current.label}"/>${stadiumUpgradeFlash ? '<div class="stadiumUpgradeFlash">Mejora completada</div>' : ''}</div>
+          <div class="stadiumUpgradeAction">
+            <div><span>${next ? 'PRÓXIMA REFORMA' : 'ESTADIO'}</span><strong>${next ? next.label : 'Máximo nivel alcanzado'}</strong><small>${next ? `${current.nextProject} · ${fmtM(current.nextCost)}` : 'Proyecto completado'}</small></div>
+            <button class="stadiumUpgradeButton" data-action="upgrade" ${!next || state.budget < current.nextCost ? 'disabled' : ''}>${!next ? 'COMPLETO' : state.budget < current.nextCost ? 'SIN FONDOS' : 'MEJORAR'}</button>
+          </div>
           <div class="stadiumMeta"><div><span>${current.label}</span><h2>${current.title}</h2></div><div><strong>${current.capacity.toLocaleString('es-ES')}</strong><span>espectadores</span></div></div>
         </section>
         <section class="sectionBlock">
@@ -845,8 +889,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
             <div><span>Coste</span><strong>${next ? fmtM(current.nextCost) : '—'}</strong></div>
           </div>
           <p class="upgradeSummary">${next ? current.nextProject : 'El estadio ha alcanzado el máximo del MVP.'}</p>
-          <button class="primaryButton" data-action="upgrade" ${!next || state.budget < current.nextCost ? 'disabled' : ''}>${!next ? 'Proyecto completado' : state.budget < current.nextCost ? 'Presupuesto insuficiente' : 'Aprobar reforma'}</button>
-          <small class="note">Cada vez que apruebas una reforma, el estadio pasa a la siguiente visual y se actualiza el aforo.</small>
+          <small class="note">El botón de reforma está situado bajo la imagen para que el cambio visual sea inmediato al aprobarla.</small>
         </section>
       </div>`;
   }
@@ -868,7 +911,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
           <div class="financeList">${[...state.finance].reverse().slice(0, 6).map((f) => `<div><span>${f.label}</span><strong class="${f.amount >= 0 ? 'positive' : 'negative'}">${f.amount >= 0 ? '+' : ''}${fmtM(f.amount)}</strong></div>`).join('')}</div>
         </section>
         <button class="dangerButton" data-action="reset">Reiniciar partida MVP</button>
-        <p class="buildTag">Club Manager MVP · build 0.2.0</p>
+        <p class="buildTag">Club Manager MVP · build 0.2.1</p>
       </div>`;
   }
 
@@ -944,5 +987,6 @@ if ('serviceWorker' in navigator) {
 if ('caches' in window) {
   caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
 }
-</script></body>
+</script>
+</body>
 </html>
