@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.7.1</title>
+<title>Club Manager MVP 0.7.2</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -507,6 +507,35 @@ body,.appShell{background:var(--structura-bg)}
   .appBackButton{display:none}
 }
 
+
+/* === 0.7.2 Home status + lineup resolution === */
+.homeStatusDock{
+  position:relative!important;
+  top:auto!important;
+  z-index:1!important;
+  margin:0 0 10px!important;
+  padding:9px 12px!important;
+  border-radius:14px!important;
+  background:var(--surface)!important;
+  color:var(--ink)!important;
+  border:1px solid var(--line)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+.homeStatusDock span{color:var(--muted)!important}
+.homeStatusDock small{color:var(--muted)!important}
+.homeStatusDock strong{font-size:19px!important;color:var(--structura-graphite)!important}
+.homeStatusDivider{background:var(--line)!important;height:28px!important}
+@media (orientation:landscape){
+  .homeScreen>.homeStatusDock{
+    position:relative!important;
+    top:auto!important;
+    z-index:1!important;
+    grid-column:1/-1;
+    margin:0!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -867,10 +896,64 @@ body,.appShell{background:var(--structura-bg)}
     if(lineup.length===11) state.lineup=lineup; rebuildBench(); if(showNotice) saveNotice='Once optimizado para la táctica actual.'; save(); if(shouldRender) render();
   }
   function resolveLineupProblems(){
-    const formation=currentFormation(); const issues=lineupIssues(); if(!issues.length){saveNotice='El once no tiene problemas que resolver.';render();return;}
-    const squad=state.players.filter(p=>p.clubId===state.userTeamId); const used=new Set(state.lineup);
-    issues.forEach(issue=>{ const idx=state.lineup.indexOf(issue.player.id); if(idx<0)return; const target=formation.desired[idx]||issue.player.position; let candidates=squad.filter(p=>!used.has(p.id)&&!playerAvailability(p)?.hard); candidates.sort((a,b)=>playerSelectionScore(b,target)-playerSelectionScore(a,target)); const replacement=candidates[0]; if(replacement){used.delete(issue.player.id); used.add(replacement.id); state.lineup[idx]=replacement.id;} });
-    rebuildBench(); saveNotice='Problemas del once resueltos automáticamente.'; save(); render();
+    const formation=currentFormation();
+    let issues=lineupIssues();
+    if(!issues.length){saveNotice='El once no tiene problemas que resolver.';render();return;}
+
+    const squad=state.players.filter(p=>p.clubId===state.userTeamId);
+    const used=new Set(state.lineup);
+    const changes=[];
+
+    // Hard problems first, then fitness warnings.
+    issues=[...issues].sort((a,b)=>Number(b.hard)-Number(a.hard));
+
+    issues.forEach(issue=>{
+      const idx=state.lineup.indexOf(issue.player.id);
+      if(idx<0)return;
+      const target=formation.desired[idx]||issue.player.position;
+
+      // Best case: fully available player with no injury, suspension or fitness warning.
+      let candidates=squad.filter(p=>!used.has(p.id)&&!playerAvailability(p));
+
+      // If none exists, accept a warning only as fallback, but never another hard problem.
+      if(!candidates.length){
+        candidates=squad.filter(p=>!used.has(p.id)&&!playerAvailability(p)?.hard);
+      }
+
+      candidates.sort((a,b)=>{
+        const aStatus=playerAvailability(a);
+        const bStatus=playerAvailability(b);
+        const aClean=aStatus?0:12;
+        const bClean=bStatus?0:12;
+        return (playerSelectionScore(b,target)+bClean)-(playerSelectionScore(a,target)+aClean);
+      });
+
+      const replacement=candidates[0];
+      if(replacement){
+        used.delete(issue.player.id);
+        used.add(replacement.id);
+        state.lineup[idx]=replacement.id;
+        changes.push(`${issue.player.name} → ${replacement.name}`);
+      }
+    });
+
+    rebuildBench();
+
+    const remaining=lineupIssues();
+    const hardRemaining=remaining.filter(x=>x.hard);
+
+    if(!changes.length){
+      saveNotice='No hay sustitutos disponibles que mejoren los problemas actuales.';
+    }else if(hardRemaining.length){
+      saveNotice=`${changes.length} cambio${changes.length===1?'':'s'} aplicado${changes.length===1?'':'s'}, pero aún queda ${hardRemaining.length} problema obligatorio.`;
+    }else if(remaining.length){
+      saveNotice=`Once corregido. Quedan ${remaining.length} alerta${remaining.length===1?'':'s'} de físico no bloqueante${remaining.length===1?'':'s'}.`;
+    }else{
+      saveNotice=`Once resuelto automáticamente · ${changes.length} cambio${changes.length===1?'':'s'}.`;
+    }
+
+    save();
+    render();
   }
   function setFormation(id){ if(!FORMATIONS[id]||state.tactics.formation===id)return; state.tactics.formation=id; ensureTacticFamiliarity(); optimizeXI(false,false); saveNotice=`Formación cambiada a ${FORMATIONS[id].name}.`; save(); render(); }
   function setStyle(id){ if(!TACTIC_STYLES[id]||state.tactics.style===id)return; state.tactics.style=id; ensureTacticFamiliarity(); saveNotice=`Estilo cambiado a ${TACTIC_STYLES[id].name}.`; save(); render(); }
@@ -1483,7 +1566,7 @@ body,.appShell{background:var(--structura-bg)}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.1</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.2</p></div>`;
   }
 
   function newGameModal() {
