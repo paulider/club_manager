@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.6.0</title>
+<title>Club Manager MVP 0.7.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -234,7 +234,194 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
 .commercialOverview{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:11px}.commercialOverview>div{padding:13px;border-radius:17px;background:white;border:1px solid var(--line)}.commercialOverview span{display:block;font-size:8px;color:var(--muted);font-weight:900;letter-spacing:.7px}.commercialOverview strong{display:block;margin-top:5px;font-size:13px}
 @media(max-width:390px){.clubManagementGrid{grid-template-columns:1fr}.clubOverviewHero{grid-template-columns:1fr}.clubOverviewStats{display:grid;grid-template-columns:repeat(3,1fr)}.clubOverviewStats div{display:flex;flex-direction:column;align-items:flex-start}.clubHubBudget strong{font-size:15px}.financeSummary{grid-template-columns:1fr}.clubHubNav button{min-width:76px}}
 
-.moreClubShortcut{margin-top:12px;padding:15px;border-radius:20px;background:#e7f0d8;border:1px solid #d2dfbe;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.moreClubShortcut span{display:block;font-size:8px;font-weight:900;letter-spacing:1px;color:#6d775f}.moreClubShortcut strong{display:block;margin-top:4px;font-size:12px}.moreClubShortcut small{display:block;margin-top:4px;font-size:9px;color:#6d775f}.moreClubShortcut button{border:0;border-radius:12px;background:var(--dark);color:white;padding:10px 12px;font-size:9px;font-weight:900}</style>
+.moreClubShortcut{margin-top:12px;padding:15px;border-radius:20px;background:#e7f0d8;border:1px solid #d2dfbe;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.moreClubShortcut span{display:block;font-size:8px;font-weight:900;letter-spacing:1px;color:#6d775f}.moreClubShortcut strong{display:block;margin-top:4px;font-size:12px}.moreClubShortcut small{display:block;margin-top:4px;font-size:9px;color:#6d775f}.moreClubShortcut button{border:0;border-radius:12px;background:var(--dark);color:white;padding:10px 12px;font-size:9px;font-weight:900}
+/* === 0.7 Landscape UI Foundation === */
+@media (orientation:portrait) and (max-width:900px){
+  body::before{
+    content:"↻\A Gira el dispositivo para jugar";
+    white-space:pre;
+    position:fixed; inset:0; z-index:9999;
+    display:grid; place-items:center;
+    text-align:center;
+    padding:32px;
+    background:#11140f;
+    color:white;
+    font-size:24px;
+    font-weight:850;
+    letter-spacing:-.6px;
+  }
+}
+@media (orientation:landscape){
+  html,body{width:100%;height:100%;overflow:hidden}
+  .appShell{max-width:none;width:100vw;height:100dvh;min-height:100dvh;margin:0;box-shadow:none}
+  .appContent{height:100dvh;min-height:0;padding:0 0 0 86px}
+  .bottomNav{
+    left:0;top:0;bottom:0;transform:none;width:86px;height:100dvh;
+    grid-template-columns:1fr;grid-template-rows:repeat(5,1fr);
+    padding:calc(8px + env(safe-area-inset-top)) 7px calc(8px + env(safe-area-inset-bottom));
+    border-top:0;border-right:1px solid rgba(203,207,198,.9);
+    backdrop-filter:blur(20px)
+  }
+  .bottomNav button{min-height:0;gap:4px}
+  .bottomNav i{font-size:18px}
+  .bottomNav span{font-size:9px}
+  .bottomNav button.active i{width:38px;height:30px;border-radius:12px}
+  .screen{height:100dvh;overflow:auto;padding:12px 14px 18px;scrollbar-width:none}
+  .screen::-webkit-scrollbar{display:none}
+  .topbar{margin:0 0 10px;align-items:center}
+  h1{font-size:22px} h2{font-size:20px} h3{font-size:16px}
+  .heroCard,.resultStrip,.sectionBlock,.tacticPanel{border-radius:18px}
+  .heroCard{padding:14px}
+  .versus{padding:12px 2px 10px}
+  .resultStrip{padding:13px}
+  .resultScore strong{font-size:38px}
+  .homeScreen{
+    display:grid;
+    grid-template-columns:minmax(0,1.18fr) minmax(280px,.82fr);
+    grid-auto-flow:row dense;
+    grid-auto-rows:min-content;
+    gap:10px;
+    align-content:start
+  }
+  .homeScreen>.topbar,.homeScreen>.homeStatusDock{grid-column:1/-1}
+  .homeScreen>.homeStatusDock{
+    position:sticky;top:0;z-index:20;margin:0;
+    box-shadow:0 8px 24px rgba(24,31,17,.08)
+  }
+  .homeScreen>.heroCard{grid-column:1;margin:0}
+  .homeScreen>.resultStrip{grid-column:2;margin:0}
+  .homeScreen>.twoCol{grid-column:1/-1;margin:0}
+  .homeScreen>.sectionBlock{margin:0}
+  .metricCard{min-height:96px;padding:12px}
+  .metricCard>strong{font-size:30px;margin-top:8px}
+  .sectionBlock{padding:13px;margin-top:10px}
+  .sectionHeader{margin-bottom:10px}
+  .clubScreen{padding-left:154px}
+  .clubHubNav{
+    position:fixed;z-index:25;left:94px;top:12px;bottom:12px;width:132px;
+    display:flex;flex-direction:column;gap:6px;padding:8px;
+    overflow:auto;border:1px solid var(--line);border-radius:18px;
+    background:rgba(248,249,246,.96);backdrop-filter:blur(18px);box-shadow:var(--shadow)
+  }
+  .clubHubNav button{
+    width:100%;min-height:44px;display:grid;grid-template-columns:24px 1fr auto;
+    align-items:center;text-align:left;padding:8px 9px;border-radius:12px
+  }
+  .clubHubHeader{margin-top:0}
+  .clubManagementGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+  .clubManagementCard{min-height:104px}
+  .clubOverviewHero{display:grid;grid-template-columns:.7fr 1.3fr}
+  .stadiumHero{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr)}
+  .stadiumVisual{height:calc(100dvh - 190px);min-height:250px;grid-row:1/4}
+  .stadiumUpgradeAction{grid-column:2}
+  .stadiumMeta{grid-column:2}
+  .screen:has(.teamSubnav){
+    display:grid;grid-template-columns:minmax(180px,.8fr) minmax(330px,1.5fr) minmax(220px,.9fr);
+    grid-auto-rows:min-content;gap:8px;align-content:start
+  }
+  .screen:has(.teamSubnav)>.topbar,
+  .screen:has(.teamSubnav)>.teamSubnav{grid-column:1/-1}
+  .screen:has(.teamSubnav)>.lineupAlertPanel{grid-column:1;grid-row:3}
+  .screen:has(.teamSubnav)>.lineupActions{grid-column:1;grid-row:4}
+  .screen:has(.teamSubnav)>.formationBar{grid-column:2;grid-row:3}
+  .screen:has(.teamSubnav)>.pitch{grid-column:2;grid-row:4/8}
+  .screen:has(.teamSubnav)>.benchBlock{grid-column:3;grid-row:3/8;margin:0;max-height:calc(100dvh - 110px);overflow:auto}
+  .pitch{height:330px;border-radius:20px}
+  .fieldPlayer{width:66px}
+  .fieldPlayer .shirt{width:32px;height:32px}
+  .benchPlayer{min-height:48px}
+  .teamSubnav,.academySubnav{position:sticky;top:0;z-index:15}
+  .tacticPanel{margin-top:0}
+  .tacticGrid{grid-template-columns:repeat(4,1fr)}
+  .styleGrid{grid-template-columns:repeat(3,1fr)}
+  .sheetBackdrop{align-items:stretch;justify-content:flex-end}
+  .sheet{width:min(410px,44vw);height:100dvh;border-radius:24px 0 0 24px;overflow:auto;padding-bottom:24px}
+  .newGameInner{width:min(900px,calc(100vw - 130px));max-height:calc(100dvh - 24px)}
+  .clubChoiceGrid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* Academy 0.7 */
+.academy07{padding-bottom:16px}
+.academySubnav{
+  display:flex;gap:6px;padding:6px;margin:8px 0 10px;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px
+}
+.academySubnav button{
+  flex:1;border:0;border-radius:10px;background:transparent;padding:10px 12px;
+  font-size:10px;font-weight:900;color:var(--muted)
+}
+.academySubnav button.active{background:var(--dark);color:white}
+.academyCommandBar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px
+}
+.academyCommandBar>div{
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;
+  display:flex;flex-direction:column;gap:4px
+}
+.academyCommandBar span{font-size:8px;font-weight:850;letter-spacing:.8px;color:var(--muted)}
+.academyCommandBar strong{font-size:15px}
+.academyWorkspace{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(290px,.82fr);gap:10px;min-height:0}
+.academyWorkspace.scouting{grid-template-columns:minmax(185px,.58fr) minmax(270px,1fr) minmax(280px,.92fr)}
+.academyPanel{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px;min-height:0
+}
+.academyPanelHead{display:flex;justify-content:space-between;align-items:end;margin-bottom:9px}
+.academyPanelHead>div{display:flex;flex-direction:column;gap:3px}
+.academyPanelHead span{font-size:8px;font-weight:850;letter-spacing:.8px;color:var(--muted)}
+.academyPanelHead strong{font-size:14px}
+.academyRoster,.candidateList{display:flex;flex-direction:column;gap:6px}
+.academyRow,.candidateRow{
+  width:100%;border:1px solid transparent;border-radius:12px;background:var(--surface-2);
+  display:grid;grid-template-columns:40px 1fr auto auto;align-items:center;gap:9px;padding:8px;text-align:left
+}
+.academyRow.active,.candidateRow.active{border-color:#b7dc7b;background:#f1f8e5}
+.academyRow .positionTag,.candidateRow .positionTag{background:white}
+.academyRow>div,.candidateRow>div{min-width:0;display:flex;flex-direction:column;gap:2px}
+.academyRow strong,.candidateRow strong{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.academyRow small,.candidateRow small{font-size:8px;color:var(--muted)}
+.academyRating{min-width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--dark);color:white;font-size:13px;font-weight:900}
+.academyGrowth{font-size:9px;color:var(--good);font-style:normal;font-weight:900}
+.academyDetailHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.academyDetailHead>div{display:flex;flex-direction:column;gap:4px}
+.academyDetailHead small{color:var(--muted)}
+.academyBigRating{font-size:34px;font-weight:900;letter-spacing:-2px}
+.academyStatsGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0}
+.academyStatsGrid div{background:var(--surface-2);border-radius:11px;padding:8px;display:flex;flex-direction:column;gap:3px}
+.academyStatsGrid span{font-size:7px;color:var(--muted);font-weight:850}
+.academyStatsGrid strong{font-size:11px}
+.academyTraits{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 12px}
+.academyTraits span{padding:6px 8px;border-radius:999px;background:#e8ece4;font-size:8px;font-weight:800}
+.academyActions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.academyActions button{min-height:38px;border:0;border-radius:11px;font-size:9px;font-weight:900}
+.academyActions .primary{background:var(--accent);color:var(--accent-ink)}
+.academyActions .ghost{background:var(--surface-2)}
+.scoutNetwork{display:flex;flex-direction:column;gap:8px}
+.scoutNetworkCard{background:var(--dark);color:white;border-radius:14px;padding:11px}
+.scoutNetworkCard span{font-size:8px;color:#9aa291}
+.scoutNetworkCard strong{display:block;font-size:18px;margin:3px 0 8px}
+.scoutNetworkCard button{width:100%;border:0;border-radius:9px;padding:8px;background:var(--accent);font-size:8px;font-weight:900}
+.scoutMission{border:1px solid var(--line);border-radius:12px;padding:9px;display:flex;flex-direction:column;gap:4px}
+.scoutMission strong{font-size:10px}.scoutMission small{font-size:8px;color:var(--muted)}
+.scoutMission button{margin-top:4px;border:0;border-radius:9px;padding:8px;background:var(--dark);color:white;font-size:8px;font-weight:900}
+.scoutMission button:disabled{opacity:.35}
+.scoutFocus{display:flex;flex-wrap:wrap;gap:5px}
+.scoutFocus button,.trainingPlans button{
+  border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:7px 9px;font-size:8px;font-weight:850
+}
+.scoutFocus button.active,.trainingPlans button.active{background:var(--dark);color:white;border-color:var(--dark)}
+.scoutProgress{padding:9px;border-radius:11px;background:#eef8dd;display:flex;flex-direction:column;gap:3px;font-size:9px}
+.trainingProgress{height:5px;border-radius:5px;background:#e7e9e3;overflow:hidden;margin-top:5px}
+.trainingProgress span{display:block;height:100%;background:var(--accent);border-radius:inherit}
+.trainingPlans{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.academyRecommendation{padding:9px;border-radius:11px;background:#eef8dd;margin:10px 0;font-size:9px}
+.academyRecommendation.warn{background:#f5f0df}
+@media (orientation:landscape){
+  .academy07 .clubHubHeader{margin-bottom:4px}
+  .academy07 .academyWorkspace{height:calc(100dvh - 190px)}
+  .academy07 .academyPanel{overflow:auto}
+}
+
+</style>
 </head>
 <body>
 <main id="app" class="appShell"></main>
@@ -607,7 +794,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
     const y=state.academy.prospects.find(p=>p.id===id); if(!y) return;
     const p={...y,id:`academy-${state.seasonStartYear}-${Date.now()}-${Math.floor(Math.random()*9999)}`,clubId:state.userTeamId,wage:Math.max(18,Math.round(y.rating*y.rating/85)),morale:84,fitness:95,form:70,injuryGames:0,suspensionGames:0,yellowCards:0,value:Math.max(.4,Math.round(((y.rating-45)**2)*.025*10)/10)};
     state.players.push(p); state.academy.prospects=state.academy.prospects.filter(x=>x.id!==id); rebuildBench(); academyMessage=`${p.name} ha sido promocionado al primer equipo.`;
-    state.inbox=[{id:`academy-promote-${Date.now()}`,type:'success',title:'Juvenil promocionado',body:`${p.name}, ${p.position} de ${p.age} años, ya forma parte de la primera plantilla.`},...state.inbox].slice(0,10); save(); render();
+    state.inbox=[{id:`academy-promote-${Date.now()}`,type:'success',title:'Juvenil promocionado',body:`${p.name}, ${positionShort(p.position)} de ${p.age} años, ya forma parte de la primera plantilla.`},...state.inbox].slice(0,10); save(); render();
   }
   function discardYouth(id){ const y=state.academy.prospects.find(p=>p.id===id); if(!y)return; state.academy.prospects=state.academy.prospects.filter(x=>x.id!==id); academyMessage=`${y.name} deja la cantera.`; save(); render(); }
   function upgradeAcademy(){
@@ -1100,7 +1287,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
       const activeTraits=[...new Set(state.lineup.flatMap(id=>(player(id)?.traits||[]).filter(t=>style.traits.includes(t))))];
       return `<div class="screen"><header class="topbar compact"><div class="topbarBrand">${mark(club.short,'md')}<div><div class="eyebrow">EQUIPO</div><h1>Táctica</h1></div></div><div class="squadAvg"><span>FIT</span><strong>${Math.round(state.lineup.reduce((n,id,i)=>n+tacticalFit(player(id),formation.desired[i]),0)/11)}</strong></div></header>${tabs}<section class="tacticPanel"><div class="sectionHeader"><div><span>FORMACIÓN</span><h3>Estructura</h3></div><small>Cambiar reorganiza el XI</small></div><div class="tacticGrid">${Object.entries(FORMATIONS).map(([id,f])=>`<button class="tacticCard ${state.tactics.formation===id?'active':''}" data-formation="${id}"><strong>${f.name}</strong><span>${id==='4231'?'Control entre líneas':id==='433'?'Anchura y tres medios':id==='442'?'Dos puntas y bandas':'Superioridad central'}</span></button>`).join('')}</div></section><section class="tacticPanel"><div class="sectionHeader"><div><span>ESTILO</span><h3>Cómo jugar</h3></div><small>Modifica el rendimiento</small></div><div class="styleGrid">${Object.entries(TACTIC_STYLES).map(([id,st])=>`<button class="styleCard ${state.tactics.style===id?'active':''}" data-style="${id}"><div><strong>${st.name}</strong><span>${st.desc}</span></div><b>${st.traits.filter(t=>activeTraits.includes(t)).length}/${st.traits.length}</b></button>`).join('')}</div><div class="familiarity"><div class="familiarityHead"><span>Familiaridad ${formation.name} + ${style.name}</span><strong>${familiarity}%</strong></div><div class="familiarityTrack"><span style="width:${familiarity}%"></span></div></div><div class="traitSection"><span>CAPACIDADES ACTIVADAS EN EL XI</span><div class="activatedTraits">${style.traits.map(t=>`<span class="traitChip ${activeTraits.includes(t)?'active':'inactive'}">${t}</span>`).join('')}</div></div></section></div>`;
     }
-    return `<div class="screen"><header class="topbar compact"><div class="topbarBrand">${mark(club.short,'md')}<div><div class="eyebrow">EQUIPO</div><h1>Once inicial</h1></div></div><div class="squadAvg"><span>XI</span><strong>${avg}</strong></div></header>${tabs}<div class="lineupAlertPanel ${status.cls==='danger'?'danger':status.cls==='ok'?'ok':''}"><div class="lineupAlertTitle"><strong>${status.icon} ${status.text}</strong><span>${status.issues.length?'Requiere atención':'Sin incidencias'}</span></div>${status.issues.length?`<div class="lineupIssueList">${status.issues.map(x=>`<div class="lineupIssue ${x.hard?'':'warn'}"><span>${x.player.name}</span><b>${x.label}</b></div>`).join('')}</div>`:''}</div><div class="lineupActions"><button class="fix" data-action="auto-fix" ${!status.issues.length?'disabled':''}>RESOLVER PROBLEMAS</button><button class="optimize" data-action="optimize-xi">OPTIMIZAR XI</button></div><div class="formationBar"><span>${formation.name} · ${style.name}</span><small>${selectedPlayer?'Selecciona otro jugador para intercambiar':`Familiaridad ${familiarity}%`}</small></div><div class="pitch"><div class="pitchLine center"></div><div class="pitchCircle"></div><div class="box top"></div><div class="box bottom"></div>${formation.slots.map(slot=>{const p=player(state.lineup[slot.i]);if(!p)return'';const st=playerAvailability(p);const target=formation.desired[slot.i]||p.position;const fit=tacticalFit(p,target);return `<button class="fieldPlayer ${selectedPlayer===p.id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" style="left:${slot.x}%;top:${slot.y}%" data-player="${p.id}"><span class="shirt">${target}</span>${st?`<em class="playerStateBadge ${st.hard?'':'warn'}">${st.type==='injury'?'✚':st.type==='suspension'?'S':'!'}</em>`:''}<strong>${p.name.split(' ').pop()}</strong><small>${p.rating}</small><em class="fitBadge">FIT ${fit}</em></button>`}).join('')}</div><section class="sectionBlock benchBlock"><div class="sectionHeader"><div><span>PLANTILLA</span><h3>Banquillo</h3></div><small>${state.bench.length} jugadores</small></div><div class="benchList">${state.bench.map(id=>{const p=player(id);const st=playerAvailability(p);const fit=tacticalFit(p,p.position);return `<button class="benchPlayer ${selectedPlayer===id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" data-player="${id}"><span class="positionTag">${p.position}</span><div><strong>${p.name}</strong><small>${st?st.label:`${p.role} · Físico ${p.fitness}%`} · <span class="benchFit">Fit ${fit}</span></small></div>${rating(p.rating)}</button>`}).join('')}</div></section></div>`;
+    return `<div class="screen"><header class="topbar compact"><div class="topbarBrand">${mark(club.short,'md')}<div><div class="eyebrow">EQUIPO</div><h1>Once inicial</h1></div></div><div class="squadAvg"><span>XI</span><strong>${avg}</strong></div></header>${tabs}<div class="lineupAlertPanel ${status.cls==='danger'?'danger':status.cls==='ok'?'ok':''}"><div class="lineupAlertTitle"><strong>${status.icon} ${status.text}</strong><span>${status.issues.length?'Requiere atención':'Sin incidencias'}</span></div>${status.issues.length?`<div class="lineupIssueList">${status.issues.map(x=>`<div class="lineupIssue ${x.hard?'':'warn'}"><span>${x.player.name}</span><b>${x.label}</b></div>`).join('')}</div>`:''}</div><div class="lineupActions"><button class="fix" data-action="auto-fix" ${!status.issues.length?'disabled':''}>RESOLVER PROBLEMAS</button><button class="optimize" data-action="optimize-xi">OPTIMIZAR XI</button></div><div class="formationBar"><span>${formation.name} · ${style.name}</span><small>${selectedPlayer?'Selecciona otro jugador para intercambiar':`Familiaridad ${familiarity}%`}</small></div><div class="pitch"><div class="pitchLine center"></div><div class="pitchCircle"></div><div class="box top"></div><div class="box bottom"></div>${formation.slots.map(slot=>{const p=player(state.lineup[slot.i]);if(!p)return'';const st=playerAvailability(p);const target=formation.desired[slot.i]||p.position;const fit=tacticalFit(p,target);return `<button class="fieldPlayer ${selectedPlayer===p.id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" style="left:${slot.x}%;top:${slot.y}%" data-player="${p.id}"><span class="shirt">${positionShort(target)}</span>${st?`<em class="playerStateBadge ${st.hard?'':'warn'}">${st.type==='injury'?'✚':st.type==='suspension'?'S':'!'}</em>`:''}<strong>${p.name.split(' ').pop()}</strong><small>${p.rating}</small><em class="fitBadge">FIT ${fit}</em></button>`}).join('')}</div><section class="sectionBlock benchBlock"><div class="sectionHeader"><div><span>PLANTILLA</span><h3>Banquillo</h3></div><small>${state.bench.length} jugadores</small></div><div class="benchList">${state.bench.map(id=>{const p=player(id);const st=playerAvailability(p);const fit=tacticalFit(p,p.position);return `<button class="benchPlayer ${selectedPlayer===id?'selected':''} ${st?.hard?'unavailable':st?'tired':''}" data-player="${id}"><span class="positionTag">${positionShort(p.position)}</span><div><strong>${p.name}</strong><small>${st?st.label:`${p.role} · Físico ${p.fitness}%`} · <span class="benchFit">Fit ${fit}</span></small></div>${rating(p.rating)}</button>`}).join('')}</div></section></div>`;
   }
 
 
@@ -1110,7 +1297,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
       return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MERCADO</div><h1>Ofertas recibidas</h1></div><div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div></header>${tabs}${transferMessage?`<div class="saveNotice">${transferMessage}</div>`:''}<div class="incomingOffers">${offers.length?offers.map(o=>{const p=player(o.playerId),c=team(o.clubId);return `<article class="incomingOffer"><div class="offerHead">${mark(c.short,'md')}<div><span>${c.name}</span><strong>${p?.name||'Jugador'}</strong><small>${p?.position||''} · ${p?.age||''} años · Valor ${p?fmtM(p.value):'—'}</small></div>${p?rating(p.rating):''}</div><div class="offerMoney"><span>OFERTA</span><strong>${fmtM(o.amount)}</strong><small>Caduca J${o.expiresMatchday}${o.negotiated?' · negociada':''}</small></div>${o.note?`<div class="offerNote">${o.note}</div>`:''}<div class="offerActions"><button class="reject" data-reject-offer="${o.id}">RECHAZAR</button><button data-negotiate-offer="${o.id}">NEGOCIAR +10%</button><button class="accept" data-accept-offer="${o.id}">ACEPTAR</button></div></article>`}).join(''):`<div class="emptyState"><strong>Sin ofertas pendientes</strong><span>Los clubes irán preguntando por tus jugadores durante la temporada.</span></div>`}</div></div>`;
     }
     const need=getSquadNeed(); const candidates=state.players.filter(p=>p.clubId!==state.userTeamId&&(marketFilter==='ALL'||p.position===marketFilter)).sort((a,b)=>(b.potential+b.rating)-(a.potential+a.rating)).slice(0,14); const filters=['ALL','GK','CB','CM','AM','RW','LW','ST'];
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MERCADO</div><h1>Scouting</h1></div><div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div></header>${tabs}<div class="needCard"><div><span>PRIORIDAD</span><strong>${POSITION_LABELS[need]||need}</strong></div><div class="needSignal"><i></i><i></i><i></i></div></div><div class="filterRow">${filters.map(f=>`<button data-filter="${f}" class="${marketFilter===f?'active':''}">${f}</button>`).join('')}</div><div class="marketList">${candidates.map(p=>{const c=team(p.clubId),can=p.value<=state.budget;return `<div class="marketCard"><button class="marketInfo" data-detail="${p.id}">${mark(c.short,'md')}<div class="marketText"><div><span class="positionTag">${p.position}</span><small>${p.age} años · ${c.short}</small></div><strong>${p.name}</strong><span>${(p.traits||[]).slice(0,2).join(' · ')} · Fit ${tacticalFit(p,p.position)}</span></div>${rating(p.rating)}</button><div class="marketAction"><div><span>Valor</span><strong>${fmtM(p.value)}</strong></div><button data-buy="${p.id}" ${can?'':'disabled'}>${can?'Fichar':'Sin presupuesto'}</button></div></div>`}).join('')}</div></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MERCADO</div><h1>Scouting</h1></div><div class="budget"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div></header>${tabs}<div class="needCard"><div><span>PRIORIDAD</span><strong>${POSITION_LABELS[need]||need}</strong></div><div class="needSignal"><i></i><i></i><i></i></div></div><div class="filterRow">${filters.map(f=>`<button data-filter="${f}" class="${marketFilter===f?'active':''}">${f}</button>`).join('')}</div><div class="marketList">${candidates.map(p=>{const c=team(p.clubId),can=p.value<=state.budget;return `<div class="marketCard"><button class="marketInfo" data-detail="${p.id}">${mark(c.short,'md')}<div class="marketText"><div><span class="positionTag">${positionShort(p.position)}</span><small>${p.age} años · ${c.short}</small></div><strong>${p.name}</strong><span>${(p.traits||[]).slice(0,2).join(' · ')} · Fit ${tacticalFit(p,p.position)}</span></div>${rating(p.rating)}</button><div class="marketAction"><div><span>Valor</span><strong>${fmtM(p.value)}</strong></div><button data-buy="${p.id}" ${can?'':'disabled'}>${can?'Fichar':'Sin presupuesto'}</button></div></div>`}).join('')}</div></div>`;
   }
 
 
@@ -1169,7 +1356,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
         <section class="clubSectionIntro"><div><span>CANTERA</span><h2>Formación y talento</h2><p>Desarrolla jugadores propios y aumenta el nivel de academia para mejorar las futuras generaciones.</p></div><div class="academyLevelRing"><strong>${level}</strong><span>/5</span></div></section>
         <section class="academyUpgrade"><div><span>MEJORA DE CANTERA</span><strong>${level>=5?'Máximo nivel':`Subir a nivel ${level+1}`}</strong><small>${level>=5?'Centro de formación completado':`Coste ${fmtM(cost)} · mejor talento en próximas generaciones`}</small></div><button data-action="upgrade-academy" ${level>=5||state.budget<cost?'disabled':''}>${level>=5?'COMPLETO':state.budget<cost?'SIN FONDOS':'MEJORAR'}</button></section>
         ${academyMessage?`<div class="saveNotice">${academyMessage}</div>`:''}
-        <section class="sectionBlock"><div class="sectionHeader"><div><span>JUVENILES</span><h3>Talentos disponibles</h3></div><small>${prospects.length} jugadores</small></div><div class="prospectList">${prospects.length?prospects.map(p=>{const [lo,hi]=youthPotentialRange(p);return `<article class="prospectCard"><div class="prospectMain"><div class="prospectRating"><span>${p.position}</span><strong>${p.rating}</strong></div><div><strong>${p.name}</strong><span>${p.age} años · ${p.role}</span><small>${(p.traits||[]).slice(0,2).join(' · ')}</small></div><div class="potentialRange"><span>POT.</span><strong>${lo}–${hi}</strong></div></div><div class="prospectActions"><button class="discard" data-discard-youth="${p.id}">DESCARTAR</button><button class="promote" data-promote-youth="${p.id}">SUBIR AL PRIMER EQUIPO</button></div></article>`}).join(''):`<div class="emptyState"><strong>Sin juveniles disponibles</strong><span>La siguiente generación llegará al comenzar una nueva temporada.</span></div>`}</div></section>
+        <section class="sectionBlock"><div class="sectionHeader"><div><span>JUVENILES</span><h3>Talentos disponibles</h3></div><small>${prospects.length} jugadores</small></div><div class="prospectList">${prospects.length?prospects.map(p=>{const [lo,hi]=youthPotentialRange(p);return `<article class="prospectCard"><div class="prospectMain"><div class="prospectRating"><span>${positionShort(p.position)}</span><strong>${p.rating}</strong></div><div><strong>${p.name}</strong><span>${p.age} años · ${p.role}</span><small>${(p.traits||[]).slice(0,2).join(' · ')}</small></div><div class="potentialRange"><span>POT.</span><strong>${lo}–${hi}</strong></div></div><div class="prospectActions"><button class="discard" data-discard-youth="${p.id}">DESCARTAR</button><button class="promote" data-promote-youth="${p.id}">SUBIR AL PRIMER EQUIPO</button></div></article>`}).join(''):`<div class="emptyState"><strong>Sin juveniles disponibles</strong><span>La siguiente generación llegará al comenzar una nueva temporada.</span></div>`}</div></section>
       </div>`;
     }
 
@@ -1210,7 +1397,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.6.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.0</p></div>`;
   }
 
   function newGameModal() {
@@ -1330,6 +1517,448 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
       render();
     }
   }
+
+
+  const POSITION_SHORT_ES_V07 = {GK:'POR',RB:'LD',CB:'DFC',LB:'LI',DM:'MCD',CM:'MC',AM:'MCO',RW:'ED',LW:'EI',ST:'DEL'};
+  const ACADEMY_PLANS_V07 = {
+    balanced:{name:'Equilibrado',mult:1.00,traits:[]},
+    technical:{name:'Técnico',mult:1.04,traits:['Visión','Primer toque','Conducción','Finalizador','Centros']},
+    physical:{name:'Físico',mult:1.03,traits:['Resistencia','Físico','Velocidad','Juego aéreo']},
+    tactical:{name:'Táctico',mult:1.00,traits:['Anticipación','Organizador','Recuperador','Salida de balón']},
+    role:{name:'Rol específico',mult:1.06,traits:[]}
+  };
+  let academySubViewV07 = 'squad';
+  let selectedAcademyIdV07 = null;
+  let selectedCandidateIdV07 = null;
+
+function positionShort(pos){
+  return POSITION_SHORT_ES_V07[pos] || pos;
+}
+
+function academyCapacityV07(){
+  return 8 + Math.max(1, Number(state.academy?.level || 1)) * 2;
+}
+
+function ensureYouthSystemsV07(){
+  if (!state.academy) state.academy = {level:1,prospects:[]};
+  if (!Array.isArray(state.academy.prospects)) state.academy.prospects = [];
+  if (!state.academy.scouting) {
+    state.academy.scouting = {
+      level: Math.max(1, Math.min(5, Number(state.academy.level || 1))),
+      focus: "ALL",
+      active: null,
+      candidates: []
+    };
+  }
+  if (!Array.isArray(state.academy.scouting.candidates)) state.academy.scouting.candidates = [];
+  state.academy.prospects.forEach((p)=>{
+    if (!p.trainingPlan) p.trainingPlan = "balanced";
+    if (!Number.isFinite(p.developmentXP)) p.developmentXP = 0;
+    if (!Number.isFinite(p.seasonGrowth)) p.seasonGrowth = 0;
+    if (!Array.isArray(p.traits)) p.traits = makeTraits(p.position,idSeed(p.id));
+    if (!p.role) p.role = defaultRoleFor(p.position,p.traits);
+  });
+}
+
+function youthPlanMetaV07(id){
+  return ACADEMY_PLANS_V07[id] || ACADEMY_PLANS_V07.balanced;
+}
+
+function academySelectedProspectV07(){
+  ensureYouthSystemsV07();
+  let p = state.academy.prospects.find(x=>x.id===selectedAcademyIdV07);
+  if (!p) {
+    p = state.academy.prospects[0] || null;
+    selectedAcademyIdV07 = p?.id || null;
+  }
+  return p;
+}
+
+function academySelectedCandidateV07(){
+  ensureYouthSystemsV07();
+  let c = state.academy.scouting.candidates.find(x=>x.id===selectedCandidateIdV07);
+  if (!c) {
+    c = state.academy.scouting.candidates[0] || null;
+    selectedCandidateIdV07 = c?.id || null;
+  }
+  return c;
+}
+
+function academyScoutMissionDefV07(type){
+  const defs = {
+    local:{name:"Búsqueda local",cost:.02,weeks:1,min:2,max:3,level:1},
+    national:{name:"Búsqueda nacional",cost:.075,weeks:2,min:3,max:4,level:2},
+    international:{name:"Búsqueda internacional",cost:.18,weeks:3,min:4,max:5,level:4}
+  };
+  return defs[type] || defs.local;
+}
+
+function scoutingPoolV07(focus){
+  if (focus==="GK") return ["GK"];
+  if (focus==="DEF") return ["RB","CB","LB"];
+  if (focus==="MID") return ["CM","AM"];
+  if (focus==="ATT") return ["RW","LW","ST"];
+  return ["GK","RB","CB","LB","CM","AM","RW","LW","ST"];
+}
+
+function createScoutedCandidateV07(type,index){
+  ensureYouthSystemsV07();
+  const scout = state.academy.scouting;
+  const seed = state.seed + state.seasonStartYear*1709 + state.currentMatchday*313 + index*997 + scout.level*43 + type.length*71;
+  const random = rng(seed);
+  const pool = scoutingPoolV07(scout.focus);
+  const position = pool[Math.floor(random()*pool.length)];
+  const age = 15 + Math.floor(random()*4);
+  const base = Math.min(73, 47 + state.academy.level*2 + scout.level + Math.floor(random()*10) + (age>=18?2:0));
+  const potential = Math.min(95, Math.max(base+8, 68 + state.academy.level*3 + scout.level + Math.floor(random()*14)));
+  const traits = makeTraits(position,seed+19);
+  const first = firstNames[Math.floor(random()*firstNames.length)];
+  const last = lastNames[Math.floor(random()*lastNames.length)];
+  const uncertainty = Math.max(2, 8-scout.level);
+  return {
+    id:`sc-${state.seasonStartYear}-${state.currentMatchday}-${type}-${index}-${seed%1000}`,
+    name:`${first} ${last}`,age,position,rating:base,potential,traits,
+    role:defaultRoleFor(position,traits),
+    observed:0,
+    reportLow:Math.max(base+4,potential-uncertainty),
+    reportHigh:Math.min(95,potential+Math.max(1,Math.floor(uncertainty/2))),
+    cost:Math.round((.025 + base*.0015 + potential*.0008)*1000)/1000,
+    trainingPlan:"balanced",developmentXP:0,seasonGrowth:0
+  };
+}
+
+function generateScoutCandidatesV07(type){
+  const def = academyScoutMissionDefV07(type);
+  const random = rng(state.seed + state.seasonStartYear*811 + state.currentMatchday*121 + type.length*19);
+  const count = def.min + Math.floor(random()*(def.max-def.min+1));
+  state.academy.scouting.candidates = Array.from({length:count},(_,i)=>createScoutedCandidateV07(type,i));
+  selectedCandidateIdV07 = state.academy.scouting.candidates[0]?.id || null;
+  state.inbox = [{
+    id:`scout-done-${Date.now()}`,type:"success",title:"Scouting completado",
+    body:`La red de cantera ha encontrado ${count} candidatos.`
+  },...state.inbox].slice(0,10);
+  academyMessage = `${count} nuevos candidatos disponibles.`;
+}
+
+function startYouthScoutingV07(type){
+  ensureYouthSystemsV07();
+  const scout = state.academy.scouting;
+  const def = academyScoutMissionDefV07(type);
+  if (scout.active || scout.level < def.level || state.budget < def.cost) return;
+  state.budget = Math.round((state.budget-def.cost)*100)/100;
+  state.finance.push({id:`scout-${Date.now()}`,label:def.name,amount:-def.cost,matchday:state.currentMatchday});
+  scout.active = {type,remaining:def.weeks,total:def.weeks};
+  academyMessage = `${def.name} iniciada.`;
+  save(); render();
+}
+
+function observeCandidateV07(id){
+  ensureYouthSystemsV07();
+  const c = state.academy.scouting.candidates.find(x=>x.id===id);
+  if (!c || c.observed>=2) return;
+  c.observed += 1;
+  const width = Math.max(1, Math.ceil((c.reportHigh-c.reportLow)/3));
+  c.reportLow = Math.max(c.rating+4, c.potential-width);
+  c.reportHigh = Math.min(95, c.potential+Math.max(1,width-1));
+  selectedCandidateIdV07 = c.id;
+  academyMessage = `Informe de ${c.name} actualizado.`;
+  save(); render();
+}
+
+function signCandidateV07(id){
+  ensureYouthSystemsV07();
+  const c = state.academy.scouting.candidates.find(x=>x.id===id);
+  if (!c) return;
+  if (state.academy.prospects.length >= academyCapacityV07()) {
+    academyMessage = "La cantera está completa. Libera una plaza o mejora la academia.";
+    render(); return;
+  }
+  if (state.budget < c.cost) {
+    academyMessage = "Presupuesto insuficiente para incorporar al jugador.";
+    render(); return;
+  }
+  state.budget = Math.round((state.budget-c.cost)*100)/100;
+  state.finance.push({id:`academy-sign-${Date.now()}`,label:`Cantera · ${c.name}`,amount:-c.cost,matchday:state.currentMatchday});
+  state.academy.prospects.unshift({...c,id:`y-scout-${state.seasonStartYear}-${Date.now()}`});
+  state.academy.scouting.candidates = state.academy.scouting.candidates.filter(x=>x.id!==id);
+  selectedAcademyIdV07 = state.academy.prospects[0]?.id || null;
+  selectedCandidateIdV07 = state.academy.scouting.candidates[0]?.id || null;
+  academyMessage = `${c.name} se incorpora a la cantera.`;
+  save(); render();
+}
+
+function dismissCandidateV07(id){
+  ensureYouthSystemsV07();
+  state.academy.scouting.candidates = state.academy.scouting.candidates.filter(x=>x.id!==id);
+  selectedCandidateIdV07 = state.academy.scouting.candidates[0]?.id || null;
+  save(); render();
+}
+
+function upgradeScoutingV07(){
+  ensureYouthSystemsV07();
+  const scout = state.academy.scouting;
+  if (scout.level>=5) return;
+  const cost = [.0,.35,.7,1.4,2.6][scout.level] || .35;
+  if (state.budget<cost) return;
+  state.budget = Math.round((state.budget-cost)*100)/100;
+  scout.level += 1;
+  state.finance.push({id:`scouting-up-${Date.now()}`,label:`Red scouting nivel ${scout.level}`,amount:-cost,matchday:state.currentMatchday});
+  academyMessage = `Red de scouting mejorada a nivel ${scout.level}.`;
+  save(); render();
+}
+
+function setScoutFocusV07(focus){
+  ensureYouthSystemsV07();
+  state.academy.scouting.focus = focus;
+  save(); render();
+}
+
+function setYouthTrainingPlanV07(id,plan){
+  ensureYouthSystemsV07();
+  const p = state.academy.prospects.find(x=>x.id===id);
+  if (!p || !ACADEMY_PLANS_V07[plan]) return;
+  p.trainingPlan = plan;
+  selectedAcademyIdV07 = id;
+  academyMessage = `${p.name}: plan ${ACADEMY_PLANS_V07[plan].name}.`;
+  save(); render();
+}
+
+function trainingTraitPoolV07(p){
+  const plan = youthPlanMetaV07(p.trainingPlan);
+  const base = TRAIT_POOLS[p.position] || [];
+  const preferred = plan.traits || [];
+  return [...new Set([...preferred,...base])];
+}
+
+function advanceAcademyWeekV07(){
+  ensureYouthSystemsV07();
+  const scout = state.academy.scouting;
+  if (scout.active) {
+    scout.active.remaining -= 1;
+    if (scout.active.remaining<=0) {
+      const type = scout.active.type;
+      scout.active = null;
+      generateScoutCandidatesV07(type);
+    }
+  }
+  let improved = [];
+  state.academy.prospects.forEach((p)=>{
+    const gap = Math.max(0,p.potential-p.rating);
+    if (!gap) return;
+    const plan = youthPlanMetaV07(p.trainingPlan);
+    const ageFactor = p.age<=16?1.18:p.age===17?1.08:p.age===18?.96:.84;
+    const gain = (9 + state.academy.level*2.5 + Math.min(8,gap*.35)) * ageFactor * plan.mult;
+    p.developmentXP = Math.min(199,(p.developmentXP||0)+gain);
+    if (p.developmentXP>=100 && p.rating<p.potential) {
+      p.developmentXP -= 100;
+      p.rating += 1;
+      p.seasonGrowth = (p.seasonGrowth||0)+1;
+      improved.push(p.name);
+      if (p.seasonGrowth%3===0 && (p.traits||[]).length<4) {
+        const pool = trainingTraitPoolV07(p).filter(t=>!p.traits.includes(t));
+        if (pool.length) p.traits.push(pool[idSeed(p.id+state.currentMatchday)%pool.length]);
+      }
+    }
+  });
+  if (improved.length) {
+    state.inbox = [{
+      id:`academy-progress-${Date.now()}`,type:"success",title:"Progreso de cantera",
+      body:`${improved.slice(0,3).join(", ")} ${improved.length>3?`y ${improved.length-3} más`:''} han mejorado.`
+    },...state.inbox].slice(0,10);
+  }
+}
+
+function youthRecommendationV07(p){
+  const first = state.lineup.map(player).filter(Boolean);
+  const avg = first.length ? first.reduce((s,x)=>s+x.rating,0)/first.length : 75;
+  if (p.rating>=avg-6) return {text:"Preparado para primer equipo",cls:""};
+  if (p.rating>=avg-10 || p.age>=19) return {text:"Cerca del primer equipo",cls:"warn"};
+  return {text:"Seguir desarrollando",cls:"warn"};
+}
+
+function scoutingRangeV07(c){
+  return [c.reportLow,c.reportHigh];
+}
+
+function renderAcademyV07(){
+  ensureYouthSystemsV07();
+  const clubTeam = team(state.userTeamId);
+  const leaguePos = table().findIndex(t=>t.id===state.userTeamId)+1;
+  const prospects = state.academy.prospects || [];
+  const scout = state.academy.scouting;
+  const selected = academySelectedProspectV07();
+  const candidate = academySelectedCandidateV07();
+  const level = state.academy.level;
+  const cap = academyCapacityV07();
+  const growth = prospects.reduce((s,p)=>s+(p.seasonGrowth||0),0);
+  const header = `<header class="clubHubHeader"><div class="clubHubBrand">${mark(clubTeam.short,'lg')}<div><span>CLUB</span><h1>${clubTeam.name}</h1><small>${seasonLabel()} · ${leaguePos}º en liga</small></div></div><div class="clubHubBudget"><span>PRESUPUESTO</span><strong>${fmtM(state.budget)}</strong></div></header>`;
+  const clubTabs = `<div class="clubHubNav">
+    <button data-club-view="overview"><i>⌂</i><span>Resumen</span></button>
+    <button data-club-view="stadium"><i>▦</i><span>Estadio</span></button>
+    <button data-club-view="academy" class="active"><i>◈</i><span>Cantera</span>${prospects.length?`<b>${prospects.length}</b>`:''}</button>
+    <button data-club-view="finances"><i>€</i><span>Finanzas</span></button>
+    <button data-club-view="marketing"><i>↗</i><span>Marketing</span></button>
+  </div>`;
+  const sub = `<div class="academySubnav">
+    <button data-academy-view="squad" class="${academySubViewV07==='squad'?'active':''}">PLANTILLA</button>
+    <button data-academy-view="scouting" class="${academySubViewV07==='scouting'?'active':''}">SCOUTING</button>
+    <button data-academy-view="training" class="${academySubViewV07==='training'?'active':''}">ENTRENAMIENTO</button>
+  </div>`;
+  const command = `<div class="academyCommandBar">
+    <div><span>JUVENILES</span><strong>${prospects.length} / ${cap}</strong></div>
+    <div><span>ACADEMIA</span><strong>Nivel ${level}</strong></div>
+    <div><span>SCOUTING</span><strong>Nivel ${scout.level}</strong></div>
+    <div><span>PROGRESO</span><strong>+${growth} media</strong></div>
+  </div>`;
+
+  let content = "";
+  if (academySubViewV07==="squad") {
+    const rows = prospects.length ? prospects.map(p=>{
+      const [lo,hi]=youthPotentialRange(p);
+      return `<button class="academyRow ${selected?.id===p.id?'active':''}" data-academy-player="${p.id}">
+        <span class="positionTag">${positionShort(p.position)}</span>
+        <div><strong>${p.name}</strong><small>${p.age} años · ${youthPlanMetaV07(p.trainingPlan).name}</small></div>
+        <span class="academyRating">${p.rating}</span>
+        <em class="academyGrowth">${p.seasonGrowth?`+${p.seasonGrowth}`:`${lo}–${hi}`}</em>
+      </button>`;
+    }).join('') : `<div class="emptyState"><strong>Sin juveniles</strong><span>Usa Scouting para incorporar talento.</span></div>`;
+    let detail = `<div class="emptyState"><strong>Selecciona un juvenil</strong><span>Su ficha aparecerá aquí.</span></div>`;
+    if (selected) {
+      const [lo,hi]=youthPotentialRange(selected);
+      const rec=youthRecommendationV07(selected);
+      detail = `<div class="academyDetailHead"><div><span class="eyebrow">${positionShort(selected.position)} · ${selected.age} AÑOS</span><h2>${selected.name}</h2><small>${selected.role}</small></div><span class="academyBigRating">${selected.rating}</span></div>
+        <div class="academyStatsGrid"><div><span>MEDIA</span><strong>${selected.rating}</strong></div><div><span>POTENCIAL</span><strong>${lo}–${hi}</strong></div><div><span>PROGRESO</span><strong>+${selected.seasonGrowth||0}</strong></div><div><span>PLAN</span><strong>${youthPlanMetaV07(selected.trainingPlan).name}</strong></div></div>
+        <div class="academyTraits">${(selected.traits||[]).map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="academyRecommendation ${rec.cls}">${rec.text}</div>
+        <div class="trainingProgress"><span style="width:${Math.min(100,selected.developmentXP||0)}%"></span></div>
+        <small>${Math.round(selected.developmentXP||0)}% hacia la próxima mejora</small>
+        <div class="academyActions"><button class="ghost" data-discard-youth="${selected.id}">DESCARTAR</button><button class="primary" data-promote-youth="${selected.id}">PROMOCIONAR</button></div>`;
+    }
+    content = `<div class="academyWorkspace"><section class="academyPanel"><div class="academyPanelHead"><div><span>PLANTILLA</span><strong>Jugadores en formación</strong></div><small>${prospects.length}</small></div><div class="academyRoster">${rows}</div></section><section class="academyPanel">${detail}</section></div>`;
+  }
+
+  if (academySubViewV07==="scouting") {
+    const missions = ["local","national","international"].map(type=>{
+      const def=academyScoutMissionDefV07(type);
+      const locked=scout.level<def.level;
+      return `<div class="scoutMission"><strong>${def.name}</strong><small>${def.weeks} jornada${def.weeks>1?'s':''} · ${fmtM(def.cost)}</small><small>${locked?`Requiere scouting nivel ${def.level}`:`${def.min}–${def.max} candidatos`}</small><button data-start-scout="${type}" ${locked||scout.active||state.budget<def.cost?'disabled':''}>${locked?'BLOQUEADO':scout.active?'SCOUT OCUPADO':'INICIAR'}</button></div>`;
+    }).join('');
+    const candidateRows = scout.candidates.length ? scout.candidates.map(c=>{
+      const [lo,hi]=scoutingRangeV07(c);
+      return `<button class="candidateRow ${candidate?.id===c.id?'active':''}" data-academy-candidate="${c.id}"><span class="positionTag">${positionShort(c.position)}</span><div><strong>${c.name}</strong><small>${c.age} años · ${c.observed?'Informe ampliado':'Informe inicial'}</small></div><span class="academyRating">${c.rating}</span><em class="academyGrowth">${lo}–${hi}</em></button>`;
+    }).join('') : `<div class="emptyState"><strong>Sin informes pendientes</strong><span>Inicia una búsqueda para encontrar nuevos jugadores.</span></div>`;
+    let candDetail=`<div class="emptyState"><strong>Selecciona un candidato</strong><span>Verás aquí el informe del scout.</span></div>`;
+    if(candidate){
+      const [lo,hi]=scoutingRangeV07(candidate);
+      const knownTraits=(candidate.traits||[]).slice(0,Math.min(candidate.traits.length,candidate.observed+1));
+      candDetail=`<div class="academyDetailHead"><div><span class="eyebrow">${positionShort(candidate.position)} · ${candidate.age} AÑOS</span><h2>${candidate.name}</h2><small>${candidate.role}</small></div><span class="academyBigRating">${candidate.rating}</span></div>
+      <div class="academyStatsGrid"><div><span>MEDIA</span><strong>${candidate.rating}</strong></div><div><span>POTENCIAL</span><strong>${lo}–${hi}</strong></div><div><span>INFORME</span><strong>${candidate.observed>=2?'Preciso':candidate.observed===1?'Medio':'Inicial'}</strong></div><div><span>INCORPORAR</span><strong>${fmtM(candidate.cost)}</strong></div></div>
+      <div class="academyTraits">${knownTraits.length?knownTraits.map(t=>`<span>${t}</span>`).join(''):'<span>Traits por descubrir</span>'}</div>
+      <div class="academyActions"><button class="ghost" data-observe-candidate="${candidate.id}" ${candidate.observed>=2?'disabled':''}>SEGUIR OJEANDO</button><button class="primary" data-sign-candidate="${candidate.id}">INCORPORAR</button><button class="ghost" data-dismiss-candidate="${candidate.id}">DESCARTAR</button></div>`;
+    }
+    content=`<div class="academyWorkspace scouting">
+      <section class="academyPanel"><div class="academyPanelHead"><div><span>RED</span><strong>Scouting juvenil</strong></div></div><div class="scoutNetwork">
+        <div class="scoutNetworkCard"><span>NIVEL DE SCOUTING</span><strong>${scout.level}/5</strong><button data-upgrade-scouting ${scout.level>=5?'disabled':''}>${scout.level>=5?'MÁXIMO NIVEL':'MEJORAR RED'}</button></div>
+        <div><span class="eyebrow">PERFIL BUSCADO</span><div class="scoutFocus">${[["ALL","Cualquiera"],["GK","POR"],["DEF","Defensa"],["MID","Medio"],["ATT","Ataque"]].map(([id,label])=>`<button data-scout-focus="${id}" class="${scout.focus===id?'active':''}">${label}</button>`).join('')}</div></div>
+        ${scout.active?`<div class="scoutProgress"><strong>${academyScoutMissionDefV07(scout.active.type).name}</strong><span>${scout.active.remaining} jornada${scout.active.remaining!==1?'s':''} restante${scout.active.remaining!==1?'s':''}</span></div>`:missions}
+      </div></section>
+      <section class="academyPanel"><div class="academyPanelHead"><div><span>RESULTADOS</span><strong>Candidatos</strong></div><small>${scout.candidates.length}</small></div><div class="candidateList">${candidateRows}</div></section>
+      <section class="academyPanel">${candDetail}</section>
+    </div>`;
+  }
+
+  if (academySubViewV07==="training") {
+    const rows = prospects.length ? prospects.map(p=>`<button class="academyRow ${selected?.id===p.id?'active':''}" data-academy-player="${p.id}"><span class="positionTag">${positionShort(p.position)}</span><div><strong>${p.name}</strong><small>${youthPlanMetaV07(p.trainingPlan).name} · ${Math.round(p.developmentXP||0)}%</small><div class="trainingProgress"><span style="width:${Math.min(100,p.developmentXP||0)}%"></span></div></div><span class="academyRating">${p.rating}</span><em class="academyGrowth">${p.seasonGrowth?`+${p.seasonGrowth}`:'→'}</em></button>`).join('') : `<div class="emptyState"><strong>Sin juveniles</strong></div>`;
+    let detail=`<div class="emptyState"><strong>Selecciona un jugador</strong></div>`;
+    if(selected){
+      const plan=youthPlanMetaV07(selected.trainingPlan);
+      detail=`<div class="academyDetailHead"><div><span class="eyebrow">${positionShort(selected.position)} · ${selected.age} AÑOS</span><h2>${selected.name}</h2><small>Entrenamiento automático</small></div><span class="academyBigRating">${selected.rating}</span></div>
+      <div class="academyStatsGrid"><div><span>PLAN ACTUAL</span><strong>${plan.name}</strong></div><div><span>PROGRESO</span><strong>${Math.round(selected.developmentXP||0)}%</strong></div><div><span>SUBIDA TEMP.</span><strong>+${selected.seasonGrowth||0}</strong></div><div><span>POTENCIAL</span><strong>${selected.potential}</strong></div></div>
+      <div class="trainingProgress"><span style="width:${Math.min(100,selected.developmentXP||0)}%"></span></div>
+      <div class="trainingPlans">${Object.entries(ACADEMY_PLANS_V07).map(([id,p])=>`<button data-training-plan="${id}" data-training-player="${selected.id}" class="${selected.trainingPlan===id?'active':''}">${p.name}</button>`).join('')}</div>
+      <div class="academyRecommendation">El entrenamiento progresa automáticamente después de cada jornada.</div>
+      <div class="academyTraits">${(selected.traits||[]).map(t=>`<span>${t}</span>`).join('')}</div>`;
+    }
+    content=`<div class="academyWorkspace"><section class="academyPanel"><div class="academyPanelHead"><div><span>ENTRENAMIENTO</span><strong>Planes activos</strong></div><small>Automático</small></div><div class="academyRoster">${rows}</div></section><section class="academyPanel">${detail}</section></div>`;
+  }
+
+  return `<div class="screen clubScreen academy07">${header}${clubTabs}${sub}${command}${academyMessage?`<div class="saveNotice">${academyMessage}</div>`:''}${content}</div>`;
+}
+
+  ensureYouthSystemsV07();
+
+  const __clubBaseV07 = club;
+  club = function(){
+    ensureYouthSystemsV07();
+    if (clubView === 'academy') return renderAcademyV07();
+    return __clubBaseV07();
+  };
+
+  const __simulateMatchdayBaseV07 = simulateMatchday;
+  simulateMatchday = function(){
+    const before = state.fixtures.filter(f=>f.played).length;
+    __simulateMatchdayBaseV07();
+    const after = state.fixtures.filter(f=>f.played).length;
+    if (after > before) {
+      advanceAcademyWeekV07();
+      save();
+      render();
+    }
+  };
+
+  const __startNewSeasonBaseV07 = startNewSeason;
+  startNewSeason = function(){
+    __startNewSeasonBaseV07();
+    ensureYouthSystemsV07();
+    state.academy.scouting.active = null;
+    save();
+    render();
+  };
+
+  const __handleClickBaseV07 = handleClick;
+  handleClick = function(event){
+    const academyView = event.target.closest('[data-academy-view]');
+    if (academyView){ academySubViewV07 = academyView.dataset.academyView; academyMessage=''; render(); return; }
+
+    const academyPlayer = event.target.closest('[data-academy-player]');
+    if (academyPlayer){ selectedAcademyIdV07 = academyPlayer.dataset.academyPlayer; render(); return; }
+
+    const academyCandidate = event.target.closest('[data-academy-candidate]');
+    if (academyCandidate){ selectedCandidateIdV07 = academyCandidate.dataset.academyCandidate; render(); return; }
+
+    const focus = event.target.closest('[data-scout-focus]');
+    if (focus){ setScoutFocusV07(focus.dataset.scoutFocus); return; }
+
+    const startScout = event.target.closest('[data-start-scout]');
+    if (startScout){ startYouthScoutingV07(startScout.dataset.startScout); return; }
+
+    const observe = event.target.closest('[data-observe-candidate]');
+    if (observe){ observeCandidateV07(observe.dataset.observeCandidate); return; }
+
+    const sign = event.target.closest('[data-sign-candidate]');
+    if (sign){ signCandidateV07(sign.dataset.signCandidate); return; }
+
+    const dismiss = event.target.closest('[data-dismiss-candidate]');
+    if (dismiss){ dismissCandidateV07(dismiss.dataset.dismissCandidate); return; }
+
+    const upgradeScout = event.target.closest('[data-upgrade-scouting]');
+    if (upgradeScout){ upgradeScoutingV07(); return; }
+
+    const training = event.target.closest('[data-training-plan]');
+    if (training){ setYouthTrainingPlanV07(training.dataset.trainingPlayer,training.dataset.trainingPlan); return; }
+
+    __handleClickBaseV07(event);
+  };
+
+  const __renderBaseV07 = render;
+  render = function(){
+    ensureYouthSystemsV07();
+    __renderBaseV07();
+    $app.querySelectorAll('.positionTag,.shirt').forEach(el=>{
+      const txt = el.textContent.trim();
+      if (POSITION_SHORT_ES_V07[txt]) el.textContent = POSITION_SHORT_ES_V07[txt];
+    });
+  };
 
   $app.addEventListener('click', handleClick);
   window.__CM_DEBUG__={getState:()=>state,resolveLineupProblems,optimizeXI,setFormation,setStyle,simulateMatchday,tacticalFit,promoteYouth,upgradeAcademy,acceptIncomingOffer,rejectIncomingOffer,negotiateIncomingOffer,maybeGenerateTransferOffer,startNewSeason};
