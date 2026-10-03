@@ -207,7 +207,7 @@ h3 { font-size: 18px; letter-spacing: -.45px; }
 @media(max-width:380px){.tacticGrid{grid-template-columns:1fr}.lineupActions{grid-template-columns:1fr}.saveSlot{grid-template-columns:30px 1fr}.slotActions{grid-column:2;justify-content:flex-start}}
 
 
-.homeStatusDock{position:sticky;top:calc(8px + env(safe-area-inset-top));z-index:24;margin:-4px 0 12px;padding:11px 14px;border-radius:17px;background:rgba(17,20,15,.94);backdrop-filter:blur(16px);color:white;display:grid;grid-template-columns:1fr 1px 1.35fr;gap:12px;align-items:center;box-shadow:0 10px 26px rgba(15,20,12,.18)}
+.homeStatusDock{position:relative;top:auto;z-index:1;margin:-4px 0 12px;padding:11px 14px;border-radius:17px;background:rgba(17,20,15,.94);backdrop-filter:blur(16px);color:white;display:grid;grid-template-columns:1fr 1px 1.35fr;gap:12px;align-items:center;box-shadow:0 10px 26px rgba(15,20,12,.18)}
 .homeStatusDock>div:not(.homeStatusDivider){display:grid;grid-template-columns:auto 1fr;align-items:end;column-gap:8px}.homeStatusDock span{grid-column:1/-1;color:#9fa796;font-size:8px;font-weight:900;letter-spacing:1px}.homeStatusDock strong{font-size:22px;letter-spacing:-.8px}.homeStatusDock small{font-size:9px;color:#bbc2b5;text-align:right}.homeStatusDivider{width:1px;height:34px;background:rgba(255,255,255,.14)}
 .homeAttentionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.homeAttentionGrid button{border:1px solid var(--line);background:var(--surface);border-radius:19px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:4px}.homeAttentionGrid span{font-size:9px;color:var(--muted);font-weight:850;letter-spacing:1px}.homeAttentionGrid strong{font-size:28px;line-height:1}.homeAttentionGrid small{font-size:10px;color:var(--muted)}
 .marketSubnav,.clubSubnav{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:-4px 0 12px;padding:4px;background:#e5e8e0;border-radius:15px}.marketSubnav button,.clubSubnav button{height:38px;border:0;border-radius:11px;background:transparent;color:#767c72;font-size:10px;font-weight:900;letter-spacing:.5px}.marketSubnav button.active,.clubSubnav button.active{background:white;color:var(--ink);box-shadow:0 3px 10px rgba(20,25,15,.08)}.marketSubnav b,.clubSubnav b{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:4px;border-radius:9px;background:var(--dark);color:white;font-size:8px}
@@ -285,7 +285,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
   }
   .homeScreen>.topbar,.homeScreen>.homeStatusDock{grid-column:1/-1}
   .homeScreen>.homeStatusDock{
-    position:sticky;top:0;z-index:20;margin:0;
+    position:relative;top:auto;z-index:1;margin:0;
     box-shadow:0 8px 24px rgba(24,31,17,.08)
   }
   .homeScreen>.heroCard{grid-column:1;margin:0}
