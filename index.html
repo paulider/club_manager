@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.7.0</title>
+<title>Club Manager MVP 0.7.1</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -419,6 +419,91 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
   .academy07 .clubHubHeader{margin-bottom:4px}
   .academy07 .academyWorkspace{height:calc(100dvh - 190px)}
   .academy07 .academyPanel{overflow:auto}
+}
+
+
+/* === 0.7.1 Navigation + Structura visual language === */
+:root{
+  --structura-blue:#5f7eea;
+  --structura-blue-soft:#e9eefc;
+  --structura-green:#8eaa96;
+  --structura-green-soft:#e8f0ea;
+  --structura-graphite:#1b211e;
+  --structura-bg:#f4f6f3;
+  --accent:var(--structura-blue);
+  --accent-ink:#ffffff;
+  --dark:var(--structura-graphite);
+  --bg:var(--structura-bg);
+}
+body,.appShell{background:var(--structura-bg)}
+.primaryButton,.marketAction button,.academyActions .primary,
+.scoutNetworkCard button,.seasonButton{background:var(--structura-blue)!important;color:white!important}
+.bottomNav button.active i{background:var(--structura-blue);color:white}
+.clubHubNav button.active,
+.teamSubnav button.active,
+.academySubnav button.active{background:var(--structura-graphite);color:white}
+.clubManagementCard.stadium,
+.clubManagementCard.academy{background:linear-gradient(145deg,#f8fbf8,var(--structura-green-soft));border-color:#d5e1d8}
+.clubManagementCard.finances,
+.clubManagementCard.marketing{background:linear-gradient(145deg,#fbfcff,var(--structura-blue-soft));border-color:#d9e1f6}
+.homeStatusDock{border-color:#d8dfec}
+.homeStatusDock strong{color:var(--structura-graphite)}
+.positionTag{background:#eef1f7;color:#38445f}
+.ratingPill.elite,.academyRecommendation{background:var(--structura-green-soft)}
+.saveNotice{border-left:3px solid var(--structura-blue)}
+.academyRow.active,.candidateRow.active{border-color:#9eb1ee;background:#f1f4ff}
+.scoutFocus button.active,.trainingPlans button.active{background:var(--structura-blue);border-color:var(--structura-blue);color:white}
+.trainingProgress span{background:var(--structura-blue)}
+.appBackButton{
+  position:fixed;z-index:120;
+  top:max(8px,env(safe-area-inset-top));
+  left:94px;
+  width:42px;height:42px;
+  border:1px solid rgba(214,220,215,.9);
+  border-radius:14px;
+  background:rgba(255,255,255,.94);
+  color:var(--structura-graphite);
+  box-shadow:0 10px 28px rgba(23,31,26,.12);
+  backdrop-filter:blur(18px);
+  display:grid;place-items:center;
+  font-size:21px;font-weight:800;
+}
+.appBackButton:disabled{opacity:.28}
+.appBackButton span{transform:translateY(-1px)}
+@media (orientation:landscape){
+  .screen{padding-top:60px}
+  .topbar,.clubHubHeader{margin-top:-48px;padding-left:52px;min-height:44px}
+  .clubScreen{padding-top:60px}
+  .clubScreen .clubHubHeader{margin-top:-48px}
+  .academy07 .academyWorkspace{height:auto!important;min-height:0}
+  .academy07 .academyPanel{overflow:visible!important}
+  .screen:has(.teamSubnav)>.benchBlock{
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  .clubHubNav{overflow:visible!important}
+  .academyWorkspace.focus-player,
+  .academyWorkspace.focus-candidate{grid-template-columns:1fr!important}
+  .academyWorkspace.focus-player>.academyPanel:first-child{display:none}
+  .academyWorkspace.scouting.focus-candidate>.academyPanel:nth-child(1),
+  .academyWorkspace.scouting.focus-candidate>.academyPanel:nth-child(2){display:none}
+  .academyWorkspace.focus-player>.academyPanel:last-child,
+  .academyWorkspace.focus-candidate>.academyPanel:last-child{
+    min-height:calc(100dvh - 190px);
+    padding:18px 20px;
+  }
+  .academyWorkspace.focus-player .academyDetailHead h2,
+  .academyWorkspace.focus-candidate .academyDetailHead h2{font-size:28px}
+  .academyWorkspace.focus-player .academyBigRating,
+  .academyWorkspace.focus-candidate .academyBigRating{font-size:48px}
+  .academyWorkspace.focus-player .academyStatsGrid,
+  .academyWorkspace.focus-candidate .academyStatsGrid{
+    grid-template-columns:repeat(4,minmax(120px,1fr));
+    margin:18px 0;
+  }
+}
+@media (orientation:portrait) and (max-width:900px){
+  .appBackButton{display:none}
 }
 
 </style>
@@ -1397,7 +1482,7 @@ body{background:linear-gradient(180deg,#eef0ea 0,#f5f6f2 190px,#f2f3ef 100%)}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.1</p></div>`;
   }
 
   function newGameModal() {
@@ -1958,6 +2043,113 @@ function renderAcademyV07(){
       const txt = el.textContent.trim();
       if (POSITION_SHORT_ES_V07[txt]) el.textContent = POSITION_SHORT_ES_V07[txt];
     });
+  };
+
+
+  // === 0.7.1 Navigation history / focus mode ===
+  let navHistoryV071 = [];
+  let academyFocusV071 = null;
+
+  function routeSnapshotV071(){
+    return {
+      tab, teamView, marketView, clubView, academySubViewV07,
+      selectedAcademyIdV07, selectedCandidateIdV07,
+      academyFocusV071,
+      detailPlayerId: detailPlayer?.id || null
+    };
+  }
+  function routeKeyV071(r){
+    return [r.tab,r.teamView,r.marketView,r.clubView,r.academySubViewV07,r.selectedAcademyIdV07,r.selectedCandidateIdV07,r.academyFocusV071,r.detailPlayerId].join('|');
+  }
+  function pushRouteV071(){
+    const snap = routeSnapshotV071();
+    const last = navHistoryV071[navHistoryV071.length-1];
+    if (!last || routeKeyV071(last)!==routeKeyV071(snap)) navHistoryV071.push(snap);
+    if (navHistoryV071.length>30) navHistoryV071.shift();
+  }
+  function restoreRouteV071(r){
+    if(!r) return;
+    tab=r.tab||'home';
+    teamView=r.teamView||'lineup';
+    marketView=r.marketView||'scouting';
+    clubView=r.clubView||'overview';
+    academySubViewV07=r.academySubViewV07||'squad';
+    selectedAcademyIdV07=r.selectedAcademyIdV07||null;
+    selectedCandidateIdV07=r.selectedCandidateIdV07||null;
+    academyFocusV071=r.academyFocusV071||null;
+    detailPlayer=r.detailPlayerId?player(r.detailPlayerId):null;
+  }
+  function canGoBackV071(){
+    return !!academyFocusV071 || navHistoryV071.length>0 || tab!=='home';
+  }
+  function goBackV071(){
+    if (academyFocusV071){
+      academyFocusV071=null;
+      render();
+      return;
+    }
+    const prev=navHistoryV071.pop();
+    if(prev){
+      restoreRouteV071(prev);
+    }else{
+      tab='home'; teamView='lineup'; marketView='scouting'; clubView='overview'; detailPlayer=null;
+    }
+    render();
+  }
+  function enhanceFocusV071(){
+    const ws=$app.querySelector('.academyWorkspace');
+    if(!ws) return;
+    ws.classList.remove('focus-player','focus-candidate');
+    if(academyFocusV071==='player') ws.classList.add('focus-player');
+    if(academyFocusV071==='candidate') ws.classList.add('focus-candidate');
+  }
+
+  const __renderBaseV071=render;
+  render=function(){
+    __renderBaseV071();
+    enhanceFocusV071();
+    const existing=$app.querySelector('.appBackButton');
+    if(existing) existing.remove();
+    $app.insertAdjacentHTML('beforeend',`<button class="appBackButton" data-go-back-v071 aria-label="Volver" ${canGoBackV071()?'':'disabled'}><span>←</span></button>`);
+  };
+
+  const __handleClickBaseV071=handleClick;
+  handleClick=function(event){
+    const back=event.target.closest('[data-go-back-v071]');
+    if(back){ if(canGoBackV071()) goBackV071(); return; }
+
+    const academyView=event.target.closest('[data-academy-view]');
+    if(academyView){
+      pushRouteV071();
+      academyFocusV071=null;
+      academySubViewV07=academyView.dataset.academyView;
+      academyMessage='';
+      render();
+      return;
+    }
+
+    const academyPlayer=event.target.closest('[data-academy-player]');
+    if(academyPlayer){
+      pushRouteV071();
+      selectedAcademyIdV07=academyPlayer.dataset.academyPlayer;
+      academyFocusV071='player';
+      render();
+      return;
+    }
+
+    const academyCandidate=event.target.closest('[data-academy-candidate]');
+    if(academyCandidate){
+      pushRouteV071();
+      selectedCandidateIdV07=academyCandidate.dataset.academyCandidate;
+      academyFocusV071='candidate';
+      render();
+      return;
+    }
+
+    const navTarget=event.target.closest('[data-nav],[data-club-view],[data-team-view],[data-market-view],[data-detail]');
+    if(navTarget) pushRouteV071();
+
+    __handleClickBaseV071(event);
   };
 
   $app.addEventListener('click', handleClick);
