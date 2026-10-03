@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.7.2</title>
+<title>Club Manager MVP 0.8.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -534,6 +534,110 @@ body,.appShell{background:var(--structura-bg)}
     grid-column:1/-1;
     margin:0!important;
   }
+}
+
+
+/* === 0.8 Focused Workspaces === */
+:root{
+  --structura-blue:#5877e6;
+  --structura-blue-2:#7f96ee;
+  --structura-blue-soft:#edf1ff;
+  --structura-green:#7f9f8a;
+  --structura-green-2:#a8c0af;
+  --structura-green-soft:#edf4ef;
+  --structura-warm:#f7f8f5;
+  --structura-graphite:#202622;
+}
+.workbench08{display:grid;gap:10px;align-content:start}
+.workbench08Header{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.9)
+}
+.workbench08Title{display:flex;align-items:center;gap:10px;min-width:0}
+.workbench08Title>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.workbench08Title span,.workCard08 span,.focusMetric08 span{font-size:8px;font-weight:900;letter-spacing:.9px;color:var(--muted);text-transform:uppercase}
+.workbench08Title h1{font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.workbench08Aside{text-align:right;display:flex;flex-direction:column;gap:3px}
+.workbench08Aside strong{font-size:17px}
+.workbench08Grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(280px,.85fr);gap:10px}
+.workbench08Panel{
+  border:1px solid var(--line);border-radius:18px;background:var(--surface);padding:15px;min-width:0
+}
+.workbench08Panel.green{background:linear-gradient(145deg,#fff,var(--structura-green-soft));border-color:#d8e5dc}
+.workbench08Panel.blue{background:linear-gradient(145deg,#fff,var(--structura-blue-soft));border-color:#dce3fa}
+.focusIdentity08{display:flex;align-items:center;gap:13px}
+.focusIdentity08>div{min-width:0;display:flex;flex-direction:column;gap:3px}
+.focusIdentity08 h2{font-size:27px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.focusIdentity08 small{color:var(--muted)}
+.focusRating08{
+  margin-left:auto;width:64px;height:64px;border-radius:18px;display:grid;place-items:center;
+  background:var(--structura-graphite);color:white;font-size:26px;font-weight:900
+}
+.focusMetrics08{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:14px}
+.focusMetric08{padding:10px;border-radius:12px;background:rgba(244,246,243,.92);display:flex;flex-direction:column;gap:4px}
+.focusMetric08 strong{font-size:13px}
+.focusTraits08{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0}
+.focusTraits08 i{font-style:normal;padding:6px 8px;border-radius:999px;background:#e9ede9;font-size:8px;font-weight:850}
+.focusActions08{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px}
+.focusActions08 button,.focusPrimary08{
+  border:0;border-radius:12px;min-height:42px;padding:8px 10px;font-size:9px;font-weight:900
+}
+.focusActions08 .primary,.focusPrimary08{background:var(--structura-blue);color:white}
+.focusActions08 .green{background:var(--structura-green);color:white}
+.focusActions08 .ghost{background:var(--surface-2)}
+.workCards08{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.workCard08{
+  min-height:126px;border:1px solid var(--line);border-radius:17px;background:var(--surface);
+  padding:13px;text-align:left;display:flex;flex-direction:column;gap:6px;position:relative
+}
+.workCard08.blue{background:linear-gradient(145deg,#fff,var(--structura-blue-soft));border-color:#dce3fa}
+.workCard08.green{background:linear-gradient(145deg,#fff,var(--structura-green-soft));border-color:#d8e5dc}
+.workCard08 strong{font-size:17px;letter-spacing:-.4px}
+.workCard08 small{font-size:9px;line-height:1.35;color:var(--muted)}
+.workCard08 b{position:absolute;right:12px;bottom:10px;font-size:18px}
+.marketCard,.incomingOffer,.tacticCard,.styleCard,.clubManagementCard,.workCard08{cursor:pointer}
+.marketCard:active,.incomingOffer:active,.tacticCard:active,.styleCard:active,.workCard08:active{transform:scale(.992)}
+.enterHint08{
+  display:inline-flex;align-items:center;gap:4px;margin-top:auto;color:var(--structura-blue)!important;
+  font-size:8px!important;font-weight:900!important
+}
+.tacticFocus08 .workbench08Grid{grid-template-columns:minmax(330px,1.15fr) minmax(260px,.85fr)}
+.tacticPreview08{
+  min-height:260px;border-radius:16px;background:linear-gradient(145deg,#536b55,#39503d);
+  position:relative;overflow:hidden;border:4px solid #eef1e8
+}
+.tacticPreview08:before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.55)}
+.tacticSlot08{
+  position:absolute;transform:translate(-50%,-50%);width:38px;height:26px;border-radius:9px;
+  display:grid;place-items:center;background:white;color:#1d241f;font-size:8px;font-weight:900;
+  box-shadow:0 3px 10px rgba(0,0,0,.18)
+}
+.styleTrait08{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.styleTrait08:first-child{border-top:0}
+.styleTrait08 b{font-size:9px}
+.financeHub08{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.financeHub08 .workCard08{min-height:110px}
+.financeLedger08{display:flex;flex-direction:column}
+.financeLedger08>div{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 2px;border-top:1px solid var(--line)}
+.financeLedger08>div:first-child{border-top:0}
+.financeLedger08 span{display:flex;flex-direction:column;gap:2px;font-size:10px}
+.financeLedger08 small{color:var(--muted);font-size:8px}
+.stadiumHub08{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.55fr);gap:10px}
+.stadiumHub08 .stadiumVisual{height:calc(100dvh - 150px);min-height:270px;border-radius:18px}
+.stadiumWorkCards08{display:grid;grid-template-columns:1fr;gap:8px;align-content:start}
+.stadiumWorkCards08 .workCard08{min-height:105px}
+.stageFocus08{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stageFocus08 .stageChip{min-width:0}
+.marketFocusList08 .marketList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.marketFocusList08 .marketCard{margin:0}
+@media (orientation:landscape){
+  .screen{overflow:auto!important}
+  .marketList,.incomingOffers,.financeList,.benchList,.facilityList{overflow:visible!important;max-height:none!important}
+  .workbench08{min-height:calc(100dvh - 76px)}
+  .marketFocusList08{padding-bottom:20px}
+  .incomingOffers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .incomingOffer{margin:0}
+  .tacticGrid,.styleGrid{gap:8px}
 }
 
 </style>
@@ -1566,7 +1670,7 @@ body,.appShell{background:var(--structura-bg)}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.7.2</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.8.0</p></div>`;
   }
 
   function newGameModal() {
@@ -2234,6 +2338,251 @@ function renderAcademyV07(){
     if(navTarget) pushRouteV071();
 
     __handleClickBaseV071(event);
+  };
+
+
+  let marketFocusPlayerV08=null;
+  let marketFocusOfferV08=null;
+  let tacticFocusV08=null;
+  let stadiumFocusV08=null;
+  let financeFocusV08=null;
+
+function clubChromeV08(active){
+  const c=team(state.userTeamId);
+  const pos=table().findIndex(t=>t.id===state.userTeamId)+1;
+  const prospects=state.academy?.prospects||[];
+  const header=`<header class="clubHubHeader"><div class="clubHubBrand">${mark(c.short,'lg')}<div><span>CLUB</span><h1>${c.name}</h1><small>${seasonLabel()} · ${pos}º en liga</small></div></div><div class="clubHubBudget"><span>PRESUPUESTO</span><strong>${fmtM(state.budget)}</strong></div></header>`;
+  const tabs=`<div class="clubHubNav">
+    <button data-club-view="overview" class="${active==='overview'?'active':''}"><i>⌂</i><span>Resumen</span></button>
+    <button data-club-view="stadium" class="${active==='stadium'?'active':''}"><i>▦</i><span>Estadio</span></button>
+    <button data-club-view="academy" class="${active==='academy'?'active':''}"><i>◈</i><span>Cantera</span>${prospects.length?`<b>${prospects.length}</b>`:''}</button>
+    <button data-club-view="finances" class="${active==='finances'?'active':''}"><i>€</i><span>Finanzas</span></button>
+    <button data-club-view="marketing" class="${active==='marketing'?'active':''}"><i>↗</i><span>Marketing</span></button>
+  </div>`;
+  return {header,tabs};
+}
+
+function renderMarketPlayerV08(p){
+  const c=team(p.clubId);
+  const fit=tacticalFit(p,p.position);
+  const can=p.value<=state.budget;
+  const role=p.role||defaultRoleFor(p.position,p.traits||[]);
+  return `<div class="screen workbench08">
+    <header class="workbench08Header"><div class="workbench08Title">${mark(c.short,'md')}<div><span>MERCADO · FICHA</span><h1>${p.name}</h1></div></div><div class="workbench08Aside"><span>Disponible</span><strong>${fmtM(state.budget)}</strong></div></header>
+    <div class="workbench08Grid">
+      <section class="workbench08Panel blue">
+        <div class="focusIdentity08"><div><span class="positionTag">${positionShort(p.position)}</span><h2>${p.name}</h2><small>${c.name} · ${p.age} años · ${role}</small></div><div class="focusRating08">${p.rating}</div></div>
+        <div class="focusMetrics08"><div class="focusMetric08"><span>VALOR</span><strong>${fmtM(p.value)}</strong></div><div class="focusMetric08"><span>POTENCIAL</span><strong>${p.potential}</strong></div><div class="focusMetric08"><span>FIT TÁCTICO</span><strong>${fit}</strong></div><div class="focusMetric08"><span>FÍSICO</span><strong>${p.fitness}%</strong></div></div>
+        <div class="focusTraits08">${(p.traits||[]).map(t=>`<i>${t}</i>`).join('')}</div>
+      </section>
+      <section class="workbench08Panel">
+        <div class="sectionHeader"><div><span>DECISIÓN</span><h3>Operación de fichaje</h3></div></div>
+        <div class="financeList"><div><span>Valor estimado</span><strong>${fmtM(p.value)}</strong></div><div><span>Sueldo</span><strong>${fmtK(p.wage)}</strong></div><div><span>Presupuesto tras fichaje</span><strong>${can?fmtM(Math.max(0,state.budget-p.value)):'Insuficiente'}</strong></div></div>
+        <button class="focusPrimary08 full" data-buy="${p.id}" ${can?'':'disabled'}>${can?'FICHAR JUGADOR':'SIN PRESUPUESTO'}</button>
+      </section>
+    </div>
+  </div>`;
+}
+
+function renderOfferFocusV08(o){
+  const p=player(o.playerId),c=team(o.clubId);
+  if(!p||!c) return `<div class="screen"><div class="emptyState"><strong>Oferta no disponible</strong></div></div>`;
+  return `<div class="screen workbench08">
+    <header class="workbench08Header"><div class="workbench08Title">${mark(c.short,'md')}<div><span>MERCADO · OFERTA RECIBIDA</span><h1>${p.name}</h1></div></div><div class="workbench08Aside"><span>Oferta</span><strong>${fmtM(o.amount)}</strong></div></header>
+    <div class="workbench08Grid">
+      <section class="workbench08Panel blue"><div class="focusIdentity08"><div><span class="positionTag">${positionShort(p.position)}</span><h2>${p.name}</h2><small>${p.age} años · ${p.role||''}</small></div><div class="focusRating08">${p.rating}</div></div>
+      <div class="focusMetrics08"><div class="focusMetric08"><span>VALOR</span><strong>${fmtM(p.value)}</strong></div><div class="focusMetric08"><span>OFERTA</span><strong>${fmtM(o.amount)}</strong></div><div class="focusMetric08"><span>DIFERENCIA</span><strong>${Math.round((o.amount/p.value-1)*100)}%</strong></div><div class="focusMetric08"><span>CADUCA</span><strong>J${o.expiresMatchday}</strong></div></div></section>
+      <section class="workbench08Panel"><div class="sectionHeader"><div><span>${c.name}</span><h3>Decisión contractual</h3></div></div>${o.note?`<div class="offerNote">${o.note}</div>`:''}<div class="focusActions08"><button class="ghost" data-reject-offer="${o.id}">RECHAZAR</button><button data-negotiate-offer="${o.id}">NEGOCIAR +10%</button><button class="primary" data-accept-offer="${o.id}">ACEPTAR</button></div></section>
+    </div>
+  </div>`;
+}
+
+function renderTacticFocusV08(focus){
+  const club=team(state.userTeamId);
+  if(focus.type==='formation'){
+    const f=FORMATIONS[focus.id]; if(!f) return '';
+    const active=state.tactics.formation===focus.id;
+    return `<div class="screen workbench08 tacticFocus08"><header class="workbench08Header"><div class="workbench08Title">${mark(club.short,'md')}<div><span>EQUIPO · FORMACIÓN</span><h1>${f.name}</h1></div></div><div class="workbench08Aside"><span>Actual</span><strong>${currentFormation().name}</strong></div></header>
+    <div class="workbench08Grid"><section class="workbench08Panel green"><div class="tacticPreview08">${f.slots.map(slot=>`<span class="tacticSlot08" style="left:${slot.x}%;top:${slot.y}%">${positionShort(f.desired[slot.i]||'')}</span>`).join('')}</div></section>
+    <section class="workbench08Panel"><div class="sectionHeader"><div><span>ESTRUCTURA</span><h3>${f.name}</h3></div></div><p class="note">${focus.id==='4231'?'Control entre líneas y doble mediocentro.':focus.id==='433'?'Anchura ofensiva y tres centrocampistas.':focus.id==='442'?'Dos delanteros y amplitud por bandas.':'Superioridad central con tres centrales.'}</p><div class="focusMetrics08"><div class="focusMetric08"><span>FAMILIARIDAD</span><strong>${state.tactics.familiarity?.[`${focus.id}|${state.tactics.style}`]||35}%</strong></div><div class="focusMetric08"><span>ESTILO</span><strong>${currentStyle().name}</strong></div></div><button class="focusPrimary08 full" data-v08-apply-formation="${focus.id}">${active?'FORMACIÓN ACTUAL':'APLICAR FORMACIÓN'}</button></section></div></div>`;
+  }
+  const st=TACTIC_STYLES[focus.id]; if(!st) return '';
+  const activeTraits=[...new Set(state.lineup.flatMap(id=>(player(id)?.traits||[])))];
+  const active=state.tactics.style===focus.id;
+  return `<div class="screen workbench08 tacticFocus08"><header class="workbench08Header"><div class="workbench08Title">${mark(club.short,'md')}<div><span>EQUIPO · ESTILO</span><h1>${st.name}</h1></div></div><div class="workbench08Aside"><span>Actual</span><strong>${currentStyle().name}</strong></div></header>
+  <div class="workbench08Grid"><section class="workbench08Panel blue"><div class="sectionHeader"><div><span>IDENTIDAD</span><h3>${st.name}</h3></div></div><p class="note">${st.desc}</p><div class="focusTraits08">${st.traits.map(t=>`<i>${activeTraits.includes(t)?'✓ ':''}${t}</i>`).join('')}</div></section>
+  <section class="workbench08Panel"><div class="sectionHeader"><div><span>CAPACIDADES DEL XI</span><h3>Sinergias</h3></div><small>${st.traits.filter(t=>activeTraits.includes(t)).length}/${st.traits.length}</small></div>${st.traits.map(t=>`<div class="styleTrait08"><span>${t}</span><b>${activeTraits.includes(t)?'ACTIVA':'SIN ESPECIALISTA'}</b></div>`).join('')}<button class="focusPrimary08 full" data-v08-apply-style="${focus.id}">${active?'ESTILO ACTUAL':'APLICAR ESTILO'}</button></section></div></div>`;
+}
+
+function renderStadiumHubV08(focus){
+  const {header,tabs}=clubChromeV08('stadium');
+  const current=stadiumStage();
+  const next=state.stadium.level<STADIUM_STAGES.length-1?STADIUM_STAGES[state.stadium.level+1]:null;
+  const levels=[['Hospitality',current.hospitality],['Césped',current.pitch],['Iluminación',current.lighting],['Academia',Math.max(current.academy,state.academy.level)],['Entrenamiento',current.training]];
+  if(focus==='upgrade'){
+    return `<div class="screen clubScreen">${header}${tabs}<div class="workbench08"><section class="stadiumHero"><div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title}"/>${stadiumUpgradeFlash?'<div class="stadiumUpgradeFlash">Mejora completada</div>':''}</div><div class="stadiumUpgradeAction"><div><span>${next?'PRÓXIMA REFORMA':'ESTADIO'}</span><strong>${next?next.label:'Máximo nivel alcanzado'}</strong><small>${next?`${current.nextProject} · ${fmtM(current.nextCost)}`:'Proyecto completado'}</small></div><button class="stadiumUpgradeButton" data-action="upgrade" ${!next||state.budget<current.nextCost?'disabled':''}>${!next?'COMPLETO':state.budget<current.nextCost?'SIN FONDOS':'MEJORAR'}</button></div><div class="stadiumMeta"><div><span>${current.label}</span><h2>${current.title}</h2></div><div><strong>${current.capacity.toLocaleString('es-ES')}</strong><span>espectadores</span></div></div></section></div></div>`;
+  }
+  if(focus==='evolution'){
+    return `<div class="screen clubScreen">${header}${tabs}<section class="workbench08Panel"><div class="sectionHeader"><div><span>ESTADIO</span><h2>Evolución del proyecto</h2></div><small>5 fases</small></div><div class="stageFocus08">${STADIUM_STAGES.map((stage,index)=>`<div class="stageChip ${index===state.stadium.level?'current':index<state.stadium.level?'done':'locked'}"><img src="${stage.image}" alt="${stage.label}"/><strong>Fase ${index+1}</strong><span>${stage.capacity.toLocaleString('es-ES')} espectadores</span></div>`).join('')}</div></section></div>`;
+  }
+  if(focus==='facilities'){
+    return `<div class="screen clubScreen">${header}${tabs}<section class="workbench08Panel green"><div class="sectionHeader"><div><span>ESTADIO</span><h2>Instalaciones</h2></div><small>Máx. 5</small></div><div class="facilityList">${levels.map(([label,value])=>`<div class="facility"><span>${label}</span><div class="levelDots">${[1,2,3,4,5].map(n=>`<i class="${n<=value?'on':''}"></i>`).join('')}</div><strong>${value}</strong></div>`).join('')}</div></section></div>`;
+  }
+  return `<div class="screen clubScreen">${header}${tabs}<div class="stadiumHub08"><div class="stadiumVisual stadiumVisual--image"><img class="stadiumStageImage" src="${current.image}" alt="${current.title}"/></div><div class="stadiumWorkCards08">
+    <button class="workCard08 green" data-v08-stadium="upgrade"><span>REFORMA</span><strong>${next?next.label:'Estadio completado'}</strong><small>${next?`${current.nextProject} · ${fmtM(current.nextCost)}`:'No quedan ampliaciones'}</small><em class="enterHint08">ENTRAR →</em></button>
+    <button class="workCard08" data-v08-stadium="evolution"><span>EVOLUCIÓN</span><strong>Fase ${state.stadium.level+1}/5</strong><small>${current.capacity.toLocaleString('es-ES')} espectadores actuales</small><em class="enterHint08">VER PLAN →</em></button>
+    <button class="workCard08 blue" data-v08-stadium="facilities"><span>INSTALACIONES</span><strong>Niveles del club</strong><small>Césped, iluminación, academia y entrenamiento.</small><em class="enterHint08">GESTIONAR →</em></button>
+  </div></div></div>`;
+}
+
+function renderFinancesV08(focus){
+  const {header,tabs}=clubChromeV08('finances');
+  const movements=[...state.finance].reverse();
+  const totalIn=state.finance.filter(f=>f.amount>0).reduce((s,f)=>s+f.amount,0);
+  const totalOut=Math.abs(state.finance.filter(f=>f.amount<0).reduce((s,f)=>s+f.amount,0));
+  const balance=totalIn-totalOut;
+  const econ=state.lastEconomics;
+  if(['income','expense','ledger'].includes(focus)){
+    const list=focus==='income'?movements.filter(x=>x.amount>0):focus==='expense'?movements.filter(x=>x.amount<0):movements;
+    const title=focus==='income'?'Ingresos':focus==='expense'?'Gastos':'Movimientos';
+    return `<div class="screen clubScreen">${header}${tabs}<section class="workbench08Panel"><div class="sectionHeader"><div><span>FINANZAS</span><h2>${title}</h2></div><small>${list.length} registros</small></div><div class="financeLedger08">${list.map(f=>`<div><span>${f.label}<small>J${f.matchday??0}</small></span><strong class="${f.amount>=0?'positive':'negative'}">${f.amount>=0?'+':''}${fmtM(f.amount)}</strong></div>`).join('')||'<div class="emptyState"><strong>Sin movimientos</strong></div>'}</div></section></div>`;
+  }
+  if(focus==='matchday'){
+    return `<div class="screen clubScreen">${header}${tabs}<section class="workbench08Panel blue"><div class="sectionHeader"><div><span>FINANZAS</span><h2>Último partido</h2></div></div>${econ?`<div class="financeBreakdown"><div><span>Taquilla</span><b>${fmtM(econ.ticketIncome||0)}</b></div><div><span>Merchandising</span><b>${fmtM(econ.merch||0)}</b></div><div><span>Publicidad</span><b>${fmtM(econ.ads||0)}</b></div><div><span>Hospitality</span><b>${fmtM(econ.hospitality||0)}</b></div></div><div class="focusMetric08"><span>TOTAL</span><strong>+${fmtM(econ.total||0)}</strong></div>`:'<div class="emptyState"><strong>Aún no hay partido registrado</strong></div>'}</section></div>`;
+  }
+  return `<div class="screen clubScreen">${header}${tabs}<section class="financeHero"><div class="financeBudget"><span>DISPONIBLE</span><strong>${fmtM(state.budget)}</strong></div><div class="financeSummary"><div><span>Ingresos</span><strong class="positive">+${fmtM(totalIn)}</strong></div><div><span>Gastos</span><strong class="negative">-${fmtM(totalOut)}</strong></div><div><span>Balance</span><strong class="${balance>=0?'positive':'negative'}">${balance>=0?'+':''}${fmtM(balance)}</strong></div></div></section><div class="financeHub08">
+    <button class="workCard08 green" data-v08-finance="income"><span>INGRESOS</span><strong>+${fmtM(totalIn)}</strong><small>Taquilla, ventas y actividad comercial.</small><em class="enterHint08">ENTRAR →</em></button>
+    <button class="workCard08" data-v08-finance="expense"><span>GASTOS</span><strong>-${fmtM(totalOut)}</strong><small>Fichajes, mejoras e inversiones.</small><em class="enterHint08">ENTRAR →</em></button>
+    <button class="workCard08 blue" data-v08-finance="ledger"><span>LEDGER</span><strong>${movements.length} movimientos</strong><small>Historial económico completo.</small><em class="enterHint08">ENTRAR →</em></button>
+    <button class="workCard08" data-v08-finance="matchday"><span>ÚLTIMO PARTIDO</span><strong>${econ?`+${fmtM(econ.total||0)}`:'—'}</strong><small>Desglose de ingresos de jornada.</small><em class="enterHint08">ENTRAR →</em></button>
+  </div></div>`;
+}
+
+function enhanceWorkspacesV08(){
+  if(tab==='market'&&marketView==='offers'&&!marketFocusOfferV08){
+    const offers=pendingOffers();
+    $app.querySelectorAll('.incomingOffer').forEach((el,i)=>{
+      if(offers[i]){
+        el.dataset.v08OfferFocus=offers[i].id;
+        if(!el.querySelector('.enterHint08')){
+          const hint=document.createElement('em'); hint.className='enterHint08'; hint.textContent='ABRIR OFERTA →'; el.appendChild(hint);
+        }
+      }
+    });
+  }
+  if(tab==='market'&&marketView==='scouting'&&!marketFocusPlayerV08){
+    $app.querySelectorAll('.marketCard').forEach(el=>{
+      if(!el.querySelector('.enterHint08')){
+        const hint=document.createElement('em'); hint.className='enterHint08'; hint.textContent='VER FICHA →'; el.appendChild(hint);
+      }
+    });
+  }
+}
+
+  const __marketBaseV08=market;
+  market=function(){
+    if(marketFocusPlayerV08){
+      const p=player(marketFocusPlayerV08);
+      if(p) return renderMarketPlayerV08(p);
+      marketFocusPlayerV08=null;
+    }
+    if(marketFocusOfferV08){
+      const o=pendingOffers().find(x=>x.id===marketFocusOfferV08);
+      if(o) return renderOfferFocusV08(o);
+      marketFocusOfferV08=null;
+    }
+    return __marketBaseV08();
+  };
+
+  const __teamScreenBaseV08=teamScreen;
+  teamScreen=function(){
+    if(tacticFocusV08) return renderTacticFocusV08(tacticFocusV08);
+    return __teamScreenBaseV08();
+  };
+
+  const __clubBaseV08=club;
+  club=function(){
+    if(clubView==='stadium') return renderStadiumHubV08(stadiumFocusV08);
+    if(clubView==='finances') return renderFinancesV08(financeFocusV08);
+    return __clubBaseV08();
+  };
+
+  const __canGoBackBaseV08=canGoBackV071;
+  canGoBackV071=function(){
+    return !!(marketFocusPlayerV08||marketFocusOfferV08||tacticFocusV08||stadiumFocusV08||financeFocusV08)||__canGoBackBaseV08();
+  };
+
+  const __goBackBaseV08=goBackV071;
+  goBackV071=function(){
+    if(marketFocusPlayerV08){marketFocusPlayerV08=null;render();return;}
+    if(marketFocusOfferV08){marketFocusOfferV08=null;render();return;}
+    if(tacticFocusV08){tacticFocusV08=null;render();return;}
+    if(stadiumFocusV08){stadiumFocusV08=null;render();return;}
+    if(financeFocusV08){financeFocusV08=null;render();return;}
+    __goBackBaseV08();
+  };
+
+  const __renderBaseV08=render;
+  render=function(){
+    __renderBaseV08();
+    enhanceWorkspacesV08();
+  };
+
+  const __handleClickBaseV08=handleClick;
+  handleClick=function(event){
+    const marketDetail=event.target.closest('[data-detail]');
+    if(marketDetail&&tab==='market'){
+      pushRouteV071();
+      detailPlayer=null;
+      marketFocusPlayerV08=marketDetail.dataset.detail;
+      render();return;
+    }
+
+    const offerCard=event.target.closest('[data-v08-offer-focus]');
+    if(offerCard&&!event.target.closest('.offerActions button')){
+      pushRouteV071();
+      marketFocusOfferV08=offerCard.dataset.v08OfferFocus;
+      render();return;
+    }
+
+    const formationCard=event.target.closest('[data-formation]');
+    if(formationCard&&tab==='team'&&teamView==='tactics'){
+      pushRouteV071();
+      tacticFocusV08={type:'formation',id:formationCard.dataset.formation};
+      render();return;
+    }
+
+    const styleCard=event.target.closest('[data-style]');
+    if(styleCard&&tab==='team'&&teamView==='tactics'){
+      pushRouteV071();
+      tacticFocusV08={type:'style',id:styleCard.dataset.style};
+      render();return;
+    }
+
+    const applyFormation=event.target.closest('[data-v08-apply-formation]');
+    if(applyFormation){
+      setFormation(applyFormation.dataset.v08ApplyFormation);
+      tacticFocusV08=null;render();return;
+    }
+
+    const applyStyle=event.target.closest('[data-v08-apply-style]');
+    if(applyStyle){
+      setStyle(applyStyle.dataset.v08ApplyStyle);
+      tacticFocusV08=null;render();return;
+    }
+
+    const stadiumCard=event.target.closest('[data-v08-stadium]');
+    if(stadiumCard){pushRouteV071();stadiumFocusV08=stadiumCard.dataset.v08Stadium;render();return;}
+
+    const financeCard=event.target.closest('[data-v08-finance]');
+    if(financeCard){pushRouteV071();financeFocusV08=financeCard.dataset.v08Finance;render();return;}
+
+    const anyNav=event.target.closest('[data-nav],[data-club-view],[data-market-view],[data-team-view]');
+    if(anyNav){
+      marketFocusPlayerV08=null;marketFocusOfferV08=null;tacticFocusV08=null;stadiumFocusV08=null;financeFocusV08=null;
+    }
+
+    __handleClickBaseV08(event);
   };
 
   $app.addEventListener('click', handleClick);
