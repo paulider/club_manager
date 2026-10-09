@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.9.0</title>
+<title>Club Manager MVP 0.10.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -975,6 +975,81 @@ h2,h3{font-weight:820}
   .academyPanelHead{margin-bottom:7px}
 }
 
+
+/* === 0.10 PC-first navigation and information scale === */
+@media (orientation:landscape) and (min-width:900px){
+  .appContent{padding-left:224px!important}
+  .bottomNav.pcNav010{
+    width:224px!important;
+    padding:18px 12px 14px!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto repeat(5,64px) 1fr!important;
+    gap:7px!important;
+    align-content:start!important;
+    background:
+      radial-gradient(circle at 20% 0,rgba(50,120,200,.18),transparent 30%),
+      linear-gradient(180deg,#07182c,#081d34 60%,#061424)!important;
+  }
+  .bottomNav.pcNav010:before{display:none!important}
+  .pcNavBrand010{
+    min-height:78px;display:flex;align-items:center;gap:11px;padding:4px 7px 14px;
+    border-bottom:1px solid rgba(255,255,255,.09);margin-bottom:4px
+  }
+  .pcNavBrand010 b{
+    width:46px;height:46px;flex:0 0 46px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#3588f5,#164e96);
+    color:#fff;font-size:15px;letter-spacing:.3px;border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 8px 20px rgba(0,0,0,.22)
+  }
+  .pcNavBrand010>span{color:#e6f0f9;font-size:12px;font-weight:900;line-height:1.12;letter-spacing:.7px}
+  .bottomNav.pcNav010 button{
+    display:grid!important;grid-template-columns:42px 1fr!important;align-items:center!important;
+    justify-content:initial!important;gap:10px!important;text-align:left!important;padding:7px 9px!important;
+    border-radius:9px!important;border-left:3px solid transparent!important;color:#a8bdd0!important
+  }
+  .bottomNav.pcNav010 button i{
+    width:38px!important;height:38px!important;display:grid!important;place-items:center!important;
+    border-radius:8px!important;background:rgba(255,255,255,.055)!important;color:#a9bfd4!important;font-size:0!important
+  }
+  .bottomNav.pcNav010 button i svg{width:22px;height:22px}
+  .bottomNav.pcNav010 button>span{
+    display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:2px!important;font-size:inherit!important
+  }
+  .bottomNav.pcNav010 button strong{color:inherit;font-size:14px;font-weight:850;line-height:1.05}
+  .bottomNav.pcNav010 button small{color:#6f8aa3;font-size:9px;font-weight:650;line-height:1.1}
+  .bottomNav.pcNav010 button.active{
+    background:linear-gradient(90deg,rgba(45,125,224,.28),rgba(45,125,224,.08))!important;
+    border-left-color:#5ca5ff!important;color:white!important
+  }
+  .bottomNav.pcNav010 button.active i{background:linear-gradient(145deg,#2d7ee7,#1c5fae)!important;color:white!important}
+  .bottomNav.pcNav010 button.active small{color:#a9c9e8}
+  .appBackButton{left:236px!important;width:44px;height:44px}
+  .clubHubNav{left:236px!important;width:168px!important}
+  .clubScreen{padding-left:192px!important}
+  .screen{padding-left:18px!important;padding-right:18px!important}
+  .topbar,.clubHubHeader,.workbench08Header{min-height:60px!important;padding:10px 15px!important}
+  .topbar h1,.clubHubHeader h1,.workbench08Header h1{font-size:24px!important}
+  .eyebrow,.topbar .eyebrow,.clubHubBrand span,.clubHubBudget span{font-size:10px!important}
+  .budget strong,.clubHubBudget strong,.workbench08Aside strong{font-size:19px!important}
+  .sectionHeader h3{font-size:17px!important}
+  .sectionHeader span{font-size:9px!important}
+  .clubHubNav button{min-height:58px!important;grid-template-columns:30px 1fr auto!important;padding:9px 11px!important}
+  .clubHubNav button i{font-size:18px!important}
+  .clubHubNav button span{font-size:11px!important}
+  .teamSubnav button,.marketSubnav button,.clubSubnav button,.academySubnav button{height:44px!important;font-size:12px!important}
+  .marketText strong,.benchPlayer strong,.academyRow strong,.candidateRow strong{font-size:13px!important}
+  .marketText small,.benchPlayer small,.academyRow small,.candidateRow small{font-size:10px!important}
+  .positionTag{font-size:9px!important;min-width:34px!important;padding:5px 7px!important}
+  .marketAction button,.offerActions button,.academyActions button,.focusPrimary08{font-size:11px!important}
+  .workCard08 strong,.clubManagementCard strong{font-size:18px!important}
+  .workCard08 small,.clubManagementCard small{font-size:10px!important}
+  .heroMeta span{font-size:10px!important}
+  .side strong{font-size:16px!important}
+  .versusCenter b{font-size:28px!important}
+  .resultScore strong{font-size:48px!important}
+  .appShell,.appContent,.screen{min-width:0}
+}
+
 </style>
 </head>
 <body>
@@ -1004,6 +1079,20 @@ h2,h3{font-weight:820}
   const SAVE_DB_NAME = 'club-manager-manual-saves-v1';
   const SAVE_STORE = 'slots';
   const MAX_SAVE_SLOTS = 10;
+
+
+  const STADIUM_FAMILIES_V010 = [
+    {id:'neighborhood',name:'Estadio de barrio',minCapacity:1500,maxCapacity:8000,theme:'urban-neighborhood',
+      upgrades:['Vallado y accesos','Grada principal','Iluminación','Grada opuesta','Cubierta parcial','Asientos completos','Clubhouse','Corners básicos','Parking y entorno','Marcador y fachada']},
+    {id:'municipal',name:'Estadio municipal',minCapacity:8000,maxCapacity:20000,theme:'compact-municipal',
+      upgrades:['Nueva tribuna','Fondos cubiertos','Cuatro gradas','Corners cerrados','Cubierta 50%','Hospitality','Media y prensa','Iluminación TV','Fachada unificada','Entorno urbano']},
+    {id:'professional',name:'Estadio profesional',minCapacity:20000,maxCapacity:45000,theme:'professional-bowl',
+      upgrades:['Anillo inferior','Tribuna premium','Corners completos','Segundo nivel lateral','Cubierta 70%','Hospitality ring','Videomarcadores','Segundo nivel fondos','Fachada exterior','Cubierta integral']},
+    {id:'elite',name:'Estadio elite',minCapacity:45000,maxCapacity:75000,theme:'elite-arena',
+      upgrades:['Segundo anillo','Skyboxes','Bowl continuo','Cubierta tensada','Media façade','Fan plaza','Tercer nivel lateral','Tercer nivel fondos','Roof ring','Campus del estadio']},
+    {id:'premium',name:'Estadio premium',minCapacity:75000,maxCapacity:110000,theme:'global-premium',
+      upgrades:['Bowl 80k','Hospitality premium','Tercer anillo','Cubierta icónica','Anillo LED','Mega videomarcador','Fan district','Roof completo','Fachada signature','Superestadio 110k+']}
+  ];
 
   const TEAM_DEFS = [
     { name: 'Barcelona City', short: 'BCN', palette: ['#0d2c5b', '#a50044', '#f0c560'], symbol: 'tower', crest: 'data:image/webp;base64,UklGRjAUAABXRUJQVlA4WAoAAAAQAAAAdwAAdwAAQUxQSMYGAAABDAVt20gJf9j77whExARQWxZRBTCS2/2PBk9QUCe0ZdkTtm2GpG3bth9xxGXbtm3bvm3btm3btq2RbeOy7Y4j4oh9kNXVGZlZ1zgiJkCS20iSJP3/yVVppu6ejPAtYu4RMQEYcwhYzALIQgo4+SCEBRRks5v+sVaQRSJhBr5OvhfaCbIYAAEUD2UyHg8FBAtRZLO9EBDxZU9L9S2ICDhsbZH7Kb5++doiikfSMs+HBmxz+6uh11M8mnwPFAFfJT8ElbDKT5hPhU6cYL1rqvFghIj3kq9AjLgf7+KvIZO3/jXMPFxiDD8gPx1WWUUu4tIQ5CgJGlfFg8j3oPtb8jsAIF+vSyfIqlGDtBii9CQaFTMfSr5VN9hs2wOuJv+623Ybr69fZTkWMzWq9CRD6FM0BgBYfbfzX/L539zu9bZ/XHnzndndPd9xwxX/WvJ60y8+8ewzdlAACFGlhzGGqACw8XHP++rFxq47u96tJFnd2b37H5971rHrAoDGMC7RCADrn/Cy719HktWS5eJecimldEopJbt7sZQyu5d/63lHrAVAospIRBUAdn/sV68iyefzfeRmPd+PSPKSzz10RwBQlcGFGACsc/Lrf28kc7LiscVSIXnXz1969BoAQgzDEY0AsMX9P3YZyWpWfDYzutmMJP/74ftuDkBikAGIKgDs+qTv3kQyp1x8NsSgx92LpULyxq8/dhcAiCptJABY9chX/WqJpKXs3TojDSugqJuTkVz6xUsOXQWASgtgs4ve+y+SNVnxbnWvtfYRTJBw92JWSf7traevj4ZB9vnW9SRLysWXrT7uWt1LToXkVV/eWkJfEQ+hW8o+SiK1rqCbUyaPhvb3wJJ8wR1e43cuR7Z4CM3mGDZ5ADvz6FbUAAPelBj7dVyLRzK5FDwQFsSY85i+ZtYs4QZ0RMlsM09s8eiF9fi5CBCo1otAdeZJrSioZ7NMUHPyUA6k7ZRWF8RRiJza4klM5jwTcuSMFk+dBYcVW5tnMNk2vtNZLZ7VBk47u8VzZlXP4TqnG89v8expu6DF86ftwhYvZDIrjWPAvRDbnK2ee7cioWGtxoug/b2Aydc23guxv+ffI+Iqz2MyCTWMN14EbZP9f13UeC/E/p49Dxc6H9rf0+biPue0eNI8xmZFGx0EMk9v8ei5ZkNZNPOEFg+iHWKzkcoKj2hxr9HgYJ1zf4S+FGeOZqKq79HieOYFcB/evX1/AYewdNCEsU3HjZtA+tu9VL2cYgBuZHXpGv0JtriVVQyABZDC74d/EvQuWPsKyrzcSolxLWy+/CFCA/kzs6+QEtuQq8bLJn4S2hsCfkhbBhblOC/VLOuM1yH2F/EBpmXcdGDio9o8e54j1ZF5ArQ/xfm0UW1la6NNqXdvj9BfwO65lmnIZ/57FUh/gtUvZp6AUuPXoGgY8C3aysCcl/gSxBYRL2VaEe/zMk+CtlAcx7IiX6Hw2vUgLQRrXsGyoita/QoCmio+VdMUkEp8BGKbiHvRVkILMKPU27dCaCPY8AaWFdhAWV6bJQHjtxDQWPFhpnnAtgfFgch9EdsdzTKPF8fnevEaIq0Q5JfV3CurOya+EBHNIx7ECSBW/IZNRdqJrPqPmn3gkMHxxFdAMUDF/Wi90NGc/boNRYaAoL+h9cAKIrywYUON8WlQDFJxbDU3Ka8xxPqNf1wlyDCg+ACTG/FceB0HxUAlbHSFPykCnawIffguKAarOJfm7nUs4cx/rxVkOIh4N5O716EVFrPDoBiw6Gq/obl7nSPLlMRnImLQAbvc5MVrf1MTP4OIgStOr9mr1x0cYPzV6kGGhojH04pXNicaL94GAcOPeAmTV0c1zHjTXlCMMeK1TD5I0gZsG289AhGjFMUbmMoyWJKGdI23HIuIkYriFczF3at3JanDscQbD0fEaEXxVHr2LrblXjm4xP/vg4gxR9z/LqblxpbEX2+HiHFHHPo/pg62NSMXfmZNKMYesdm3WLLnqUv05wAB41fg5ZUpZ4qUeNmpUMEUhoDj/8VHZGr5/vBLmyNiKiPWfz9pK5JyxXjzowHFdCpw/n9ZbD5JStREfndXBMGUimL9NzqtzONULrz64UDE1Cpw9E/JVOawHC1GfmBLSMD0SoQ87iq6dWp1vCTyl8cDimlWweZvNeZcq1dCVnnlYxUqmGwFDvwKadnntsK73rY5oJhyUeCUn5OWdzmTn98bUEx9CJB7/4G03MlGfu84QAULUIFVH/l3MpVs5E/PA0LAglRgjSdeTJJ/vC8gisUpCqz3rCv++bBVIYrFKgpssCagWLwSARUsZBHcEwdWUDggRA0AAJAwAJ0BKngAeAA+5V6jTaklIyIy+8sRIByJbAYoAQW1H7SqIOyAP19vaE9EHlGdCXzAecJ/0vVP/nd81/dX2ZvOl9WL/FWCf+D8H/HuD/QpTwfv/ez8l9QK4x2K9m/QC9vL9nUa72+wB31Phlfef8z7AX84/x/obaDnqn2EP2G65XoWuAfAePrIa+nxOR5mEt8G57mIfiiucHTYntnIjxvWXiBgX4El6KP1BvQqXZa0sRjo/HlxikNjXYdw6Gx0IhDVOkwwhMYwwp1bDHXsHLkXXscGBSNhw9cRxbfhD3nxyMPgRcj4TXexcZaJ39geRgCgn8M0LYqpTAnIChDibJCpS2qQL2JNw95Rf/UyBurUBWSLC+LA1pvdgfIcMfe089aUqgBhRUN0TCviTCHsW9xgvCZPhcrqM3MWZjCh0yEypwWDhOZzRP/BiRTheZhcg5Be63H/CrmYnYUF+N92+29OSGPgxTyq5TfSDAKd35j8Yg3jYtpXrqWa4S1a7T2/sr+7/qWg68HxI+005gAA/vucyV/ztfm13bq05wWmzosGdA6xh5pwnqU8Jbmp1hnKpQlAkfmLcJQe3zObLfeVtjflK86wfqXzsOUDg8B56mT93R3py3Lc7zXNZ532k2jx+n8noriMzIfs+P0Fw5+Ke4v0pBLqLb+mDgvc+TamAH0O9XWnCIK+DpJIk4Hjj0mNBBmJNwWIB+q5qKCMTZHuJ+NRUVcgy0p97uGgf7H4D/MS668iM5T5drnt3UFhztZ9zn8QMvxexo94OnC6AZW6JgE7w/0kmuEedtmBStklrXQ0rptwxASDyJQY52YI+C1ZX6BxImJ0/erbU5Y22XTFOyFOBjhkFvkrx2DBn2XdRdJU9sQEWdXhhSl8XOgstahalRWMRsBm+5JbSJVy0LK1caUPsALkuicwNb/kZxYBWoigHS8YAGaRs62SAC71vB6Hv/U7difub5Rf6dc3iOPj/gtCXcvkCsqdEm/yPznhvUUP0CjeUf7kjH/9KBfAdEw/2f8xG0JXarXybBWU/GTgbWUbScc+NXNoHCRchVpemNaslT+WbV6Zpx9FNJyJXGCwZDiQqfngP9RNDhotFIjvE6VdUTWcF7ksvU6j/r+bn2hfo6inhb6hyMQu2WFHVJAipEVP5+mGGiBLMNJWzJucl3w38DfZTgbLTshhQRADXXsTVpdZPeyfC824axntXQqA9tL6zdvPf5PWsx7eVohKQyVgq+oDhUINN10Wz31AfSO4Pfqop8RsQdwapXHlYjRXJqYUrAQXbhul+ntGaO7h3/eSa88TeaErTlXyiYDkqHkisSX+KBAA8ewSVmsK6oGgmqj/OZfxC7zwj2EpX8zrowNCAEHYwfJMF8ZuKcMT6/GzFLgt/EbZheq8wl+JiwUFvP7RAHnKY93Mt1o3DAgj66yaIvQMEtDcuULoKeygLZLJJ8A7kKjxeYN5y2jx+GjybWI9s7lsXSOM4ilaIekj2zjrh7M43wjk9g/TcBp8YIMlbn/Ka7G7d0HKCVKibOR7BaASrs+ZiEXSM59d6+oC89csPhtmVukh8qyPw8LR0gdKtRYK5Uyaf40zdn0YjZTmZCIZikknCqvYOLtMTGELOYLX8gi0pTo78PNcWnplo1Yv3X/ZUSiC01FamJD1C73SYhi7fqPEZfrcM+pniK9z4DNngOJ3QM22mrZyOag4ilbdb6slkTK8G7LfkeZyOAn3ZMOwTveMveSxf+c5XAtXSSWvFiqK6uId6TNFKA2TKx8xcoj6KJySiNQeIEwrxLkPtfY2/qlGdVpShCJIMcgcQshXYdqblLuOSYj2FVjYBtuYyXDI8+B34DZDknUhzEGScETT8j2MYUrgLkT5OWAfhfXqQLDHwCwnbvIc5zFlnhng3Tp/gbleqbO6iNqXLFTEqKw1s9JtJbUCwbcfrmtQEZQpOlHovVdIRXUJHWttRu16y/m6eIr7ygS4Va8xyvXQvHeZmXzwCKUSUPePgNiY5+4/5fNQTlbgY5O+s/P+WvphgmBnPQlBH9XxazkmUV3phyqhnVFD7vUOykYxbHmRrDDAGneZrp3QwGUTe3WeiAFircjdRiqHOLNg/nz95Nk4EbxFMomN5IfXlUzYhYkVmtlzg1lZlqEQ2Bj8tJzXuKWLS/BBxFBC0oZXUcjC8+YkRTt0ay5ufVCpwipSvRv4EDpBdk2f6tUnxiUa/yp/ocMkjm5+WdEd1XJNZngov0xjpL/25L4RwW5+dNs3zNh0oAollFi2Vts+KVkTGgb4YgvHnsdblkUF7p8Hc682V+IHlgq6xXcSNwHOa94aP9ssI+tbQKwnE0JOKCCivQiq1xevCqg2PdGAx1aEuKceabBn2B82OuaE8/YATHPb1oIWhfR9EWQ1OS/PNZ5aZUHTCEHRbbXBU7t+acRlp/ALJP8gCAJcEyIc/VkVIPTi6h68R+AKiBAxB0xlVyKlvurX7uasYA7vHGu91i/01+xs/NCbFitoqO/M2jXp6KwcMllXVUAkYIn39FwH+SYmkeORL6eMGBEg82SM89gawUE2UT46VWWcR14HPo7oruYn09G/DLNVDGUFpgvfxZaFOP8XQasHL9nhccop2CAMR0dGJM8IfDyxhTCISCGdASGhfgufbEozhfHb+Z8SBFqsx8wH/Wd66H098FJ/iGgkLR9E+9SiRZjzUCabyuvn+85xdhDfsOaUzDrJmCryCpC71CWh2FtxArIyDhLIJya98hqLbuA6MqVQMYIXVAFf8QZWK2/JCir44m4dw7zp7c85ei8p0rsti0RqnSlcjeqjIzKsCClQiCBGcBry012tlwLewGeqk/YJoYADekKyocO28+5fEzkKLacRUIAjfjJ3iz0YT3yRtk+0aOro0yW4Gx+Ow4Onm07cs7wxRs6lK6Tkk6miO6fXFLUrZn9ObR5Wew8l2FYfhuACWy9tbex75qGuSDbU89Vb/RGQpVou5SfZBac1aYER3mcIz/VqIZD6famPtbdOIgvzwHlafiIEPlUU9UazRxW5JsTc+NLr2ivFRCpxSbZLtrJTbC9Py6VqU5b4BWHAnpLbv21Bx5jDjnBpzNSLPDJkfhUIMKV4P+aFD+R6X0x2vgzyxhVOu+gyxFVufGhOlhhswwzbxZ59dxa6S1giL4/+LOeFd3/DFnGen1Di0ICIRIRZ847PZvNlbtkba5WC1a68Mxvp2A/ngRJM0yE2r1h4EizptHh0ZyZ/009t41AV9UEnwUEU3x7K9ECn7YJoPULUH6maE8JEX33UpdhpWuOJQWTfBTOWE1OFWfcldWuN55qGzYe5JS1jhyTdB/jnZxJu2qcF4hB482oSEtWTmWQ4RwyMJnPn6e+hFGG4hEn2IcNZNuqEmIWz4i99W0ZYAIPjo/dk7ViRlY/KNMSCP2i5GRKHpw93elW0HfI3dx/3bZeEBhx/5MkrFSqLWZk5VbmKUcJ2mBo+6qND6LfAoxe5cPO79WuQ6itEvifB2dui2/BBdcraO/wsZwgr9mna1cRWGi2mVsHqvu5H2T1k92AfUX3DxTzhc0I3OJYKFV0tmmHR9v4lJ7iqsbeaZ/WkHaomSpQPUWHWn1mNmaLyyI6hvxI4aIlGas01SxLxOLSzH+vnZ81Ro6SDLl+Fcksyov+NkMpQ3zOSXZbTm5vMjbnbfH4WMLAmI19VcK1Uz136xhZHyWhlO/g7N7Y0tGpaxTmoe/qowr5wX0GzUyWA9iXlYeikA5/6WLPLtLSGN27O9EJhv6WKtqy4xYLJT5AscFKIVlWa4o5a14Gm9EHm/XjI+0SfNzlfeJhtjXaSC/C6sIf9lQNLe7vFUwHgDkpj/V21Z5HFixIH8u+QhKTTKgtW9OFinwAm2+GZbaTzx3bmha+tLM4DQXUgg2By4JZ1y7vOh+XolI1xZNYv9IzF33DnJx8z6NKKQJhk2DHySKEwL1ENcIe19hMBhMSsTKsRX6de4tyHuJekkgtJL1afBZCjWcPLuhGq+mUQMYcc4LltYeRY+t86Gr5pzKIDgyoPhbXqafW9Ug9Mr3cxGfZ424vgnEiJSvgn26Is38TlLSk5FeNa3mZaQHWiVCA9OtkaVUjf0uUwmQL+tw2H+lkc+QCVadDqofhu095iIt0oBtPsBeJkq3If3FVCUpj1jcx12fqu14BfjGwmw7c/anTyYlXHUlXtqcdxuMRf0ZfwEvj2mY8hU0Karc+075cueqCW5Dgt7MX1VdDw/uMGg6aIxs3Nqd/tHjTvCa3J2WIzcSnrijJ0IJlo06nEVhcIAAcd44Iy8/rA5CqS1vR3CHfH6zfwmGk/odac8MfO89G2Sql8/klJEcDNATCJQaof3lDlHjTCSUCgDPxsaZl9lr+x9JxHkXM5LfOvh/gC7qL1luyMUnOmsFQ5a1klpzEB2oVKtpXZ43NV5HwtczeBCRvrrAOhwneLznBtBJ1SlvVLffBag4PhB/H7fnNmheGfYuJjX7HpbYbFkOE+kvCPHH+YN1yIQJ2H6I1CxKrzD/zZ1NDRwAAAAA==' },
@@ -1856,9 +1945,19 @@ h2,h3{font-weight:820}
     return `<span class="ratingPill ${c}">${v}</span>`;
   }
 
+  function navIconPCV010(id){
+    const paths={
+      home:'<path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1Z"/><path d="M2.5 12.5 12 4.7l9.5 7.8"/>',
+      team:'<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.7-4 2.7-6 5.5-6s4.8 2 5.5 6M14 19c.5-2.9 1.9-4.5 4-4.5 2 0 3.3 1.5 3.7 4.5"/>',
+      market:'<path d="M4 7h13l3 4-3 4H4z"/><path d="M9 4 5 7l4 3M15 14l4 3-4 3"/>',
+      club:'<path d="M4 21V8l8-4 8 4v13"/><path d="M8 21v-7h8v7M8 10h.01M12 10h.01M16 10h.01"/>',
+      more:'<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>'
+    };
+    return `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[id]||paths.more}</svg>`;
+  }
   function nav() {
-    const items = [['home', '⌂', 'Inicio'], ['team', '◇', 'Equipo'], ['market', '↗', 'Mercado'], ['club', '▦', 'Club'], ['more', '•••', 'Más']];
-    return `<nav class="bottomNav">${items.map(([id, ic, lab]) => `<button data-nav="${id}" class="${tab === id ? 'active' : ''}"><i>${ic}</i><span>${lab}</span></button>`).join('')}</nav>`;
+    const items = [['home','Inicio','Resumen y jornada'],['team','Equipo','Plantilla y táctica'],['market','Mercado','Fichajes y ofertas'],['club','Club','Gestión e instalaciones'],['more','Más','Competición y partida']];
+    return `<nav class="bottomNav pcNav010"><div class="pcNavBrand010"><b>CM</b><span>CLUB MANAGER</span></div>${items.map(([id,lab,sub])=>`<button data-nav="${id}" class="${tab===id?'active':''}"><i>${navIconPCV010(id)}</i><span><strong>${lab}</strong><small>${sub}</small></span></button>`).join('')}</nav>`;
   }
 
   function sheet(p) {
@@ -2005,7 +2104,7 @@ h2,h3{font-weight:820}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.9.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.10.0</p></div>`;
   }
 
   function newGameModal() {
