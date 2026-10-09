@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.10.0</title>
+<title>Club Manager MVP 0.11.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -1050,6 +1050,25 @@ h2,h3{font-weight:820}
   .appShell,.appContent,.screen{min-width:0}
 }
 
+
+/* === 0.11 Stadium Evolution System === */
+.stadium011{display:grid;gap:12px;align-content:start}
+.stadium011Top{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(330px,.65fr);gap:12px}
+.stadium011Visual{position:relative;min-height:470px;border-radius:12px;overflow:hidden;background:#0a2038;border:1px solid #173b5f;box-shadow:0 12px 28px rgba(5,28,51,.18)}
+.stadium011Visual svg{display:block;width:100%;height:100%;min-height:470px}
+.stadium011Overlay{position:absolute;left:16px;right:16px;bottom:14px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px;color:white;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.stadium011Overlay>div{display:flex;flex-direction:column;gap:3px}.stadium011Overlay span{font-size:9px;font-weight:900;letter-spacing:.9px;color:#b7cee2}.stadium011Overlay strong{font-size:26px;letter-spacing:-.7px}.stadium011Overlay b{font-size:28px;letter-spacing:-1px}
+.stadium011Side{background:linear-gradient(180deg,#fbfdff,#eef4f9);border:1px solid #c5d4e1;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:11px}
+.stadium011Family{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid #d5e0e9}.stadium011FamilyIcon{width:46px;height:46px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(145deg,#0d3154,#185a93);color:#d9ecff;font-size:22px}.stadium011Family>div{display:flex;flex-direction:column;gap:2px}.stadium011Family span{font-size:9px;color:#6c8093;font-weight:850}.stadium011Family strong{font-size:19px;color:#13314f}
+.stadium011Metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stadium011Metric{padding:10px;border-radius:8px;background:#e9f0f6;border:1px solid #d5e0e8;display:flex;flex-direction:column;gap:3px}.stadium011Metric span{font-size:8px;color:#6b7d8f;font-weight:900;letter-spacing:.7px}.stadium011Metric strong{font-size:15px;color:#153654}
+.stadium011Stars{display:flex;gap:3px}.stadium011Stars i{font-style:normal;color:#b7c2cc}.stadium011Stars i.on{color:#e4a82d}
+.stadium011Upgrade{margin-top:auto;padding:12px;border-radius:9px;background:linear-gradient(135deg,#0b2a49,#124b7b);color:white}.stadium011Upgrade span{font-size:8px;color:#a9c3dc;font-weight:900;letter-spacing:.8px}.stadium011Upgrade strong{display:block;margin-top:5px;font-size:17px}.stadium011Upgrade small{display:block;color:#bad0e2;margin-top:4px;font-size:10px;line-height:1.35}.stadium011Upgrade button{width:100%;min-height:43px;margin-top:11px;border:0;border-radius:7px;background:linear-gradient(180deg,#2bb978,#1d995f);color:white;font-size:11px;font-weight:900}.stadium011Upgrade button:disabled{background:#526779;color:#a8b7c4}
+.stadium011FamilyRail{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.stadium011FamilyChip{border:1px solid #c8d6e1;border-radius:9px;background:#f6f9fc;padding:10px 11px;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;text-align:left}.stadium011FamilyChip>i{width:34px;height:34px;border-radius:7px;display:grid;place-items:center;background:#e0e9f1;color:#34536d;font-style:normal;font-weight:900}.stadium011FamilyChip>div{display:flex;flex-direction:column;gap:2px}.stadium011FamilyChip strong{font-size:11px}.stadium011FamilyChip span{font-size:8px;color:#758697}.stadium011FamilyChip b{font-size:10px;color:#5d7184}.stadium011FamilyChip.done{background:#e9f5ee;border-color:#cce4d5}.stadium011FamilyChip.current{background:#e7f1fd;border-color:#7ca9d7;box-shadow:inset 0 0 0 1px #b7d1ec}
+.stadium011Steps{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}.stadium011Step{min-width:0;border:1px solid #ccd8e2;border-radius:7px;background:#f8fbfd;padding:8px 5px;display:flex;flex-direction:column;align-items:center;gap:3px}.stadium011Step b{font-size:11px;color:#193b5c}.stadium011Step span{font-size:7px;color:#76899a;white-space:nowrap}.stadium011Step.done{background:#e9f5ee;border-color:#cce5d6}.stadium011Step.current{background:#226fc8;border-color:#226fc8;color:white}.stadium011Step.current b,.stadium011Step.current span{color:white}
+.stadium011FeatureGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.stadium011Feature{border:1px solid #d1dde6;background:#f7fafc;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px}.stadium011Feature i{width:30px;height:30px;border-radius:7px;display:grid;place-items:center;font-style:normal;background:#e3edf5;color:#28577e}.stadium011Feature div{display:flex;flex-direction:column;gap:2px}.stadium011Feature span{font-size:8px;color:#6f8294}.stadium011Feature strong{font-size:11px}
+.stadium011Transition{padding:10px 12px;border-radius:8px;background:#f3ead7;border:1px solid #e4d3ad;color:#6f5929;font-size:10px;line-height:1.4}
+@media (orientation:landscape) and (min-width:900px){.stadium011Top{grid-template-columns:minmax(500px,1.55fr) minmax(340px,.45fr)}.stadium011Visual{min-height:520px}.stadium011Visual svg{min-height:520px}.stadium011FamilyChip strong{font-size:12px}.stadium011FamilyChip span{font-size:9px}.stadium011Step{padding:9px 6px}.stadium011Step b{font-size:12px}.stadium011Step span{font-size:8px}}
+
 </style>
 </head>
 <body>
@@ -1530,7 +1549,7 @@ h2,h3{font-weight:820}
     const formFactor = Math.max(0.88, 1.08 - Math.max(0, standing - 1) * 0.008);
     const priceFactor = Math.max(0.48, Math.min(1.20, 1.12 - (price - 30) * 0.014));
     const demand = Math.round(state.commercial.fanbase * 0.16 * rivalFactor * formFactor * priceFactor);
-    const attendance = Math.max(2500, Math.min(stage.capacity, demand));
+    const attendance = Math.min(stage.capacity, Math.max(Math.min(500, stage.capacity), demand));
     const occupancy = Math.round(attendance / stage.capacity * 100);
     const ticketIncome = Math.round(attendance * price) / 1e6;
     const merch = Math.round(attendance * (3.5 + state.commercial.marketingLevel * 0.45)) / 1e6;
@@ -2104,7 +2123,7 @@ h2,h3{font-weight:820}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.10.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.11.0</p></div>`;
   }
 
   function newGameModal() {
@@ -3019,6 +3038,168 @@ function enhanceWorkspacesV08(){
     __handleClickBaseV08(event);
   };
 
+  const STADIUM_FAMILIES_V011=[{"id":"neighborhood","name":"Estadio de barrio","short":"Barrio","icon":"⌂","capacities":[1500,2200,3000,3800,4600,5500,6200,6800,7400,8000],"costs":[0.15,0.25,0.4,0.55,0.7,0.9,1.1,1.3,1.5,2],"steps":["Campo cercado","Grada principal","Focos y accesos","Grada opuesta","Cubierta parcial","Asientos completos","Clubhouse","Corners básicos","Parking y entorno","Barrio completo"]},{"id":"municipal","name":"Estadio municipal","short":"Municipal","icon":"▦","capacities":[8000,9500,11000,12500,14000,15500,17000,18000,19000,20000],"costs":[1.8,2.1,2.4,2.7,3,3.3,3.6,4,4.4,4.8],"steps":["Base municipal","Nueva grada","Fondo cubierto","Cuatro gradas","Cierre de esquinas","Cubierta 50%","Palcos y medios","Iluminación TV","Fachada unificada","Municipal premium"]},{"id":"professional","name":"Estadio profesional","short":"Profesional","icon":"◆","capacities":[20000,24000,28000,30000,34000,36000,38000,40000,43000,45000],"costs":[4.2,4.8,5.4,5.9,6.5,7,7.6,8.2,8.8,9.5],"steps":["Base profesional","Ampliación gradas","Tribuna principal","Corners cerrados","Segundo nivel","Cubierta 70%","Hospitality ring","Pantallas y LED","Segundo anillo","Profesional premium"]},{"id":"elite","name":"Estadio elite","short":"Elite","icon":"★","capacities":[45000,50000,55000,58000,62000,65000,68000,71000,73000,75000],"costs":[8.5,9.2,10,10.8,11.6,12.4,13.2,14.1,15,16],"steps":["Base elite","Ampliación lateral","Segundo anillo","Corners cerrados","Anillo completo","Tercer anillo","Tercer anillo total","Cubierta parcial","Cubierta total","Campus elite"]},{"id":"premium","name":"Estadio premium","short":"Premium","icon":"◉","capacities":[75000,80000,85000,90000,94000,98000,102000,106000,109000,112000],"costs":[14,15.5,17,18.5,20,22,24,26,28,30],"steps":["Bowl inicial","Hospitality premium","Tercer anillo","Cubierta icónica","Fachada LED","Pantallas gigantes","Fan district","Cubierta completa","Complejo premium","Superestadio"]}];
+  const STADIUM_STAGES_V011=buildStadiumStagesV011();
+function buildStadiumStagesV011(){
+  const out=[];
+  STADIUM_FAMILIES_V011.forEach((f,fi)=>{
+    f.steps.forEach((step,si)=>{
+      const global=fi*10+si;
+      const stars=Math.min(5,1+Math.floor((global+7)/10));
+      out.push({
+        key:'v011-'+f.id+'-'+(si+1),
+        familyId:f.id,familyIndex:fi,stepIndex:si,globalIndex:global,
+        label:f.name+' · Fase '+(si+1),
+        title:step,
+        subtitle:f.name+', evolución '+(si+1)+' de 10.',
+        capacity:f.capacities[si],
+        nextCost:global<49?f.costs[si]:null,
+        nextProject:global<49?(si<9?f.steps[si+1]:(STADIUM_FAMILIES_V011[fi+1]?.steps[0]||null)):null,
+        hospitality:Math.min(5,1+Math.floor((global+5)/11)),
+        pitch:Math.min(5,1+Math.floor((global+8)/10)),
+        lighting:Math.min(5,1+Math.floor((global+4)/10)),
+        academy:Math.min(5,1+Math.floor((global+12)/12)),
+        training:Math.min(5,1+Math.floor((global+10)/11)),
+        stars
+      });
+    });
+  });
+  return out;
+}
+
+function legacyStadiumIndexV011(level){
+  const map=[22,24,26,28,30];
+  return map[Math.max(0,Math.min(4,Number(level||0)))]||22;
+}
+
+function ensureStadiumV011(){
+  state.stadium=state.stadium||{};
+  if(!Number.isFinite(state.stadium.v011Index)){
+    const looksFresh=state.currentMatchday===1&&(state.finance||[]).length<=1&&!state.lastResult;
+    state.stadium.v011Index=looksFresh?0:legacyStadiumIndexV011(state.stadium.level);
+  }
+  state.stadium.v011Index=Math.max(0,Math.min(49,state.stadium.v011Index));
+  state.stadium.v011=true;
+  state.stadium.level=Math.min(4,Math.floor(state.stadium.v011Index/10));
+}
+
+function stadiumStageV011(){
+  ensureStadiumV011();
+  return STADIUM_STAGES_V011[state.stadium.v011Index];
+}
+
+function stadiumFamilyV011(stage){
+  const s=stage||stadiumStageV011();
+  return STADIUM_FAMILIES_V011[s.familyIndex];
+}
+
+function stadiumNextV011(){
+  const i=stadiumStageV011().globalIndex;
+  return i<49?STADIUM_STAGES_V011[i+1]:null;
+}
+
+function starsV011(n){
+  return '<span class="stadium011Stars">'+[1,2,3,4,5].map(x=>'<i class="'+(x<=n?'on':'')+'">★</i>').join('')+'</span>';
+}
+
+function stadiumSceneV011(stage){
+  const fi=stage.familyIndex,si=stage.stepIndex;
+  const roof=Math.min(1,Math.max(0,(si-2)/6)+(fi>=2?.18:0));
+  const rings=1+(fi>=2?1:0)+(fi>=4&&si>=2?1:0)+(fi===3&&si>=5?1:0);
+  const lights=si>=2||fi>=1,corners=si>=3||fi>=1,facade=si>=7||fi>=3,led=fi>=4&&si>=4,district=fi>=4&&si>=6;
+  const bg=['#8a9a7e','#8d9b86','#82948b','#7e8f8d','#77898e'][fi];
+  const stand=['#b9b9b2','#b8c0c6','#aeb8c2','#a8b5c2','#a2b1bf'][fi];
+  const roofCol=['#d8d9d2','#d4d7d9','#d0d6db','#d8dde1','#e3e6e8'][fi];
+  const seat=['#315c8a','#2f6599','#285f96','#245b91','#1f5790'][fi];
+  const buildingCount=fi===0?9:fi===1?7:fi===2?6:5;
+  const buildings=Array.from({length:buildingCount},(_,i)=>{
+    const x=35+(i*113)%910,y=36+((i*67)%115),w=42+(i%3)*14,h=24+(i%4)*10;
+    return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="3" fill="'+(i%2?'#b9a891':'#c3b39e')+'" opacity=".78"/><rect x="'+(x+5)+'" y="'+(y+6)+'" width="'+(w-10)+'" height="3" fill="#ece3d6" opacity=".7"/>';
+  }).join('');
+  const ringEls=Array.from({length:rings},(_,r)=>{
+    const pad=r*18;
+    return '<path d="M'+(205-pad)+' '+(187-pad/2)+' Q500 '+(78-pad)+' '+(795+pad)+' '+(187-pad/2)+' L'+(735+pad)+' '+(390+pad/2)+' Q500 '+(487+pad)+' '+(265-pad)+' '+(390+pad/2)+' Z" fill="'+stand+'" stroke="#738394" stroke-width="3"/>';
+  }).reverse().join('');
+  const roofTop=roof>0?'<path d="M'+(190-roof*18)+' '+(174-roof*6)+' Q500 '+(52-roof*18)+' '+(810+roof*18)+' '+(174-roof*6)+' L'+(778+roof*8)+' '+(222+roof*4)+' Q500 '+(112-roof*8)+' '+(222-roof*8)+' '+(222+roof*4)+' Z" fill="'+roofCol+'" opacity="'+(.65+roof*.3)+'" stroke="#f2f5f7" stroke-width="2"/>':'';
+  const cornerFill=corners?'<path d="M217 220 Q500 113 783 220 L748 365 Q500 455 252 365 Z" fill="'+seat+'" opacity=".96"/>':'<path d="M260 218 Q500 130 740 218 L715 352 Q500 430 285 352 Z" fill="'+seat+'" opacity=".96"/>';
+  const score=si>=7?'<rect x="438" y="125" width="124" height="48" rx="5" fill="#071a2e" stroke="#5da4ef" stroke-width="2"/><rect x="449" y="135" width="102" height="28" fill="'+(led?'#1e7bea':'#284b6a')+'"/><text x="500" y="154" text-anchor="middle" fill="white" font-size="14" font-weight="800">'+stage.capacity.toLocaleString('es-ES')+'</text>':'';
+  const flood=lights?[210,790].map(x=>'<g><rect x="'+(x-3)+'" y="126" width="6" height="100" fill="#4d5964"/><rect x="'+(x-21)+'" y="110" width="42" height="18" rx="2" fill="#e9edf0"/><circle cx="'+(x-12)+'" cy="119" r="4" fill="#fff7c7"/><circle cx="'+x+'" cy="119" r="4" fill="#fff7c7"/><circle cx="'+(x+12)+'" cy="119" r="4" fill="#fff7c7"/></g>').join(''):'';
+  const districtEls=district?'<g opacity=".95"><rect x="55" y="360" width="105" height="86" rx="5" fill="#c8b9a8"/><rect x="838" y="345" width="110" height="100" rx="6" fill="#b9c0c5"/><rect x="75" y="380" width="65" height="8" fill="#2b78c5"/><rect x="858" y="365" width="70" height="8" fill="#2b78c5"/></g>':'';
+  const facadeEls=facade?'<path d="M205 362 Q500 480 795 362 L760 410 Q500 515 240 410 Z" fill="#374b5d" opacity=".88"/><path d="M245 401 Q500 493 755 401" fill="none" stroke="'+(led?'#2f8dff':'#8aa2b4')+'" stroke-width="'+(led?8:4)+'" opacity=".9"/>':'';
+  const people=Array.from({length:12},(_,i)=>'<circle cx="'+(338+(i*31)%328)+'" cy="'+(232+(i%3)*42)+'" r="3" fill="'+(i%3===0?'#f2d4a6':i%3===1?'#d9e2ec':'#f4f6f8')+'"/>').join('');
+  return '<svg viewBox="0 0 1000 560" role="img" aria-label="'+stage.label+'"><defs><linearGradient id="sky'+stage.globalIndex+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8d5e9"/><stop offset="1" stop-color="#e9e1cf"/></linearGradient><linearGradient id="pitch'+stage.globalIndex+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f8d4d"/><stop offset=".5" stop-color="#3e7d43"/><stop offset="1" stop-color="#5a9552"/></linearGradient></defs><rect width="1000" height="560" fill="url(#sky'+stage.globalIndex+')"/><rect y="145" width="1000" height="415" fill="'+bg+'"/>'+buildings+districtEls+'<ellipse cx="500" cy="337" rx="'+(350+fi*10)+'" ry="'+(190+fi*7)+'" fill="#6d777b" opacity=".35"/>'+ringEls+cornerFill+'<path d="M310 244 Q500 178 690 244 L664 342 Q500 395 336 342 Z" fill="url(#pitch'+stage.globalIndex+')" stroke="#e7eee6" stroke-width="3"/><path d="M500 199 L500 374 M326 293 Q500 232 674 293" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"/><ellipse cx="500" cy="293" rx="38" ry="20" fill="none" stroke="rgba(255,255,255,.72)" stroke-width="2"/>'+roofTop+facadeEls+flood+score+'<g opacity=".75">'+people+'</g></svg>';
+}
+
+function stadiumFeatureScoreV011(stage,key){
+  const offset={comfort:4,commercial:10,media:16,transport:6,atmosphere:0}[key]||0;
+  return Math.min(5,1+Math.floor((stage.globalIndex+offset)/11));
+}
+
+function renderStadiumV011(){
+  ensureStadiumV011();
+  const stage=stadiumStageV011(),next=stadiumNextV011(),family=stadiumFamilyV011(stage);
+  const chrome=clubChromeV08('stadium');
+  const features=[
+    ['◎','Confort',stadiumFeatureScoreV011(stage,'comfort')],
+    ['€','Comercial',stadiumFeatureScoreV011(stage,'commercial')],
+    ['▣','Media',stadiumFeatureScoreV011(stage,'media')],
+    ['↗','Accesos',stadiumFeatureScoreV011(stage,'transport')],
+    ['★','Ambiente',stadiumFeatureScoreV011(stage,'atmosphere')]
+  ];
+  const crossesFamily=next&&next.familyIndex!==stage.familyIndex;
+  return '<div class="screen clubScreen"><div class="stadium011">'+chrome.header+chrome.tabs+
+    '<div class="stadium011Top"><section class="stadium011Visual">'+stadiumSceneV011(stage)+(stadiumUpgradeFlash?'<div class="stadiumUpgradeFlash">Mejora completada</div>':'')+
+    '<div class="stadium011Overlay"><div><span>'+family.name.toUpperCase()+' · FASE '+(stage.stepIndex+1)+'/10</span><strong>'+stage.title+'</strong></div><b>'+stage.capacity.toLocaleString('es-ES')+'</b></div></section>'+
+    '<aside class="stadium011Side"><div class="stadium011Family"><div class="stadium011FamilyIcon">'+family.icon+'</div><div><span>MODELO ACTUAL</span><strong>'+family.name+'</strong>'+starsV011(stage.stars)+'</div></div>'+
+    '<div class="stadium011Metrics"><div class="stadium011Metric"><span>AFORO</span><strong>'+stage.capacity.toLocaleString('es-ES')+'</strong></div><div class="stadium011Metric"><span>FASE</span><strong>'+(stage.stepIndex+1)+' / 10</strong></div><div class="stadium011Metric"><span>FAMILIA</span><strong>'+(stage.familyIndex+1)+' / 5</strong></div><div class="stadium011Metric"><span>PROGRESO TOTAL</span><strong>'+Math.round(stage.globalIndex/49*100)+'%</strong></div></div>'+
+    (crossesFamily?'<div class="stadium011Transition"><strong>Siguiente salto de categoría</strong><br>La próxima reforma inicia '+STADIUM_FAMILIES_V011[next.familyIndex].name+'.</div>':'')+
+    '<div class="stadium011Upgrade"><span>'+(next?'PRÓXIMA REFORMA':'PROYECTO COMPLETADO')+'</span><strong>'+(next?next.title:'Superestadio final')+'</strong><small>'+(next?stage.nextProject+' · nuevo aforo '+next.capacity.toLocaleString('es-ES'):'Has alcanzado el estadio premium de máxima categoría.')+'</small><button data-action="upgrade" '+(!next||state.budget<stage.nextCost?'disabled':'')+'>' + (!next?'COMPLETO':state.budget<stage.nextCost?'FALTAN FONDOS · '+fmtM(stage.nextCost):'REFORMAR · '+fmtM(stage.nextCost)) + '</button></div></aside></div>'+
+    '<section class="stadium011FamilyRail">'+STADIUM_FAMILIES_V011.map((f,i)=>{const cls=i<stage.familyIndex?'done':i===stage.familyIndex?'current':'';return '<div class="stadium011FamilyChip '+cls+'"><i>'+f.icon+'</i><div><strong>'+f.short+'</strong><span>'+f.capacities[0].toLocaleString('es-ES')+' → '+f.capacities[9].toLocaleString('es-ES')+'</span></div><b>'+(i<stage.familyIndex?'✓':i===stage.familyIndex?(stage.stepIndex+1)+'/10':'—')+'</b></div>';}).join('')+'</section>'+
+    '<section class="sectionBlock"><div class="sectionHeader"><div><span>EVOLUCIÓN · '+family.name.toUpperCase()+'</span><h3>10 reformas del modelo</h3></div><small>'+family.capacities[0].toLocaleString('es-ES')+' → '+family.capacities[9].toLocaleString('es-ES')+'</small></div><div class="stadium011Steps">'+family.steps.map((name,i)=>{const cls=i<stage.stepIndex?'done':i===stage.stepIndex?'current':'';return '<div class="stadium011Step '+cls+'"><b>'+(i+1)+'</b><span>'+family.capacities[i].toLocaleString('es-ES')+'</span></div>';}).join('')+'</div></section>'+
+    '<section class="stadium011FeatureGrid">'+features.map(([ic,label,val])=>'<div class="stadium011Feature"><i>'+ic+'</i><div><span>'+label+'</span><strong>'+'●'.repeat(val)+'○'.repeat(5-val)+'</strong></div></div>').join('')+'</section>'+
+    '</div></div>';
+}
+
+function installStadiumV011(){
+  stadiumStage=function(){return stadiumStageV011();};
+  upgrade=function(){
+    ensureStadiumV011();
+    const current=stadiumStageV011(),next=stadiumNextV011();
+    if(!next||current.nextCost==null||state.budget<current.nextCost)return;
+    state.budget=Math.round((state.budget-current.nextCost)*100)/100;
+    state.stadium.v011Index+=1;
+    state.stadium.level=Math.min(4,Math.floor(state.stadium.v011Index/10));
+    stadiumUpgradeFlash=true;
+    setTimeout(()=>{stadiumUpgradeFlash=false;},1200);
+    const ns=stadiumStageV011();
+    if(state.academy)state.academy.level=Math.max(state.academy.level,ns.academy||1);
+    state.finance.push({id:'stadium-v011-'+Date.now(),label:ns.label+' · '+ns.title,amount:-current.nextCost,matchday:state.currentMatchday});
+    state.inbox=[{id:'stadium-v011-'+Date.now(),type:'success',title:'Reforma completada · '+ns.title,body:ns.label+'. Nuevo aforo: '+ns.capacity.toLocaleString('es-ES')+' espectadores.'},...state.inbox].slice(0,10);
+    save();render();
+  };
+  const cg=createGame;
+  createGame=function(teamIndex=0){
+    const g=cg(teamIndex);
+    g.stadium={...(g.stadium||{}),level:0,v011:true,v011Index:0};
+    return g;
+  };
+  renderStadiumHubV08=function(){return renderStadiumV011();};
+  const rb=render;
+  render=function(){
+    ensureStadiumV011();
+    rb();
+    if(tab==='club'&&clubView==='overview'){
+      const st=stadiumStageV011(),nx=stadiumNextV011(),card=$app.querySelector('.clubManagementCard.stadium');
+      if(card){
+        const strong=card.querySelector('strong'),small=card.querySelector('small');
+        if(strong)strong.textContent=stadiumFamilyV011(st).short+' · Fase '+(st.stepIndex+1);
+        if(small)small.textContent=nx?'Próxima mejora · '+fmtM(st.nextCost):'Máximo nivel';
+      }
+    }
+  };
+}
+
+  installStadiumV011();
   $app.addEventListener('click', handleClick);
   window.__CM_DEBUG__={getState:()=>state,resolveLineupProblems,optimizeXI,setFormation,setStyle,simulateMatchday,tacticalFit,promoteYouth,upgradeAcademy,acceptIncomingOffer,rejectIncomingOffer,negotiateIncomingOffer,maybeGenerateTransferOffer,startNewSeason};
   ensureTacticFamiliarity();
