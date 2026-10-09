@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.8.0</title>
+<title>Club Manager MVP 0.9.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -638,6 +638,341 @@ body,.appShell{background:var(--structura-bg)}
   .incomingOffers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
   .incomingOffer{margin:0}
   .tacticGrid,.styleGrid{gap:8px}
+}
+
+
+/* === 0.9 Visual Identity — modern PC Futbol-inspired management UI === */
+:root{
+  --cm-navy-950:#07172a;
+  --cm-navy-900:#0a2039;
+  --cm-navy-850:#0d2948;
+  --cm-navy-800:#10365e;
+  --cm-blue:#2878ea;
+  --cm-blue-2:#4d96ff;
+  --cm-blue-soft:#e8f1fb;
+  --cm-blue-pale:#f3f8fd;
+  --cm-green:#1fa563;
+  --cm-green-2:#2abd78;
+  --cm-green-soft:#e6f5ec;
+  --cm-red:#d64f4f;
+  --cm-amber:#d49b2d;
+  --cm-ice:#dce7f0;
+  --cm-line:#c7d4e0;
+  --cm-text:#132033;
+  --cm-muted:#65768a;
+  --cm-panel:#f9fbfd;
+  --cm-panel-2:#edf3f8;
+  --bg:#dbe5ee;
+  --surface:var(--cm-panel);
+  --surface-2:var(--cm-panel-2);
+  --ink:var(--cm-text);
+  --muted:var(--cm-muted);
+  --line:var(--cm-line);
+  --accent:var(--cm-blue);
+  --accent-ink:#fff;
+  --dark:var(--cm-navy-950);
+  --good:var(--cm-green);
+  --danger:var(--cm-red);
+  --shadow:0 8px 24px rgba(8,33,60,.12);
+}
+html{background:#cbd8e3}
+body,.appShell{background:
+  radial-gradient(circle at 82% 12%,rgba(67,123,180,.10),transparent 28%),
+  linear-gradient(180deg,#e6eef5 0,#d8e3ec 100%);
+  color:var(--cm-text)
+}
+body{font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+button{touch-action:manipulation}
+.screen{background:transparent}
+h1,h2,h3,strong{font-feature-settings:"tnum" 1,"ss01" 1}
+h1{font-weight:850}
+h2,h3{font-weight:820}
+.eyebrow,.sectionHeader span,.heroMeta span,.marketAction span,.metricCard>span,.budget span,.needCard span,
+.clubHubBrand span,.clubHubBudget span,.academyPanelHead span,.workbench08Title span,.workCard08 span,.focusMetric08 span{
+  color:#6b7e93;letter-spacing:.8px
+}
+
+/* Sidebar = strong product identity */
+@media (orientation:landscape){
+  .appContent{padding-left:100px}
+  .bottomNav{
+    width:100px;
+    background:linear-gradient(180deg,var(--cm-navy-950),#081a2f 62%,#061322);
+    border-right:1px solid rgba(255,255,255,.08);
+    box-shadow:10px 0 28px rgba(4,20,37,.12);
+    padding-left:8px;padding-right:8px
+  }
+  .bottomNav:before{
+    content:"CM";
+    position:absolute;top:10px;left:50%;transform:translateX(-50%);
+    width:42px;height:42px;border-radius:9px;
+    display:grid;place-items:center;
+    background:linear-gradient(145deg,#2b79e8,#124d9a);
+    color:white;font-size:13px;font-weight:950;letter-spacing:.5px;
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 8px 18px rgba(0,0,0,.24)
+  }
+  .bottomNav{padding-top:60px}
+  .bottomNav button{
+    color:#a7bbcf;border-radius:9px;
+    border-left:3px solid transparent;
+    transition:background .12s ease,color .12s ease
+  }
+  .bottomNav button:hover{background:rgba(255,255,255,.055);color:white}
+  .bottomNav button.active{
+    color:white;
+    background:linear-gradient(90deg,rgba(40,120,234,.26),rgba(40,120,234,.08));
+    border-left-color:#5ca5ff
+  }
+  .bottomNav button.active i{
+    background:transparent!important;color:#7db5ff!important;
+    width:auto;height:auto;border-radius:0
+  }
+  .bottomNav i{font-size:16px}
+  .bottomNav span{font-size:9px;font-weight:800;letter-spacing:.1px}
+  .appBackButton{left:108px}
+  .clubHubNav{left:108px;width:136px}
+  .clubScreen{padding-left:160px}
+}
+
+/* Header bars */
+.topbar,.clubHubHeader,.workbench08Header{
+  background:linear-gradient(100deg,var(--cm-navy-950),var(--cm-navy-850));
+  color:white;
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:0 7px 18px rgba(6,28,51,.16);
+  border-radius:10px;
+  padding:9px 12px;
+}
+.topbar .eyebrow,.clubHubHeader span,.clubHubHeader small,.workbench08Header span{color:#9db3c9!important}
+.topbar h1,.clubHubHeader h1,.workbench08Header h1{color:white}
+.budget strong,.clubHubBudget strong,.workbench08Aside strong{color:white}
+.seasonTag,.squadAvg{
+  border-radius:7px;background:#173c65;color:white;border:1px solid rgba(255,255,255,.1)
+}
+.teamMark{box-shadow:0 3px 10px rgba(5,25,45,.14)}
+
+/* Global panel language */
+.sectionBlock,.tacticPanel,.marketCard,.incomingOffer,.academyPanel,.workbench08Panel,
+.clubAttentionPanel,.financeHero,.commercialOverview,.moreClubShortcut{
+  background:linear-gradient(180deg,#fbfdff,#f3f7fb);
+  border:1px solid var(--cm-line);
+  border-radius:10px;
+  box-shadow:0 3px 10px rgba(15,48,77,.055)
+}
+.sectionBlock,.tacticPanel,.academyPanel,.workbench08Panel{padding:12px}
+.sectionHeader{
+  margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #d6e0e8
+}
+.sectionHeader h3{font-size:15px;color:#18304a}
+.sectionHeader>b{background:var(--cm-navy-850)}
+.metricCard,.clubManagementCard,.workCard08{
+  border-radius:9px;
+  background:linear-gradient(180deg,#fbfdff,#f0f5fa);
+  border:1px solid var(--cm-line);
+  box-shadow:0 3px 9px rgba(14,43,69,.05)
+}
+.metricCard>strong{color:#183553}
+.clubManagementCard.stadium,.clubManagementCard.academy,.workCard08.green{
+  background:linear-gradient(180deg,#fbfffc,var(--cm-green-soft))
+}
+.clubManagementCard.finances,.clubManagementCard.marketing,.workCard08.blue,.workbench08Panel.blue{
+  background:linear-gradient(180deg,#fbfdff,var(--cm-blue-soft))
+}
+.workbench08Panel.green{background:linear-gradient(180deg,#fbfffc,var(--cm-green-soft))}
+.workCard08 strong{color:#18304a}
+
+/* Tabs like management software, not pill buttons */
+.teamSubnav,.marketSubnav,.clubSubnav,.academySubnav{
+  background:#cdd9e4;border:1px solid #bbcbd9;border-radius:8px;padding:3px;gap:3px
+}
+.teamSubnav button,.marketSubnav button,.clubSubnav button,.academySubnav button{
+  border:0;border-radius:6px;background:transparent;color:#40556a;
+  font-weight:850;letter-spacing:.2px
+}
+.teamSubnav button.active,.marketSubnav button.active,.clubSubnav button.active,.academySubnav button.active{
+  background:linear-gradient(180deg,#fff,#edf4f9);
+  color:#0d3762!important;
+  box-shadow:0 1px 4px rgba(10,42,70,.14);
+  border-bottom:2px solid var(--cm-blue)
+}
+.marketSubnav b,.clubSubnav b{background:var(--cm-navy-850)}
+.filterRow button,.scoutFocus button,.trainingPlans button{
+  border-radius:6px;background:#f7fafc;border-color:#c7d4e0
+}
+.filterRow button.active,.scoutFocus button.active,.trainingPlans button.active{
+  background:var(--cm-navy-850);color:white;border-color:var(--cm-navy-850)
+}
+
+/* Home */
+.homeStatusDock{
+  background:linear-gradient(90deg,#0c2846,#10375f)!important;
+  border-color:#183e66!important;color:white!important;border-radius:9px!important;
+  box-shadow:0 5px 14px rgba(8,32,56,.14)!important
+}
+.homeStatusDock span,.homeStatusDock small{color:#a9bfd2!important}
+.homeStatusDock strong{color:white!important}
+.homeStatusDivider{background:rgba(255,255,255,.18)!important}
+.heroCard{
+  background:
+    linear-gradient(90deg,rgba(3,19,35,.95),rgba(7,30,53,.88)),
+    radial-gradient(circle at 50% 0,rgba(53,116,177,.55),transparent 55%);
+  border-radius:10px;border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 9px 24px rgba(5,24,43,.20)
+}
+.primaryButton{
+  min-height:43px;border-radius:7px;background:linear-gradient(180deg,#3588f4,#1f69d2);
+  box-shadow:0 4px 12px rgba(27,97,185,.22);font-size:10px;letter-spacing:.2px
+}
+.primaryButton:active{transform:translateY(1px)}
+.resultStrip{border-radius:10px;box-shadow:0 3px 10px rgba(15,48,77,.06)}
+.resultOutcome{border-radius:5px}
+.resultStrip.win .resultOutcome{background:#dff4e8;color:#167a48}
+.resultStrip.loss .resultOutcome{background:#f9e0e0;color:#9d3b3b}
+
+/* Market */
+.marketCard{overflow:hidden}
+.marketInfo{padding:11px}
+.marketAction{background:#edf3f8}
+.marketAction button{
+  border-radius:6px;background:linear-gradient(180deg,#2d80ee,#2167c8);color:white
+}
+.marketAction button:disabled{background:#d9e1e8;color:#8a98a5}
+.positionTag{background:#dce9f5;color:#174b7f;border:1px solid #c2d5e6;border-radius:5px}
+.ratingPill{border-radius:7px;background:#dce5ed;color:#18324e}
+.ratingPill.elite{background:#dff2e8;color:#176a43}
+.needCard{border-radius:8px;background:linear-gradient(90deg,#0d2948,#123b65)}
+.offerMoney{border-radius:7px;background:linear-gradient(90deg,#0d2948,#123b65)}
+.offerActions button{background:#f8fbfd}
+.offerActions .accept{background:linear-gradient(180deg,#29b672,#1a985d);color:white}
+.offerActions .reject{color:#b54848}
+.enterHint08{color:#216fd1!important}
+
+/* Tactics / lineup */
+.pitch,.tacticPreview08{
+  border-radius:8px;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.025) 50%,rgba(0,0,0,.02) 50%),
+    repeating-linear-gradient(90deg,#417c48 0 12.5%,#477f4c 12.5% 25%);
+  border:3px solid #d8e2e8;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 4px 12px rgba(10,40,60,.08)
+}
+.fieldPlayer .shirt{
+  border-radius:6px;background:linear-gradient(180deg,#fff,#e8eef4);
+  color:#11263b;border:1px solid #c9d4df
+}
+.fieldPlayer.selected .shirt{background:linear-gradient(180deg,#5da5ff,#2878ea);color:white}
+.fitBadge{border-radius:4px;background:#102c4b!important;color:#d8ebff!important}
+.tacticCard,.styleCard{
+  border-radius:8px;background:#f8fbfd;border-color:#c8d5e0
+}
+.tacticCard.active,.styleCard.active{
+  background:linear-gradient(180deg,#123b65,#0d2948);color:white;border-color:#0d2948
+}
+.lineupActions button{border-radius:7px}
+.lineupActions .fix{background:#f7e3e1;color:#9c4037}
+.lineupActions .optimize{background:#e2f3e9;color:#217047}
+
+/* Club */
+.clubHubNav{
+  background:linear-gradient(180deg,#0b233d,#081a2e)!important;
+  border-color:#173a5c!important;border-radius:9px!important;
+  box-shadow:0 8px 20px rgba(5,25,45,.16)!important
+}
+.clubHubNav button{
+  background:transparent!important;border:0!important;border-radius:6px!important;color:#9eb4ca!important;
+  min-height:48px!important
+}
+.clubHubNav button.active{
+  background:linear-gradient(90deg,#1d67bd,#184f90)!important;
+  color:white!important;box-shadow:none!important
+}
+.clubHubNav button b{background:#d95353}
+.clubOverviewHero{
+  border-radius:10px;
+  background:linear-gradient(120deg,#0c2947,#164f84);
+  box-shadow:0 8px 20px rgba(7,31,53,.16)
+}
+.clubOverviewStats div{border-radius:6px;background:rgba(255,255,255,.08)}
+.clubCardIcon{border-radius:7px}
+
+/* Academy */
+.academyCommandBar>div,.academyStatsGrid div{
+  border-radius:7px;background:#edf3f8;border:1px solid #d5e0e9
+}
+.academyRow,.candidateRow{
+  border-radius:7px;background:#eef3f7
+}
+.academyRow.active,.candidateRow.active{
+  background:#e4effb;border-color:#7fa9d7
+}
+.academyRating{border-radius:6px;background:#123b65}
+.academyTraits span,.focusTraits08 i{background:#e3ebf2;color:#334b62;border:1px solid #d2dee8}
+.academyRecommendation{border-radius:7px;background:#e6f5ec}
+.scoutNetworkCard{border-radius:8px;background:linear-gradient(150deg,#0d2948,#174b7d)}
+.scoutMission{border-radius:7px;background:#f8fbfd}
+.scoutMission button{border-radius:6px;background:#11395f}
+.trainingProgress{background:#d9e4ed}
+.trainingProgress span{background:linear-gradient(90deg,#2878ea,#55a1ff)}
+
+/* Stadium */
+.stadiumHero{border-radius:9px;background:var(--cm-navy-950);box-shadow:0 7px 20px rgba(4,24,43,.17)}
+.stadiumVisual{background:#18324a}
+.stadiumStageImage{filter:saturate(.92) contrast(1.03)}
+.stadiumVisual--image:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(6,22,39,.04),rgba(6,22,39,.38))
+}
+.stadiumUpgradeAction{background:linear-gradient(90deg,#0b2948,#123d67)}
+.stadiumUpgradeButton{
+  border-radius:6px!important;background:linear-gradient(180deg,#29b672,#1a985d)!important;color:white!important
+}
+.stageChip{border-radius:7px!important;background:#eef4f8!important}
+.facility{border-color:#d5e0e8}
+.levelDots i{background:#d5e0e8}
+.levelDots i.on{background:#2878ea}
+
+/* Finance / commercial */
+.financeBudget,.financeSummary>div,.commercialOverview>div{border-radius:7px}
+.positive{color:#178451}.negative{color:#b84747}
+.ticketStepper button{background:#dce8f2;color:#123c65}
+.ticketStepper b{color:#123c65}
+.adOffer,.marketingAction{border-color:#cfdae4!important;background:#f9fbfd!important;border-radius:7px!important}
+.adOffer button,.marketingAction button{background:#2878ea!important;color:white!important;border-radius:6px!important}
+
+/* Focus screens */
+.workbench08Header{border-radius:9px}
+.workbench08Panel{border-radius:9px}
+.focusRating08{border-radius:8px;background:linear-gradient(180deg,#1fa563,#17864f)}
+.focusMetric08{border-radius:6px;background:#edf3f8;border:1px solid #d6e1e9}
+.focusActions08 button,.focusPrimary08{border-radius:6px}
+.focusActions08 .primary,.focusPrimary08{background:linear-gradient(180deg,#3485ee,#226bcf)}
+.focusActions08 .green{background:linear-gradient(180deg,#2ab875,#1d9a60)}
+.workCard08{border-radius:8px}
+.tacticSlot08{border-radius:5px}
+
+/* Utility / feedback */
+.appBackButton{
+  border-radius:7px;background:#f8fbfd;color:#123a61;border-color:#bfcfdd;
+  box-shadow:0 4px 12px rgba(8,37,64,.13)
+}
+.saveNotice{border-radius:7px;background:#edf4fb;border:1px solid #cfdde9;border-left:4px solid #2878ea}
+.emptyState{border-radius:8px;background:#f4f8fb;border-color:#bfcfdd}
+.sheet{background:#f6fafd;border-left:1px solid #b8c9d8}
+.sheetTop{padding-bottom:9px;border-bottom:1px solid #d4dfe8}
+.secondaryButton{border-radius:7px;background:#edf3f8}
+.stageChip img,.stadiumStageImage{object-fit:cover}
+
+/* Slightly denser, more desktop-manager-like */
+@media (orientation:landscape){
+  .screen{padding-left:14px;padding-right:14px}
+  .topbar,.clubHubHeader,.workbench08Header{min-height:48px}
+  .heroCard{padding:13px}
+  .marketList{gap:7px}
+  .benchPlayer{min-height:44px}
+  .clubManagementGrid{gap:7px}
+  .clubManagementCard{min-height:96px}
+  .academyPanelHead{margin-bottom:7px}
 }
 
 </style>
@@ -1670,7 +2005,7 @@ body,.appShell{background:var(--structura-bg)}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.8.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.9.0</p></div>`;
   }
 
   function newGameModal() {
