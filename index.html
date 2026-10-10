@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Club Manager">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Club Manager MVP 0.11.0</title>
+<title>Club Manager MVP 0.12.0</title>
 <style>:root {
   --bg: #f2f3ef;
   --surface: #ffffff;
@@ -1069,6 +1069,208 @@ h2,h3{font-weight:820}
 .stadium011Transition{padding:10px 12px;border-radius:8px;background:#f3ead7;border:1px solid #e4d3ad;color:#6f5929;font-size:10px;line-height:1.4}
 @media (orientation:landscape) and (min-width:900px){.stadium011Top{grid-template-columns:minmax(500px,1.55fr) minmax(340px,.45fr)}.stadium011Visual{min-height:520px}.stadium011Visual svg{min-height:520px}.stadium011FamilyChip strong{font-size:12px}.stadium011FamilyChip span{font-size:9px}.stadium011Step{padding:9px 6px}.stadium011Step b{font-size:12px}.stadium011Step span{font-size:8px}}
 
+
+/* === 0.12 PC Visual Pass: Home / Team / Market / Club navigation === */
+@media (orientation:landscape) and (min-width:1100px){
+  body{font-size:14px}
+  .screen{padding-top:74px!important;padding-bottom:28px!important}
+  .topbar,.clubHubHeader,.workbench08Header{
+    min-height:66px!important;
+    border-radius:11px!important;
+    padding:10px 16px!important;
+    box-shadow:0 8px 22px rgba(5,29,52,.18)!important
+  }
+  .topbar h1,.clubHubHeader h1,.workbench08Header h1{font-size:27px!important}
+  .topbar .eyebrow,.clubHubBrand span,.workbench08Title span{font-size:11px!important}
+  .budget strong,.clubHubBudget strong,.workbench08Aside strong{font-size:21px!important}
+
+  /* Global status strip */
+  .pcGlobalStatus012{
+    margin-left:auto;display:flex;align-items:stretch;gap:5px
+  }
+  .pcGlobalStatus012>div{
+    min-width:86px;padding:7px 10px;border-radius:8px;
+    background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.09);
+    display:flex;flex-direction:column;gap:1px
+  }
+  .pcGlobalStatus012 span{font-size:8px!important;color:#91abc3!important;font-weight:900;letter-spacing:.7px}
+  .pcGlobalStatus012 strong{font-size:15px!important;color:#fff!important;font-weight:900}
+  .pcGlobalStatus012 .money{min-width:112px}
+
+  /* Home = manager dashboard */
+  .homeScreen{
+    grid-template-columns:repeat(12,minmax(0,1fr))!important;
+    gap:12px!important;
+    align-content:start!important
+  }
+  .homeScreen>.topbar{grid-column:1/-1!important}
+  .homeScreen>.homeStatusDock{
+    grid-column:1/-1!important;position:relative!important;top:auto!important;
+    display:none!important
+  }
+  .homeScreen>.heroCard{
+    grid-column:1/8!important;min-height:370px!important;margin:0!important;
+    display:flex;flex-direction:column
+  }
+  .homeScreen>.resultStrip{
+    grid-column:8/-1!important;min-height:370px!important;margin:0!important;
+    display:flex;flex-direction:column
+  }
+  .homeScreen>.homeAttentionGrid{grid-column:1/6!important;margin:0!important}
+  .homeScreen>.twoCol{grid-column:6/9!important;margin:0!important;grid-template-columns:1fr!important}
+  .homeScreen>.tacticSummary{grid-column:9/-1!important;margin:0!important}
+  .homeScreen>.stadiumPreviewBlock{grid-column:1/8!important;margin:0!important}
+  .homeScreen>.sectionBlock:not(.stadiumPreviewBlock){grid-column:8/-1!important;margin:0!important}
+  .heroMeta{font-size:11px!important}
+  .versus{flex:1;align-items:center}
+  .side strong{font-size:20px!important}
+  .side span{font-size:12px!important}
+  .versusCenter b{font-size:36px!important}
+  .versusCenter span,.versusCenter small{font-size:11px!important}
+  .heroCard .primaryButton{min-height:52px!important;font-size:13px!important}
+  .lineupStatusButton{min-height:46px!important;font-size:12px!important}
+  .lineupQuickFix{padding:11px!important}
+  .lineupQuickFix strong{font-size:12px!important}
+  .lineupQuickFix span{font-size:10px!important}
+  .resultStripHeader span{font-size:10px!important}
+  .resultScore strong{font-size:58px!important}
+  .resultTeam strong{font-size:15px!important}
+  .resultStripFooter{font-size:11px!important}
+  .resultEconomics{margin-top:auto}
+  .resultEconomics span{font-size:9px!important}
+  .resultEconomics strong{font-size:12px!important}
+  .homeAttentionGrid button{
+    min-height:116px!important;border-radius:10px!important;padding:15px!important;
+    background:linear-gradient(145deg,#0b2c4d,#0e3b68)!important;color:white!important;
+    border:1px solid #1c4a76!important
+  }
+  .homeAttentionGrid button:nth-child(2){
+    background:linear-gradient(145deg,#16462d,#1f6842)!important;border-color:#2e7650!important
+  }
+  .homeAttentionGrid span{font-size:10px!important;color:#a9c3da!important}
+  .homeAttentionGrid strong{font-size:32px!important}
+  .homeAttentionGrid small{font-size:10px!important;color:#d4e1ec!important}
+  .metricCard{min-height:96px!important}
+  .metricCard>strong{font-size:34px!important}
+  .metricCard>span{font-size:10px!important}
+  .tacticSummary{
+    min-height:200px!important;align-items:stretch!important;padding:16px!important;
+    background:linear-gradient(145deg,#0b223c,#123d67)!important;color:#fff!important;
+    border-radius:10px!important
+  }
+  .tacticSummary>div:first-child{justify-content:center}
+  .tacticSummary span{font-size:10px!important;color:#9ebad2!important}
+  .tacticSummary strong{font-size:18px!important;color:#fff!important}
+  .tacticSummary small{font-size:11px!important;color:#c5d7e6!important}
+  .tacticSummary b{font-size:42px!important;color:#65aaff!important}
+  .tacticSummary button{font-size:10px!important}
+  .stadiumPreviewBlock{min-height:295px!important}
+  .stadiumMini{display:grid!important;grid-template-columns:1.15fr .85fr!important;gap:14px!important}
+  .stadiumMini .stadiumMiniScene012{
+    min-height:220px;border-radius:8px;overflow:hidden;background:#0a2038
+  }
+  .stadiumMini .stadiumMiniScene012 svg{width:100%;height:100%;display:block}
+  .stadiumMini>div:last-child{display:flex!important;flex-direction:column!important;justify-content:center!important;gap:8px!important}
+  .stadiumMini strong{font-size:18px!important}
+  .stadiumMini span{font-size:11px!important;line-height:1.45!important}
+  .inboxItem strong{font-size:12px!important}.inboxItem span{font-size:10px!important}
+
+  /* Team */
+  .screen:has(.teamSubnav){
+    grid-template-columns:minmax(230px,.75fr) minmax(520px,1.75fr) minmax(310px,1fr)!important;
+    gap:12px!important
+  }
+  .screen:has(.teamSubnav)>.topbar{grid-column:1/-1!important}
+  .screen:has(.teamSubnav)>.teamSubnav{grid-column:1/-1!important}
+  .teamSubnav{height:48px!important}
+  .teamSubnav button{font-size:13px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important}
+  .teamSubnav .pcTabIcon012{width:21px;height:21px}
+  .lineupAlertPanel{padding:14px!important;border-radius:10px!important}
+  .lineupAlertTitle strong{font-size:13px!important}.lineupAlertTitle span{font-size:10px!important}
+  .lineupIssue span{font-size:10px!important}.lineupIssue b{font-size:9px!important}
+  .lineupActions{display:grid!important;grid-template-columns:1fr!important;gap:7px!important}
+  .lineupActions button{min-height:44px!important;font-size:10px!important}
+  .formationBar{padding:11px 13px!important;border-radius:8px!important}
+  .formationBar span{font-size:13px!important}.formationBar small{font-size:9px!important}
+  .pitch{height:560px!important;min-height:560px!important}
+  .fieldPlayer{width:82px!important}
+  .fieldPlayer .shirt{width:40px!important;height:40px!important;font-size:9px!important}
+  .fieldPlayer strong{font-size:10px!important}.fieldPlayer small{font-size:9px!important}
+  .fitBadge{font-size:7px!important;padding:2px 5px!important}
+  .benchBlock{max-height:none!important}
+  .benchPlayer{min-height:58px!important;padding:8px 9px!important}
+  .benchPlayer strong{font-size:12px!important}
+  .benchPlayer small{font-size:9px!important}
+  .benchList{gap:5px!important}
+  .tacticPanel{padding:16px!important}
+  .tacticGrid{grid-template-columns:repeat(4,1fr)!important;gap:10px!important}
+  .tacticCard{min-height:120px!important;padding:14px!important}
+  .tacticCard strong{font-size:21px!important}.tacticCard span{font-size:10px!important}
+  .styleGrid{grid-template-columns:repeat(3,1fr)!important;gap:10px!important}
+  .styleCard{min-height:115px!important;padding:13px!important}
+  .styleCard strong{font-size:15px!important}.styleCard span{font-size:10px!important;line-height:1.35!important}
+  .familiarity{padding:13px!important}.familiarityHead span,.familiarityHead strong{font-size:11px!important}
+  .traitChip{font-size:10px!important;padding:7px 10px!important}
+
+  /* Market */
+  .screen:has(.marketSubnav){
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-auto-rows:min-content!important;
+    align-content:start!important
+  }
+  .marketSubnav{height:48px!important}
+  .marketSubnav button{font-size:13px!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important}
+  .marketSubnav .pcTabIcon012{width:21px;height:21px}
+  .needCard{min-height:72px!important;border-radius:9px!important;padding:11px 14px!important}
+  .needCard span{font-size:9px!important}.needCard strong{font-size:18px!important}
+  .filterRow{display:flex!important;gap:6px!important;flex-wrap:wrap!important}
+  .filterRow button{min-width:70px!important;min-height:38px!important;font-size:10px!important}
+  .marketList{
+    display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:10px!important
+  }
+  .marketCard{min-height:174px!important}
+  .marketInfo{padding:13px!important;min-height:116px!important}
+  .marketInfo>.teamMark{width:48px!important;height:48px!important}
+  .marketText strong{font-size:15px!important}.marketText small,.marketText span{font-size:9px!important}
+  .marketAction{padding:10px 12px!important}
+  .marketAction strong{font-size:14px!important}
+  .marketAction button{min-height:36px!important;font-size:10px!important}
+  .ratingPill{min-width:42px!important;height:42px!important;font-size:14px!important}
+  .incomingOffers{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+  .incomingOffer{padding:13px!important}
+  .offerHead strong{font-size:15px!important}.offerHead span,.offerHead small{font-size:9px!important}
+  .offerMoney strong{font-size:23px!important}.offerMoney span,.offerMoney small{font-size:9px!important}
+  .offerActions button{min-height:38px!important;font-size:9px!important}
+
+  /* Club navigation = pictographic modules */
+  .clubHubNav{width:184px!important}
+  .clubScreen{padding-left:208px!important}
+  .clubHubNav button{
+    min-height:64px!important;grid-template-columns:38px 1fr auto!important;gap:9px!important
+  }
+  .clubHubNav button i{
+    width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
+    background:rgba(255,255,255,.06);font-size:0!important
+  }
+  .clubHubNav button i svg{width:21px;height:21px}
+  .clubHubNav button span{font-size:12px!important;font-weight:850!important}
+  .clubManagementCard{min-height:120px!important;padding:14px!important}
+  .clubCardIcon{
+    width:46px!important;height:46px!important;border-radius:10px!important;
+    background:linear-gradient(145deg,#e6eff7,#d2e1ee)!important;font-size:0!important
+  }
+  .clubCardIcon svg{width:25px;height:25px;color:#23547d}
+  .clubManagementCard strong{font-size:19px!important}
+  .clubManagementCard span{font-size:9px!important}
+  .clubManagementCard small{font-size:10px!important}
+}
+
+.pcTabIcon012,.clubHubNav i svg,.clubCardIcon svg{
+  fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round
+}
+
 </style>
 </head>
 <body>
@@ -2123,7 +2325,7 @@ h2,h3{font-weight:820}
 
   function more() {
     const standings=table(); const slots=Array.from({length:MAX_SAVE_SLOTS},(_,i)=>({n:i+1,info:slotInfo(i+1)}));
-    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.11.0</p></div>`;
+    return `<div class="screen"><header class="topbar compact"><div><div class="eyebrow">MÁS</div><h1>Partida y competición</h1></div><div class="seasonTag">${seasonLabel()}</div></header>${seasonComplete()?`<section class="seasonCompleteCard"><span class="eyebrow">FIN DE TEMPORADA</span><h3>Listo para continuar</h3><p>Guarda si quieres conservar este punto y empieza una nueva campaña con el mismo club.</p><button class="seasonButton" data-action="new-season">Comenzar nueva temporada</button></section>`:''}<section class="sectionBlock tableBlock"><div class="sectionHeader"><div><span>LIGA</span><h3>Clasificación</h3></div><small>J${Math.max(0,state.currentMatchday-1)}</small></div><div class="leagueTable"><div class="leagueRow header"><span>#</span><span>Club</span><span>PJ</span><span>DG</span><span>PTS</span></div>${standings.map((t,i)=>`<div class="leagueRow ${t.id===state.userTeamId?'mine':''}"><span>${i+1}</span><span>${mark(t.short,'sm')}${t.short}</span><span>${t.played}</span><span>${t.gf-t.ga>0?'+':''}${t.gf-t.ga}</span><strong>${t.points}</strong></div>`).join('')}</div></section><section class="sectionBlock"><div class="sectionHeader"><div><span>PARTIDA</span><h3>Guardar y empezar</h3></div><small>Autosave + 10 slots</small></div><div class="saveMenuActions"><button class="new" data-action="new-game">NUEVA PARTIDA</button><button class="auto" data-save-slot="1">GUARDAR AHORA</button></div><div class="saveSlots ten">${slots.map(({n,info})=>`<div class="saveSlot ${info?'':'empty'}"><div class="slotNumber">${n}</div><div><strong>${info?info.club:`Slot ${n} vacío`}</strong><span>${info?`J${info.day} · ${String(info.season).slice(-2)}/${String(info.season+1).slice(-2)}`:'Disponible para guardar'}</span></div><div class="slotActions"><button class="primary" data-save-slot="${n}">${info?'SOBRESCRIBIR':'GUARDAR'}</button>${info?`<button data-load-slot="${n}">CARGAR</button><button class="delete" data-delete-slot="${n}">BORRAR</button>`:''}</div></div>`).join('')}</div>${saveNotice?`<div class="saveNotice">${saveNotice}</div>`:''}</section><section class="moreClubShortcut"><div><span>GESTIÓN</span><strong>Finanzas, cantera y marketing</strong><small>Ahora se gestionan desde Club.</small></div><button data-nav="club" data-club-target="overview">IR A CLUB</button></section><p class="buildTag">Club Manager MVP · build 0.12.0</p></div>`;
   }
 
   function newGameModal() {
@@ -3200,6 +3402,85 @@ function installStadiumV011(){
 }
 
   installStadiumV011();
+
+  function iconMarkupV012(id,cls='pcTabIcon012'){
+    const p={
+      lineup:'<circle cx="12" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><path d="M12 7v3M8 12h8M12 14v3"/>',
+      tactics:'<path d="M5 5h14M7 9h10M4 13h16M8 17h8M6 21h12"/><circle cx="9" cy="5" r="1.5"/><circle cx="15" cy="9" r="1.5"/><circle cx="7" cy="13" r="1.5"/><circle cx="14" cy="17" r="1.5"/>',
+      scouting:'<circle cx="10" cy="10" r="6"/><path d="m14.5 14.5 5 5M10 7v6M7 10h6"/>',
+      offers:'<path d="M4 7h12l4 5-4 5H4z"/><path d="M8 4 4 7l4 3"/>',
+      overview:'<path d="M4 11.5 12 5l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/>',
+      stadium:'<path d="M4 8c2-2 14-2 16 0v9c-2 2-14 2-16 0z"/><path d="M7 10c2-1 8-1 10 0v5c-2 1-8 1-10 0z"/>',
+      academy:'<path d="M12 21v-8"/><path d="M12 13c-4 0-7-2-7-6 4 0 7 2 7 6Z"/><path d="M12 13c4 0 7-2 7-6-4 0-7 2-7 6Z"/>',
+      finances:'<circle cx="12" cy="12" r="8"/><path d="M14.5 8.5c-.7-.7-1.5-1-2.5-1-1.5 0-2.5.8-2.5 1.8 0 3 5 1.3 5 4.2 0 1.1-1 2-2.7 2-1.1 0-2.1-.4-2.8-1M12 5.5v13"/>',
+      marketing:'<path d="M4 13h4l8 4V7l-8 4H4z"/><path d="M8 13v5h3l1-3"/>'
+    };
+    return '<svg class="'+cls+'" viewBox="0 0 24 24" aria-hidden="true">'+(p[id]||p.overview)+'</svg>';
+  }
+
+  function enhancePCVisualV012(){
+    const club=team(state.userTeamId);
+    const pos=table().findIndex(t=>t.id===state.userTeamId)+1;
+    const status='<div class="pcGlobalStatus012"><div><span>LIGA</span><strong>'+pos+'º</strong></div><div><span>JORNADA</span><strong>J'+state.currentMatchday+'</strong></div><div class="money"><span>PRESUPUESTO</span><strong>'+fmtM(state.budget)+'</strong></div></div>';
+    const head=$app.querySelector('.topbar');
+    if(head&&!head.querySelector('.pcGlobalStatus012')) head.insertAdjacentHTML('beforeend',status);
+
+    $app.querySelectorAll('.teamSubnav button').forEach(b=>{
+      if(!b.querySelector('.pcTabIcon012')){
+        const id=b.dataset.teamView==='tactics'?'tactics':'lineup';
+        b.insertAdjacentHTML('afterbegin',iconMarkupV012(id));
+      }
+    });
+    $app.querySelectorAll('.marketSubnav button').forEach(b=>{
+      if(!b.querySelector('.pcTabIcon012')){
+        const id=b.dataset.marketView==='offers'?'offers':'scouting';
+        b.insertAdjacentHTML('afterbegin',iconMarkupV012(id));
+      }
+    });
+
+    const clubIconMap={overview:'overview',stadium:'stadium',academy:'academy',finances:'finances',marketing:'marketing'};
+    $app.querySelectorAll('.clubHubNav button').forEach(b=>{
+      const i=b.querySelector('i');
+      const id=clubIconMap[b.dataset.clubView];
+      if(i&&id) i.innerHTML=iconMarkupV012(id,'');
+    });
+    $app.querySelectorAll('.clubManagementCard').forEach(card=>{
+      const icon=card.querySelector('.clubCardIcon');
+      if(!icon) return;
+      const id=card.classList.contains('stadium')?'stadium':card.classList.contains('academy')?'academy':card.classList.contains('finances')?'finances':'marketing';
+      icon.innerHTML=iconMarkupV012(id,'');
+    });
+
+    if(tab==='market'){
+      const map={ALL:'TODOS',GK:'POR',RB:'LD',CB:'DFC',LB:'LI',DM:'MCD',CM:'MC',AM:'MCO',RW:'ED',LW:'EI',ST:'DEL'};
+      $app.querySelectorAll('.filterRow button').forEach(b=>{ const k=b.dataset.filter; if(map[k]) b.textContent=map[k]; });
+      $app.querySelectorAll('.incomingOffer .offerHead small').forEach(el=>{
+        el.textContent=el.textContent.replace(/\bGK\b/g,'POR').replace(/\bCB\b/g,'DFC').replace(/\bCM\b/g,'MC').replace(/\bAM\b/g,'MCO').replace(/\bRW\b/g,'ED').replace(/\bLW\b/g,'EI').replace(/\bST\b/g,'DEL');
+      });
+    }
+
+    if(tab==='home'){
+      const mini=$app.querySelector('.stadiumMini img');
+      if(mini){
+        const wrap=document.createElement('div');
+        wrap.className='stadiumMiniScene012';
+        wrap.innerHTML=stadiumSceneV011(stadiumStageV011());
+        mini.replaceWith(wrap);
+      }
+      const h=$app.querySelector('.stadiumPreviewBlock .sectionHeader h3');
+      if(h){
+        const st=stadiumStageV011();
+        h.textContent=stadiumFamilyV011(st).name+' · Fase '+(st.stepIndex+1);
+      }
+    }
+  }
+
+  const __renderBaseV012=render;
+  render=function(){
+    __renderBaseV012();
+    enhancePCVisualV012();
+  };
+
   $app.addEventListener('click', handleClick);
   window.__CM_DEBUG__={getState:()=>state,resolveLineupProblems,optimizeXI,setFormation,setStyle,simulateMatchday,tacticalFit,promoteYouth,upgradeAcademy,acceptIncomingOffer,rejectIncomingOffer,negotiateIncomingOffer,maybeGenerateTransferOffer,startNewSeason};
   ensureTacticFamiliarity();
